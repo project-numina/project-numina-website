@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog – Project Numina</title>
+  <!-- Favicons et polices -->
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
+  <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="favicon/favicon.ico">
+  <link rel="manifest" href="favicon/site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FFFEF9;
+      --card-bg: #FFFEF9;
+      --card-border: #D6CFC0;
+      --shadow: 0 2px 12px #0001;
+      --shadow-hover: 0 8px 24px rgba(205, 121, 76, 0.10);
+      --radius: 20px;
+      --primary: #ff5e62;
+      --secondary: #ff9966;
+      --text: #3B2E1A;
+      --muted: #888;
+      --tag-bg: #F6E8D1;
+      --tag-text: #7A6248;
+      --header-height: 72px;
+      --header-bg: #fff;
+      --nav-link: #222;
+      --nav-link-active: #ff5e62;
+      --nav-link-hover: #ff5e62;
+      --blog-card-width: 100%;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    /* Header/Nav - copié des autres pages */
+    header.main-header { position: sticky; top: 0; z-index: 100; background: transparent; height: var(--header-height); width: 100%; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    body.scrolled header.main-header { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); border-radius: 20px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12); top: 20px; max-width: 1168px; margin: 0 auto; border: 1px solid rgba(255, 255, 255, 0.2); width: calc(100% - 32px); }
+    .header-center { width: 100%; max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: var(--header-height); padding: 0 16px; }
+    .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.7rem; color: var(--primary); text-decoration: none; position: relative; }
+    .logo-full-only { height: 36px; width: auto; display: block; }
+    .main-nav {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      font-family: 'Roboto', sans-serif;
+    }
+    .main-nav-link {
+      color: var(--nav-link);
+      text-decoration: none;
+      font-size: 1.08rem;
+      font-weight: 700;
+      padding: 2px 0;
+      background: none;
+      border: none;
+      transition: color 0.2s;
+      font-family: 'Roboto', sans-serif;
+    }
+    .main-nav-link:hover {
+      color: #A85923;
+    }
+    .main-nav-link.active {
+      color: #A85923;
+      font-weight: 700;
+    }
+    .main-nav-cta {
+      color: #21706A;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: none;
+      padding: 2px 0;
+      border: none;
+      position: relative;
+      font-family: 'Roboto', sans-serif;
+    }
+    .main-nav-cta .cta-arrow {
+      width: 1.25em;
+      height: 1.25em;
+      margin-left: 6px;
+      vertical-align: middle;
+      display: inline-block;
+      stroke-width: 2.2;
+      stroke: #21706A;
+    }
+    .main-nav-cta::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -4px;
+      height: 2px;
+      background: #21706A;
+      width: 100%;
+      border-radius: 1px;
+    }
+    .main-nav-cta:hover {
+      color: #21706A;
+    }
+
+    /* Section Blog */
+    .blog-section { max-width: 1200px; margin: 36px auto 0 auto; padding: 0 16px 64px 16px; }
+    .blog-header {
+      margin-bottom: 48px;
+      padding-bottom: 0;
+    }
+    .blog-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      line-height: 1.1;
+      color: #111;
+      display: block;
+      text-align: left;
+    }
+    .blog-intro {
+      font-size: 1.1rem;
+      margin-bottom: 0;
+      max-width: 700px;
+      line-height: 1.5;
+      color: #666;
+    }
+
+    /* Articles grid */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 32px;
+      margin-bottom: 64px;
+    }
+    
+    /* Blog card */
+    .blog-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: none;
+      border: 1.5px solid #D6CFC0;
+      overflow: hidden;
+      transition: box-shadow 0.3s cubic-bezier(0.4,0,0.2,1), border-color 0.3s cubic-bezier(0.4,0,0.2,1), transform 0.3s cubic-bezier(0.4,0,0.2,1);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+    }
+    .blog-card:hover {
+      border-color: #CD794C;
+      box-shadow: 0 8px 24px rgba(205, 121, 76, 0.15);
+      transform: translateY(-4px);
+    }
+    
+    .blog-card-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      background: #f5f5f5;
+    }
+    
+    .blog-card-content {
+      padding: 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .blog-card-date {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    
+    .blog-card-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--text);
+      line-height: 1.2;
+    }
+    
+    .blog-card-excerpt {
+      font-size: 1rem;
+      color: #666;
+      line-height: 1.5;
+      margin-bottom: 16px;
+      flex: 1;
+    }
+    
+    .blog-card-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    
+    .blog-tag {
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      border-radius: 4px;
+      padding: 4px 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    
+    .blog-card-ctas {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    
+    .blog-cta {
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .blog-cta.primary {
+      background: #2a5f5f;
+      color: white;
+    }
+    
+    .blog-cta.primary:hover {
+      background: #1e4747;
+      transform: translateY(-1px);
+    }
+    
+    .blog-cta.secondary {
+      background: transparent;
+      color: #2a5f5f;
+      border: 1.5px solid #2a5f5f;
+    }
+    
+    .blog-cta.secondary:hover {
+      background: #2a5f5f;
+      color: white;
+    }
+
+    /* Featured post */
+    .featured-post {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+    
+    .featured-post .blog-card-image {
+      height: 300px;
+    }
+    
+    .featured-post .blog-card-title {
+      font-size: 2rem;
+    }
+    
+    @media (max-width: 768px) {
+      .featured-post {
+        grid-template-columns: 1fr;
+      }
+      .blog-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Get Involved et Footer - copiés des autres pages */
+    .get-involved-section { background: #2a5f5f; width: 100vw; margin-left: calc(-50vw + 50%); padding: 60px 0; margin-bottom: 0; }
+    .get-involved-container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+    .get-involved-header { text-align: center; margin-bottom: 48px; }
+    .get-involved-title { font-size: 2rem; font-weight: 700; color: white; margin-bottom: 16px; }
+    .get-involved-subtitle { font-size: 1.1rem; color: rgba(255, 255, 255, 0.85); max-width: 600px; margin: 0 auto; }
+    .get-involved-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+    .get-involved-card { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 16px; padding: 32px 24px; transition: all 0.3s ease; }
+    .get-involved-card:hover { background: rgba(255, 255, 255, 0.12); border-color: rgba(255, 255, 255, 0.25); transform: translateY(-4px); }
+    .get-involved-card-title { font-size: 1.3rem; font-weight: 700; color: white; margin-bottom: 12px; }
+    .get-involved-card-desc { font-size: 1rem; color: rgba(255, 255, 255, 0.8); line-height: 1.5; margin-bottom: 24px; }
+    .cta-link { display: inline-flex; align-items: center; gap: 8px; font-size: 1rem; font-weight: 600; text-decoration: none; transition: all 0.2s ease; }
+    .cta-link:hover { transform: translateX(4px); }
+    .cta-link::after { content: '→'; font-size: 1.1rem; transition: transform 0.2s ease; }
+    .cta-link:hover::after { transform: translateX(2px); }
+    .cta-follow { color: #ff6b9d; }
+    .cta-tools { color: #4ecdc4; }
+    .cta-join { color: #667eea; }
+    .cta-support { color: #ffa726; }
+    
+    .footer-new { background: #1a1a1a; width: 100vw; margin-left: calc(-50vw + 50%); padding: 100px 0 60px 0; margin-top: 0; }
+    .footer-container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+    .footer-content { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-bottom: 0; }
+    .footer-brand { display: flex; flex-direction: column; }
+    .footer-logo-new { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .footer-logo-new img { height: 32px; width: 32px; }
+    .footer-logo-text { font-size: 1.4rem; font-weight: 700; color: white; }
+    .footer-mission-new { color: #a0a0a0; font-size: 1rem; line-height: 1.6; width: 100%; margin-bottom: 24px; }
+    .footer-brand-bottom { display: flex; flex-direction: row; align-items: center; gap: 24px; flex-wrap: wrap; }
+    .footer-links { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; }
+    .footer-col-new { display: flex; flex-direction: column; }
+    .footer-col-title-new { font-size: 0.9rem; font-weight: 600; color: white; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px; }
+    .footer-link-new { color: #a0a0a0; text-decoration: none; font-size: 0.95rem; margin-bottom: 12px; transition: color 0.2s ease; display: block; }
+    .footer-link-new:hover { color: white; }
+    .footer-link-external { display: inline-flex; align-items: center; gap: 6px; }
+    .external-icon { width: 14px; height: 14px; opacity: 0.7; }
+    .footer-copyright { color: #a0a0a0; font-size: 0.9rem; }
+    .footer-legal-link { color: #a0a0a0; text-decoration: none; font-size: 0.9rem; transition: color 0.2s ease; }
+    .footer-legal-link:hover { color: white; }
+    
+    @media (max-width: 1024px) { .footer-content { grid-template-columns: 1fr; gap: 48px; } .footer-links { grid-template-columns: repeat(2, 1fr); gap: 32px; } }
+    @media (max-width: 768px) { .footer-container { padding: 0 20px; } .footer-new { padding: 80px 0 48px 0; } .footer-links { grid-template-columns: 1fr; gap: 32px; } }
+    @media (max-width: 600px) { .footer-container { padding: 0 16px; } .footer-new { padding: 64px 0 40px 0; } .footer-content { gap: 40px; } .footer-brand-bottom { flex-direction: column; align-items: flex-start; gap: 8px; } }
+    @media (max-width: 900px) { .get-involved-container { padding: 0 20px; } .get-involved-section { padding: 48px 0; } .get-involved-title { font-size: 1.8rem; } }
+    @media (max-width: 600px) { .get-involved-container { padding: 0 16px; } .get-involved-section { padding: 40px 0; } .get-involved-grid { grid-template-columns: 1fr; gap: 20px; } .get-involved-card { padding: 24px 20px; } }
+  </style>
+</head>
+<body>
+  <header class="main-header">
+    <div class="header-center">
+      <a href="index.html" class="logo">
+        <img src="Assets/logo_projectNumina.svg" alt="Project Numina" class="logo-full-only">
+      </a>
+      <nav class="main-nav">
+        <a href="#get-involved" class="main-nav-link main-nav-cta">
+          Get Involved
+          <svg class="cta-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </a>
+        <span style="margin: 0 18px; border-right: 1.5px solid #e0e0e0; height: 24px; display: inline-block;"></span>
+        <a href="index.html" class="main-nav-link">Projects</a>
+        <a href="about-us.html" class="main-nav-link">About Us</a>
+        <a href="community.html" class="main-nav-link">Community</a>
+        <a href="blog.html" class="main-nav-link active">Blog</a>
+      </nav>
+    </div>
+  </header>
+  
+  <main>
+    <section class="blog-section">
+      <div class="blog-header">
+        <h1 class="blog-title">Latest Publications & Research</h1>
+        <p class="blog-intro">Découvrez nos dernières avancées en intelligence artificielle pour les mathématiques, nos publications de recherche et les actualités de Project Numina.</p>
+      </div>
+      
+      <div class="blog-grid" id="blog-grid">
+        <!-- Les posts seront chargés dynamiquement ici -->
+      </div>
+    </section>
+    
+    <!-- Section Get Involved -->
+    <section id="get-involved" class="get-involved-section">
+      <div class="get-involved-container">
+        <div class="get-involved-header">
+          <h2 class="get-involved-title">Get Involved with Project Numina</h2>
+          <p class="get-involved-subtitle">Engage with the community, explore our resources, or contribute à la mission.</p>
+        </div>
+        <div class="get-involved-grid">
+          <div class="get-involved-card">
+            <div class="get-involved-card-title">Join the effort</div>
+            <div class="get-involved-card-desc">Contribute code, review tasks or help shape the future of math.</div>
+            <a href="https://docs.google.com/forms/d/1FREvq2lCc9URnu5iGXAxBZRcx6OpEnQWlYSryM5s42g/edit" target="_blank" rel="noopener noreferrer" class="cta-link cta-join">Contact Us</a>
+          </div>
+          
+          <div class="get-involved-card">
+            <div class="get-involved-card-title">Support the mission</div>
+            <div class="get-involved-card-desc">Make a donation and help advance open, collaborative mathematics.</div>
+            <a href="mailto:contact@projectnumina.com" class="cta-link cta-support">Donate to Numina</a>
+          </div>
+          
+          <div class="get-involved-card">
+            <div class="get-involved-card-title">Follow us</div>
+            <div class="get-involved-card-desc">Stay updated with the latest research and community news.</div>
+            <a href="https://x.com/ProjectNumina" target="_blank" rel="noopener noreferrer" class="cta-link cta-follow">Follow us on X</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <footer class="footer-new">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <div class="footer-logo-new">
+            <img src="Assets/projectnumina_logo.svg" alt="Project Numina Logo">
+            <span class="footer-logo-text">Project Numina</span>
+          </div>
+          <div class="footer-mission-new">Project Numina is a non-profit initiative advancing mathematics through open collaboration between humans and AI.</div>
+          <div class="footer-brand-bottom">
+            <div class="footer-copyright">© 2024 Project Numina. All rights reserved.</div>
+            <a href="https://projectnumina.ai/" target="_blank" rel="noopener noreferrer" class="footer-legal-link">Privacy policies</a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col-new">
+            <div class="footer-col-title-new">Quick Links</div>
+            <a href="https://projectnumina.ai/" target="_blank" rel="noopener noreferrer" class="footer-link-new">Projects</a>
+            <a href="https://projectnumina.ai/" target="_blank" rel="noopener noreferrer" class="footer-link-new">About us</a>
+            <a href="#get-involved" class="footer-link-new">Get Involved</a>
+            <a href="https://projectnumina.ai/" target="_blank" rel="noopener noreferrer" class="footer-link-new">Community</a>
+          </div>
+          <div class="footer-col-new">
+            <div class="footer-col-title-new">Resources</div>
+            <a href="blog.html" class="footer-link-new">Blog</a>
+            <a href="https://projectnumina.ai/" target="_blank" rel="noopener noreferrer" class="footer-link-new">Publications</a>
+            <a href="https://huggingface.co/AI-MO" target="_blank" rel="noopener noreferrer" class="footer-link-new footer-link-external">HuggingFace<svg class="external-icon" fill="currentColor" viewBox="0 0 16 16"><path d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/><path d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/></svg></a>
+            <a href="https://github.com/project-numina" target="_blank" rel="noopener noreferrer" class="footer-link-new footer-link-external">GitHub<svg class="external-icon" fill="currentColor" viewBox="0 0 16 16"><path d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/><path d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/></svg></a>
+          </div>
+          <div class="footer-col-new">
+            <div class="footer-col-title-new">Connect</div>
+            <a href="https://x.com/ProjectNumina" target="_blank" rel="noopener noreferrer" class="footer-link-new footer-link-external">Twitter<svg class="external-icon" fill="currentColor" viewBox="0 0 16 16"><path d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/><path d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/></svg></a>
+            <a href="https://www.linkedin.com/company/projectnumina" target="_blank" rel="noopener noreferrer" class="footer-link-new footer-link-external">LinkedIn<svg class="external-icon" fill="currentColor" viewBox="0 0 16 16"><path d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/><path d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/></svg></a>
+            <a href="https://projectnumina.ai/" target="_blank" rel="noopener noreferrer" class="footer-link-new footer-link-external">Youtube<svg class="external-icon" fill="currentColor" viewBox="0 0 16 16"><path d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.1 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/><path d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <script>
+    window.addEventListener('scroll', function() {
+      if(window.scrollY > 10) {
+        document.body.classList.add('scrolled');
+      } else {
+        document.body.classList.remove('scrolled');
+      }
+    });
+    
+    // Système de chargement des posts de blog
+    document.addEventListener('DOMContentLoaded', function() {
+      const grid = document.getElementById('blog-grid');
+      let posts = [];
+
+      // Fonction pour parser le front matter
+      function parseFrontMatter(content) {
+        if (!content.startsWith('---')) return null;
+        
+        const endIndex = content.indexOf('---', 3);
+        if (endIndex === -1) return null;
+        
+        const frontMatter = content.slice(3, endIndex).trim();
+        const body = content.slice(endIndex + 3).trim();
+        
+        const data = {};
+        frontMatter.split('\n').forEach(line => {
+          const colonIndex = line.indexOf(':');
+          if (colonIndex !== -1) {
+            const key = line.slice(0, colonIndex).trim();
+            let value = line.slice(colonIndex + 1).trim();
+            
+            // Supprimer les guillemets
+            if ((value.startsWith('"') && value.endsWith('"')) || 
+                (value.startsWith("'") && value.endsWith("'"))) {
+              value = value.slice(1, -1);
+            }
+            
+            data[key] = value;
+          }
+        });
+        
+        return { data, body };
+      }
+
+      // Fonction pour charger les posts depuis l'index
+      async function loadPosts() {
+        try {
+          console.log('🔄 Chargement dynamique des posts de blog...');
+          
+          // Charger l'index des posts
+          const indexResponse = await fetch('data/blog-index.json');
+          if (!indexResponse.ok) {
+            throw new Error(`Erreur lors du chargement de l'index blog: ${indexResponse.status}`);
+          }
+          
+          const index = await indexResponse.json();
+          console.log(`📋 Index blog trouvé: ${index.count} posts (généré: ${index.generated})`);
+          
+          // Utiliser directement les posts de l'index (déjà triés par date)
+          posts = index.posts.filter(post => post.published === true || post.published === 'true');
+          
+          console.log(`🎉 ${posts.length} posts chargés dynamiquement!`);
+          console.log('Posts:', posts);
+          
+          renderPosts();
+          
+        } catch (error) {
+          console.error('❌ Erreur lors du chargement des posts:', error);
+          grid.innerHTML = `
+            <div style='color:#b00;font-size:1.2rem;padding:32px;text-align:center;grid-column:1/-1;'>
+              Erreur de chargement des posts de blog.<br>
+              Lancez un serveur local pour voir la page (ex: <code>python3 -m http.server</code>).<br>
+              <small>L'index doit être régénéré avec: <code>node generate-blog-index.js</code></small>
+            </div>
+          `;
+        }
+      }
+
+      // Fonction pour formater la date
+      function formatDate(dateString) {
+        const date = new Date(dateString);
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        return date.toLocaleDateString('fr-FR', options);
+      }
+
+      // Fonction pour rendre les posts
+      function renderPosts() {
+        if (posts.length === 0) {
+          grid.innerHTML = `
+            <div style='text-align:center;padding:64px;color:#666;grid-column:1/-1;'>
+              <h3>Aucun article publié pour le moment</h3>
+              <p>Revenez bientôt pour découvrir nos dernières publications!</p>
+            </div>
+          `;
+          return;
+        }
+
+        grid.innerHTML = posts.map((post, index) => {
+          const isFeature = index === 0 && post.featured === 'true';
+          const tags = post.tags ? post.tags.split(',').map(t => t.trim()) : [];
+          const ctas = post.ctas || [];
+          
+          return `
+            <article class="blog-card ${isFeature ? 'featured-post' : ''}">
+              ${post.cover_image ? `<img src="${post.cover_image}" alt="${post.title}" class="blog-card-image">` : ''}
+              <div class="blog-card-content">
+                <div class="blog-card-date">${formatDate(post.date)}</div>
+                <h2 class="blog-card-title">${post.title}</h2>
+                <p class="blog-card-excerpt">${post.excerpt}</p>
+                ${tags.length > 0 ? `
+                  <div class="blog-card-tags">
+                    ${tags.map(tag => `<span class="blog-tag">${tag}</span>`).join('')}
+                  </div>
+                ` : ''}
+                ${ctas.length > 0 ? `
+                  <div class="blog-card-ctas">
+                    ${ctas.map(cta => `
+                      <a href="${cta.url}" class="blog-cta ${cta.style || 'primary'}" target="_blank" rel="noopener noreferrer">
+                        ${cta.text}
+                      </a>
+                    `).join('')}
+                  </div>
+                ` : ''}
+              </div>
+            </article>
+          `;
+        }).join('');
+      }
+
+      // Charger les posts au démarrage
+      loadPosts();
+    });
+  </script>
+</body>
+</html> 

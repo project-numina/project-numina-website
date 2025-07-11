@@ -1,0 +1,43 @@
+{
+  "generated": "2025-07-11T17:46:35.170Z",
+  "count": 2,
+  "published": 2,
+  "posts": [
+    {
+      "filename": "2025-07-10-releasing-kiminaprover-72b.md",
+      "title": "Releasing KiminaProver-72B",
+      "date": "2025-07-10T00:00:00.000Z",
+      "author": "Project Numina Team",
+      "cover_image": "/assets/uploads/kiminaprover-72b-results.jpg",
+      "excerpt": "New milestone for Project Numina and Kimi Moonshot! 🚀 We are open sourcing our KiminaProver-72B. This SotA theorem-proving model comes with Test-Time Reinforcement Learning Search and Error-Fixing Capability.",
+      "tags": [
+        "Research",
+        "AI",
+        "Mathematics",
+        "Open Source"
+      ],
+      "ctas": [
+        "text: \"CHECK OUT THE MODEL\""
+      ],
+      "url": "#content",
+      "style": "secondary",
+      "- text": "READ FULL BLOG POST",
+      "published": "true",
+      "featured": "true",
+      "lastModified": "2025-07-11T17:43:43.488Z",
+      "wordCount": 200
+    },
+    {
+      "filename": "2024-01-15-lancement-project-numina.md",
+      "title": "Lancement officiel de Project Numina",
+      "date": "2024-01-15T10:00:00.000Z",
+      "author": "Stanislas Polu",
+      "cover_image": "assets/uploads/hero.jpg",
+      "excerpt": "Nous sommes ravis d'annoncer le lancement officiel de Project Numina, notre initiative pour révolutionner l'IA mathématique.",
+      "tags": "[\"Annonce\", \"Launch\", \"News\"]",
+      "published": "true",
+      "lastModified": "2025-07-11T15:12:31.905Z",
+      "wordCount": 141
+    }
+  ]
+}
