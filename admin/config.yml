@@ -45,8 +45,6 @@ collections:
       - {label: "Titre", name: "title", widget: "string"}
       - {label: "Date", name: "date", widget: "datetime"}
       - {label: "Image", name: "image", widget: "image", required: false}
-      - {label: "Description", name: "description", widget: "text"}
-      - {label: "Tags", name: "tags", widget: "list", default: []}
       - {label: "Contenu", name: "body", widget: "markdown"}
       - {label: "Statut", name: "status", widget: "select", options: ["publié", "brouillon"], default: "brouillon"}
       - {label: "CTAs", name: "ctas", widget: "list", required: false, fields: [

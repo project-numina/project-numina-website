@@ -2,8 +2,6 @@
 title: "Releasing KiminaProver 72B"
 date: "2025-07-10T10:00:00Z"
 image: "/projects_images/projectnumina_kimina-prover.jpg"
-description: "Découvrez notre dernière avancée en matière de preuves formelles automatisées avec KiminaProver 72B, un modèle révolutionnaire qui repousse les limites de l'intelligence artificielle en mathématiques."
-tags: ["AI", "Mathematics", "Formal Proofs", "Research"]
 status: "publié"
 ctas:
   - text: "Essayer KiminaProver 72B"

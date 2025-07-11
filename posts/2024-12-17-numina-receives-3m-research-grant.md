@@ -2,8 +2,6 @@
 title: "Numina receives €3m research grant"
 date: "2024-12-17T10:00:00Z"
 image: "/partner_logos/xtx_logo.png"
-description: "Project Numina receives €3m research grant from XTX Markets to advance AI for mathematics research and open-source mathematical AI tools."
-tags: ["Funding", "Research", "Partnership", "XTX Markets"]
 status: "publié"
 ctas:
   - text: "Read Press Release"

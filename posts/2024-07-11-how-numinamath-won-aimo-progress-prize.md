@@ -2,8 +2,6 @@
 title: "How NuminaMath won the 1st AIMO Progress Prize"
 date: "2024-07-11T10:00:00Z"
 image: "/Assets/aimo 1@2x.jpg"
-description: "Discover how our NuminaMath approach achieved breakthrough results in the AIMO Progress Prize, marking a significant milestone in AI for mathematical reasoning."
-tags: ["AIMO", "Competition", "Mathematical Reasoning", "Breakthrough"]
 status: "publié"
 ctas:
   - text: "Read Full Technical Report"

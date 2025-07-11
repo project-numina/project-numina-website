@@ -2,8 +2,6 @@
 title: "Introducing Kimina-Prover Preview"
 date: "2025-04-14T10:00:00Z"
 image: "/projects_images/projectnumina_kimina-prover.jpg"
-description: "🔥 We believe formal math is the future. Introducing Kimina-Prover Preview, a Numina and Kimi-Moonshot collaboration, the first large formal reasoning model for Lean4, achieving 80.78% miniF2F."
-tags: ["Formal Math", "Lean4", "AI", "Research"]
 status: "publié"
 ctas:
   - text: "See Full Report"

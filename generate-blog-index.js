@@ -26,19 +26,7 @@ function parseFrontMatter(content) {
     const key = line.slice(0, colonIndex).trim();
     let value = line.slice(colonIndex + 1).trim();
     
-    // Gérer les listes YAML simples (tags)
-    if (value.startsWith('[') && value.endsWith(']')) {
-      try {
-        data[key] = JSON.parse(value);
-      } catch (e) {
-        // Si JSON.parse échoue, essayer un parsing manuel
-        const items = value.slice(1, -1).split(',').map(item => 
-          item.trim().replace(/^["']|["']$/g, '')
-        );
-        data[key] = items;
-      }
-      continue;
-    }
+
     
     // Gérer les objets YAML complexes (CTAs)
     if (key === 'ctas' && value === '') {
@@ -152,7 +140,7 @@ function generateBlogIndex() {
             ...parsed.data,
             lastModified: fs.statSync(filePath).mtime.toISOString(),
             wordCount: parsed.body.split(/\s+/).length,
-            excerpt: parsed.data.excerpt || parsed.body.substring(0, 200) + '...'
+            excerpt: parsed.body.substring(0, 200) + '...'
           };
           
           // Ne garder que les posts publiés (ancien format: published, nouveau format: status)

@@ -1,5 +1,5 @@
 {
-  "generated": "2025-07-11T18:37:35.046Z",
+  "generated": "2025-07-11T18:48:08.798Z",
   "count": 4,
   "published": 4,
   "posts": [
@@ -8,13 +8,6 @@
       "title": "Releasing KiminaProver 72B",
       "date": "2025-07-10T10:00:00Z",
       "image": "/projects_images/projectnumina_kimina-prover.jpg",
-      "description": "Découvrez notre dernière avancée en matière de preuves formelles automatisées avec KiminaProver 72B, un modèle révolutionnaire qui repousse les limites de l'intelligence artificielle en mathématiques.",
-      "tags": [
-        "AI",
-        "Mathematics",
-        "Formal Proofs",
-        "Research"
-      ],
       "status": "publié",
       "ctas": [
         {
@@ -28,7 +21,7 @@
           "type": "secondary"
         }
       ],
-      "lastModified": "2025-07-11T17:57:46.693Z",
+      "lastModified": "2025-07-11T18:46:34.547Z",
       "wordCount": 282,
       "excerpt": "# Releasing KiminaProver 72B\n\nAujourd'hui, nous sommes fiers d'annoncer la sortie de **KiminaProver 72B**, notre modèle d'intelligence artificielle le plus avancé à ce jour pour l'assistance aux preuv..."
     },
@@ -37,13 +30,6 @@
       "title": "Introducing Kimina-Prover Preview",
       "date": "2025-04-14T10:00:00Z",
       "image": "/projects_images/projectnumina_kimina-prover.jpg",
-      "description": "🔥 We believe formal math is the future. Introducing Kimina-Prover Preview, a Numina and Kimi-Moonshot collaboration, the first large formal reasoning model for Lean4, achieving 80.78% miniF2F.",
-      "tags": [
-        "Formal Math",
-        "Lean4",
-        "AI",
-        "Research"
-      ],
       "status": "publié",
       "ctas": [
         {
@@ -52,7 +38,7 @@
           "type": "primary"
         }
       ],
-      "lastModified": "2025-07-11T18:02:59.784Z",
+      "lastModified": "2025-07-11T18:46:47.574Z",
       "wordCount": 232,
       "excerpt": "# Introducing Kimina-Prover Preview\n\n🔥 We believe formal math is the future. Introducing **Kimina-Prover Preview**, a Numina and Kimi-Moonshot collaboration, the first large formal reasoning model fo..."
     },
@@ -61,13 +47,6 @@
       "title": "Numina receives €3m research grant",
       "date": "2024-12-17T10:00:00Z",
       "image": "/partner_logos/xtx_logo.png",
-      "description": "Project Numina receives €3m research grant from XTX Markets to advance AI for mathematics research and open-source mathematical AI tools.",
-      "tags": [
-        "Funding",
-        "Research",
-        "Partnership",
-        "XTX Markets"
-      ],
       "status": "publié",
       "ctas": [
         {
@@ -76,7 +55,7 @@
           "type": "primary"
         }
       ],
-      "lastModified": "2025-07-11T18:03:19.251Z",
+      "lastModified": "2025-07-11T18:46:58.190Z",
       "wordCount": 353,
       "excerpt": "# Numina receives €3m research grant\n\nWe are thrilled to announce that **Project Numina** has received a **€3 million research grant** from XTX Markets to advance our mission of developing open-source..."
     },
@@ -85,13 +64,6 @@
       "title": "How NuminaMath won the 1st AIMO Progress Prize",
       "date": "2024-07-11T10:00:00Z",
       "image": "/Assets/aimo 1@2x.jpg",
-      "description": "Discover how our NuminaMath approach achieved breakthrough results in the AIMO Progress Prize, marking a significant milestone in AI for mathematical reasoning.",
-      "tags": [
-        "AIMO",
-        "Competition",
-        "Mathematical Reasoning",
-        "Breakthrough"
-      ],
       "status": "publié",
       "ctas": [
         {
@@ -105,7 +77,7 @@
           "type": "secondary"
         }
       ],
-      "lastModified": "2025-07-11T18:03:42.075Z",
+      "lastModified": "2025-07-11T18:47:11.662Z",
       "wordCount": 455,
       "excerpt": "# How NuminaMath won the 1st AIMO Progress Prize\n\nWe are proud to announce that **NuminaMath**, our approach to mathematical reasoning, has won the **1st AIMO Progress Prize**! This achievement repres..."
     }
