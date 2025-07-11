@@ -464,7 +464,7 @@
         document.body.classList.remove('scrolled');
       }
     });
-    // Filtres Community
+    // Système de chargement des contributeurs depuis le CMS
     document.addEventListener('DOMContentLoaded', function() {
       const filterBtns = document.querySelectorAll('.community-filter-btn');
       const grid = document.getElementById('community-grid');
@@ -477,16 +477,67 @@
         'numina_photos/team-5.jpg',
         'numina_photos/team-6.jpg'
       ];
-      // Charger les contributeurs
-      fetch('contributors.json')
-        .then(r => r.json())
-        .then(data => {
-          contributors = data;
+
+      // Fonction pour charger tous les contributeurs depuis le CMS
+      async function loadContributors() {
+        try {
+          // Liste réelle des fichiers créés lors de la migration
+          const contributorFiles = [
+            'alain-durmus', 'albert-jiang', 'ben-lipkin', 'bolton-bailey', 'ebony-zhang',
+            'ed-beeching', 'francisco-moreira-machado', 'frederick-pu', 'gergely-berczi',
+            'guillaume-lample', 'helene-evain', 'hugues-de-saxce', 'jia-li', 'jianqiao-lu',
+            'jiawei-liu', 'julien-michel', 'kashif-rasul', 'laurent-mille', 'leo-dreyfus-schmidt',
+            'lewis-tunstall', 'liangjun-zhong', 'longhui-yu', 'luigi-pagani', 'mantas-baksys',
+            'marco-dos-santos', 'marina-vinyes', 'mert-unsal', 'pauline-bourigault',
+            'philip-vonderlind', 'professor-bin-dong', 'ran-wang', 'roman-soletskyi',
+            's-looi', 'shengyi-costa-huang', 'simon-frieder', 'stanislas-polu',
+            'thibaut-barroyer', 'wen-ding-li', 'yann-fleureau', 'yazhe-niu', 'yufan-zhao',
+            'zekai-zhu', 'zhenzhe-ying', 'zhou-li', 'zhouliang', 'zihan-qin', 'ziju-shen'
+          ];
+
+          console.log('Début du chargement des contributeurs...');
+          
+          const loadPromises = contributorFiles.map(async (filename) => {
+            try {
+              const response = await fetch(`data/team/${filename}.json`);
+              if (response.ok) {
+                const data = await response.json();
+                console.log(`✓ Chargé: ${filename}`, data);
+                return data;
+              } else {
+                console.warn(`✗ Erreur HTTP ${response.status} pour ${filename}`);
+                return null;
+              }
+            } catch (error) {
+              console.warn(`✗ Erreur lors du chargement de ${filename}:`, error);
+              return null;
+            }
+          });
+
+          const results = await Promise.all(loadPromises);
+          contributors = results.filter(contributor => contributor !== null);
+          
+          console.log(`${contributors.length} contributeurs chargés depuis le CMS`);
+          console.log('Contributeurs:', contributors);
+          
+          if (contributors.length === 0) {
+            throw new Error('Aucun contributeur chargé');
+          }
+          
           renderGrid('All');
-        })
-        .catch(() => {
-          grid.innerHTML = "<div style='color:#b00;font-size:1.2rem;padding:32px;text-align:center;'>Erreur de chargement des contributeurs. Lancez un serveur local pour voir la page (ex: <code>python3 -m http.server</code>).</div>";
-        });
+        } catch (error) {
+          console.error('Erreur lors du chargement des contributeurs:', error);
+          grid.innerHTML = `
+            <div style='color:#b00;font-size:1.2rem;padding:32px;text-align:center;grid-column:1/-1;'>
+              Erreur de chargement des contributeurs depuis le CMS.<br>
+              Lancez un serveur local pour voir la page (ex: <code>python3 -m http.server</code>).<br>
+              Vérifiez la console pour plus de détails.
+            </div>
+          `;
+        }
+      }
+
+      // Gestion des filtres
       filterBtns.forEach(btn => {
         btn.addEventListener('click', function() {
           filterBtns.forEach(b => b.classList.remove('active'));
@@ -494,18 +545,26 @@
           renderGrid(this.getAttribute('data-filter'));
         });
       });
+
+      // Fonction de rendu de la grille
       function renderGrid(filter) {
-        let filtered = (filter === 'All') ? contributors.slice() : contributors.filter(c => c.tags && c.tags.includes(filter));
-        // Tri alphabétique
+        let filtered = (filter === 'All') 
+          ? contributors.slice() 
+          : contributors.filter(c => c.tags && c.tags.includes(filter));
+        
+        // Tri alphabétique par nom
         filtered.sort((a, b) => a.name.localeCompare(b.name, 'fr', {sensitivity:'base'}));
-        // Grille : 4 par ligne desktop, 2 tablette, 1 mobile
+        
+        // Calcul du nombre de colonnes selon la taille d'écran
         let cols = 4;
         if(window.innerWidth <= 1100) cols = 2;
         if(window.innerWidth <= 700) cols = 1;
+        
         // Calcul du nombre de lignes pleines
         let fullRows = Math.floor(filtered.length / cols);
         let remainder = filtered.length % cols;
-        // Générer des indices aléatoires pour insérer les lignes de photos team entre lignes pleines
+        
+        // Générer des indices aléatoires pour insérer les lignes de photos team
         let nbRows = Math.min(fullRows, Math.floor(teamPhotos.length / 2));
         let insertRows = [];
         if(nbRows > 0) {
@@ -515,46 +574,60 @@
           possible = possible.sort(() => Math.random() - 0.5).slice(0, nbRows).sort((a,b)=>a-b);
           insertRows = possible;
         }
+        
         // Mélanger les photos team
         let shuffledPhotos = teamPhotos.slice().sort(() => Math.random() - 0.5);
         let gridItems = [];
         let teamIdx = 0;
         let cIdx = 0;
+        
+        // Construire les lignes de la grille
         for(let row=0; row<fullRows; row++) {
           // Ajouter une ligne de contributeurs
           for(let i=0; i<cols; i++) {
             gridItems.push(filtered[cIdx++]);
           }
+          
           // Insérer une ligne de photos team si demandé
           if(insertRows.includes(row+1) && teamIdx+1 < shuffledPhotos.length) {
             gridItems.push({teamRow: [shuffledPhotos[teamIdx], shuffledPhotos[teamIdx+1]]});
             teamIdx += 2;
           }
         }
+        
         // Dernière ligne incomplète
         if(remainder > 0) {
           for(let i=0; i<remainder; i++) {
             gridItems.push(filtered[cIdx++]);
           }
         }
+        
         // Générer le HTML
         grid.innerHTML = gridItems.map(item => {
           if(item.teamRow) {
-            return `<div class='team-photo-row'>${item.teamRow.map(photo => `<div class='team-photo-cell'><img src='${photo}' alt='Team photo'></div>`).join('')}</div>`;
+            return `<div class='team-photo-row'>
+              ${item.teamRow.map(photo => `<div class='team-photo-cell'><img src='${photo}' alt='Team photo'></div>`).join('')}
+            </div>`;
           } else {
             return `<a class='contributor-card no-underline' href='${item.url||'#'}' target='_blank' tabindex='0'>
               <img src='${item.image || 'profile_photos/default.png'}' alt='${item.name}' class='contributor-photo'>
               <div class='contributor-name no-underline'>${item.name}</div>
-              <div class='contributor-tags'>${(item.tags||[]).map(t=>`<span class='contributor-tag no-underline'>${t}</span>`).join('')}</div>
+              <div class='contributor-tags'>
+                ${(item.tags||[]).map(t=>`<span class='contributor-tag no-underline'>${t}</span>`).join('')}
+              </div>
             </a>`;
           }
         }).join('');
       }
-      // Re-render on resize for perfect grid
+
+      // Re-render au redimensionnement
       window.addEventListener('resize', () => {
         const active = document.querySelector('.community-filter-btn.active');
         if(active) renderGrid(active.getAttribute('data-filter'));
       });
+
+      // Charger les contributeurs au démarrage
+      loadContributors();
     });
   </script>
 </body>
