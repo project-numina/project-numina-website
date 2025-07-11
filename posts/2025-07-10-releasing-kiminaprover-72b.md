@@ -1,54 +1,14 @@
 ---
-title: "Releasing KiminaProver 72B"
-date: "2025-07-10T10:00:00Z"
-image: "/projects_images/projectnumina_kimina-prover.jpg"
-status: "publié"
+title: Releasing KiminaProver-72B
+date: 2025-07-10T10:00:00Z
+image: /assets/uploads/kimina-prover.webp
+status: publié
 ctas:
-  - text: "Essayer KiminaProver 72B"
-    url: "https://demo.projectnumina.ai/"
-    type: "primary"
-  - text: "Voir sur Hugging Face"
-    url: "https://huggingface.co/blog/AI-MO/kimina-prover"
-    type: "secondary"
+  - text: Read full blog post
+    url: https://huggingface.co/blog/AI-MO/kimina-prover
+    type: primary
+  - text: check out the model
+    url: https://huggingface.co/collections/AI-MO/kimina-prover-686b72614760ed23038056c5
+    type: secondary
 ---
-
-# Releasing KiminaProver 72B
-
-Aujourd'hui, nous sommes fiers d'annoncer la sortie de **KiminaProver 72B**, notre modèle d'intelligence artificielle le plus avancé à ce jour pour l'assistance aux preuves formelles et la résolution de problèmes mathématiques complexes.
-
-## Une nouvelle ère pour les preuves formelles
-
-KiminaProver 72B représente une avancée majeure dans le domaine de l'intelligence artificielle appliquée aux mathématiques. Avec ses 72 milliards de paramètres finement ajustés, ce modèle est capable de :
-
-- **Générer des preuves formelles** avec une précision sans précédent
-- **Assister les mathématiciens** dans leurs recherches les plus complexes
-- **Automatiser la vérification** de théorèmes mathématiques
-- **Traduire les preuves informelles** en langage formel
-
-## Performances exceptionnelles
-
-Nos tests approfondis montrent que KiminaProver 72B surpasse significativement les modèles précédents :
-
-- **+40% de précision** sur les benchmarks standard
-- **Résolution de 85%** des problèmes de l'IMO (International Mathematical Olympiad)
-- **Temps de traitement réduit** de 60% par rapport à la version précédente
-- **Support étendu** pour Lean 4, Isabelle/HOL, et Coq
-
-## Disponibilité et accès
-
-KiminaProver 72B est maintenant disponible :
-
-- **En ligne** via notre plateforme de démonstration
-- **API REST** pour l'intégration dans vos projets
-- **Modèle open-source** sur Hugging Face
-- **Documentation complète** et tutoriels
-
-## L'avenir des mathématiques assistées par IA
-
-Cette sortie marque une étape importante dans notre mission de démocratiser l'accès aux outils mathématiques avancés. KiminaProver 72B ouvre la voie à de nouvelles collaborations entre humains et machines dans l'exploration des frontières mathématiques.
-
-Nous remercions notre communauté de contributeurs et nos partenaires pour leur soutien continu dans cette aventure scientifique.
-
----
-
-*Prêt à explorer les possibilités de KiminaProver 72B ? Commencez dès maintenant avec notre démo interactive ou consultez notre documentation technique.* 
+New milestone for Project Numina and Kimi Moonshot! 🚀 We are open sourcing our KiminaProver-72B. This SotA theorem-proving model comes with Test-Time Reinforcement Learning Search and Error-Fixing Capability.
