@@ -1,9 +1,13 @@
 {
   "tags": [
-    "Team Member"
+    "Active Contributor",
+    "Founding Members",
+    "Scientific Advisors",
+    "Alumni"
   ],
   "order": 1,
   "name": "Ronaldo",
   "role": "Frontend",
-  "url": "Fonding Member"
+  "url": "Fonding Member",
+  "image": "/assets/uploads/images.jpeg"
 }
