@@ -7,8 +7,11 @@
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
+  <!-- Include the script that builds the page and powers Netlify CMS -->
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  
   <script>
-    // Initialisation de Netlify Identity AVANT le CMS
+    // Initialisation simple de Netlify Identity
     if (window.netlifyIdentity) {
       window.netlifyIdentity.on("init", user => {
         if (!user) {
@@ -17,37 +20,7 @@
           });
         }
       });
-      
-      // Force l'initialisation
-      window.netlifyIdentity.init();
     }
-  </script>
-  
-  <!-- Include the script that builds the page and powers Netlify CMS -->
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-  
-  <script>
-    // Configuration manuelle du CMS pour forcer Netlify Identity
-    window.CMS_MANUAL_INIT = true;
-    
-    // Attendre que tout soit chargé
-    window.addEventListener('DOMContentLoaded', function() {
-      // Vérifier si l'utilisateur est connecté
-      const user = window.netlifyIdentity.currentUser();
-      console.log('Utilisateur Netlify Identity:', user);
-      
-      if (user) {
-        // Initialiser le CMS avec l'utilisateur connecté
-        window.CMS.init({
-          config: {
-            load_config_file: true
-          }
-        });
-      } else {
-        // Rediriger vers la connexion
-        window.netlifyIdentity.open();
-      }
-    });
   </script>
 </body>
 </html> 
