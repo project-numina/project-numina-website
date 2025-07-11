@@ -1,6 +1,6 @@
 {
-  "generated": "2025-07-11T17:23:30.563Z",
-  "count": 50,
+  "generated": "2025-07-11T17:31:00.062Z",
+  "count": 52,
   "contributors": [
     {
       "filename": "alain-durmus",
@@ -125,6 +125,14 @@
         "Alumni"
       ],
       "lastModified": "2025-07-11T16:54:54.955Z"
+    },
+    {
+      "filename": "map-tags-list-active-contributor-name-john-doe",
+      "name": "John Doe",
+      "tags": [
+        "Active Contributor"
+      ],
+      "lastModified": "2025-07-11T17:24:57.399Z"
     },
     {
       "filename": "julien-michel",
@@ -263,6 +271,14 @@
         "Alumni"
       ],
       "lastModified": "2025-07-11T16:54:54.957Z"
+    },
+    {
+      "filename": "map-tags-list-active-contributor-name-ronaldo-image-assets-uploads-images-jpeg-url-https-www-linkedin-com-feed",
+      "name": "Ronaldo",
+      "tags": [
+        "Active Contributor"
+      ],
+      "lastModified": "2025-07-11T17:24:57.399Z"
     },
     {
       "filename": "map-tags-list-active-contributor-name-test-image-assets-uploads-images-jpeg-url-test",
