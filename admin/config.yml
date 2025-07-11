@@ -6,8 +6,8 @@ backend:
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
 
-site_url: https://project-numina.netlify.app
-display_url: https://project-numina.netlify.app
+site_url: https://projectnumina-website.netlify.app
+display_url: https://projectnumina-website.netlify.app
 
 collections:
   # Collection pour les membres de l'équipe
