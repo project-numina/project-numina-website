@@ -26,7 +26,68 @@ function parseFrontMatter(content) {
     const key = line.slice(0, colonIndex).trim();
     let value = line.slice(colonIndex + 1).trim();
     
-    // Gérer les listes YAML
+    // Gérer les listes YAML simples (tags)
+    if (value.startsWith('[') && value.endsWith(']')) {
+      try {
+        data[key] = JSON.parse(value);
+      } catch (e) {
+        // Si JSON.parse échoue, essayer un parsing manuel
+        const items = value.slice(1, -1).split(',').map(item => 
+          item.trim().replace(/^["']|["']$/g, '')
+        );
+        data[key] = items;
+      }
+      continue;
+    }
+    
+    // Gérer les objets YAML complexes (CTAs)
+    if (key === 'ctas' && value === '') {
+      const ctaItems = [];
+      i++;
+      while (i < lines.length && lines[i].trim().startsWith('-')) {
+        const ctaObj = {};
+        // Lire le premier élément après le tiret
+        let currentLine = lines[i].trim().slice(1).trim(); // Enlever le tiret
+        if (currentLine.includes(':')) {
+          const colonIdx = currentLine.indexOf(':');
+          const firstKey = currentLine.slice(0, colonIdx).trim();
+          let firstValue = currentLine.slice(colonIdx + 1).trim();
+          if ((firstValue.startsWith('"') && firstValue.endsWith('"')) || 
+              (firstValue.startsWith("'") && firstValue.endsWith("'"))) {
+            firstValue = firstValue.slice(1, -1);
+          }
+          ctaObj[firstKey] = firstValue;
+        }
+        
+        // Lire les éléments suivants de ce CTA
+        i++;
+        while (i < lines.length && lines[i].trim() && !lines[i].trim().startsWith('-') && !lines[i].includes('---')) {
+          const objLine = lines[i].trim();
+          const objColonIndex = objLine.indexOf(':');
+          if (objColonIndex !== -1) {
+            const objKey = objLine.slice(0, objColonIndex).trim();
+            let objValue = objLine.slice(objColonIndex + 1).trim();
+            // Supprimer les guillemets
+            if ((objValue.startsWith('"') && objValue.endsWith('"')) || 
+                (objValue.startsWith("'") && objValue.endsWith("'"))) {
+              objValue = objValue.slice(1, -1);
+            }
+            ctaObj[objKey] = objValue;
+          }
+          i++;
+        }
+        if (Object.keys(ctaObj).length > 0) {
+          ctaItems.push(ctaObj);
+        }
+        // Ne pas décrémenter i ici, car on veut continuer à chercher d'autres CTAs
+      }
+      // Décrémenter i une fois à la fin car la boucle for va incrémenter
+      i--;
+      data[key] = ctaItems;
+      continue;
+    }
+    
+    // Gérer les listes YAML simples avec tirets
     if (value === '' && i + 1 < lines.length && lines[i + 1].trim().startsWith('-')) {
       const listItems = [];
       i++;
@@ -42,35 +103,6 @@ function parseFrontMatter(content) {
       }
       i--; // Reculer d'une ligne car la boucle for va incrémenter
       data[key] = listItems;
-      continue;
-    }
-    
-    // Gérer les objets YAML simples (CTAs)
-    if (value === '' && i + 1 < lines.length && lines[i + 1].includes(':')) {
-      const objItems = [];
-      i++;
-      while (i < lines.length && lines[i].trim().startsWith('-')) {
-        const obj = {};
-        i++;
-        while (i < lines.length && lines[i].trim() && !lines[i].trim().startsWith('-')) {
-          const objLine = lines[i].trim();
-          const objColonIndex = objLine.indexOf(':');
-          if (objColonIndex !== -1) {
-            const objKey = objLine.slice(0, objColonIndex).trim();
-            let objValue = objLine.slice(objColonIndex + 1).trim();
-            // Supprimer les guillemets
-            if ((objValue.startsWith('"') && objValue.endsWith('"')) || 
-                (objValue.startsWith("'") && objValue.endsWith("'"))) {
-              objValue = objValue.slice(1, -1);
-            }
-            obj[objKey] = objValue;
-          }
-          i++;
-        }
-        objItems.push(obj);
-        i--;
-      }
-      data[key] = objItems;
       continue;
     }
     
@@ -123,8 +155,8 @@ function generateBlogIndex() {
             excerpt: parsed.data.excerpt || parsed.body.substring(0, 200) + '...'
           };
           
-          // Ne garder que les posts publiés
-          if (post.published === true || post.published === 'true') {
+          // Ne garder que les posts publiés (ancien format: published, nouveau format: status)
+          if (post.published === true || post.published === 'true' || post.status === 'publié') {
             posts.push(post);
           }
         }
@@ -140,7 +172,7 @@ function generateBlogIndex() {
     const index = {
       generated: new Date().toISOString(),
       count: posts.length,
-      published: posts.filter(p => p.published === true || p.published === 'true').length,
+      published: posts.filter(p => p.published === true || p.published === 'true' || p.status === 'publié').length,
       posts: posts
     };
     

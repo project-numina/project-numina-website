@@ -10,39 +10,30 @@ display_url: https://projectnumina-website.netlify.app
 
 collections:
   # Collection pour les membres de la communauté
-  - name: "team"
+  - name: "communaute"
     label: "Communauté"
     folder: "data/team"
     create: true
     slug: "{{slug}}"
-    extension: "json"
-    format: "json"
     fields:
       - {label: "Nom", name: "name", widget: "string"}
       - {label: "Avatar", name: "image", widget: "image", required: false}
-      - {label: "Tags", name: "tags", widget: "select", multiple: true, options: ["Active Contributor", "Alumni", "Founding Members", "Scientific Advisors"], default: ["Active Contributor"]}
       - {label: "URL", name: "url", widget: "string", required: false}
+      - {label: "Tags", name: "tags", widget: "select", multiple: true, options: ["Active Contributor", "Alumni", "Founding Members", "Scientific Advisors"]}
 
   # Collection pour les projets
-  - name: "projects"
+  - name: "projets"
     label: "Projets"
     folder: "data/projects"
     create: true
     slug: "{{slug}}"
-    extension: "json"
-    format: "json"
     fields:
-      - {label: "Titre", name: "title", widget: "string"}
-      - {label: "Description courte", name: "description", widget: "text"}
-      - {label: "Description longue", name: "long_description", widget: "markdown", required: false}
-      - {label: "Image principale", name: "image", widget: "image"}
-      - {label: "Galerie d'images", name: "gallery", widget: "list", field: {label: "Image", name: "image", widget: "image"}, required: false}
-      - {label: "Tags", name: "tags", widget: "list", default: ["Recherche"]}
-      - {label: "Lien du projet", name: "url", widget: "string", required: false}
-      - {label: "Lien GitHub", name: "github_url", widget: "string", required: false}
-      - {label: "Statut", name: "status", widget: "select", options: ["En cours", "Terminé", "En pause"], default: "En cours"}
-      - {label: "Ordre d'affichage", name: "order", widget: "number", default: 1}
-      - {label: "Mis en avant", name: "featured", widget: "boolean", default: false}
+      - {label: "Nom", name: "name", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Image", name: "image", widget: "image", required: false}
+      - {label: "Tags", name: "tags", widget: "list", default: []}
+      - {label: "URL", name: "url", widget: "string", required: false}
+      - {label: "GitHub", name: "github", widget: "string", required: false}
 
   # Collection pour les articles de blog
   - name: "blog"
@@ -50,45 +41,27 @@ collections:
     folder: "posts"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    extension: "md"
-    format: "frontmatter"
     fields:
       - {label: "Titre", name: "title", widget: "string"}
-      - {label: "Date de publication", name: "date", widget: "datetime"}
-      - {label: "Auteur", name: "author", widget: "string", default: "Project Numina Team"}
-      - {label: "Image de couverture", name: "cover_image", widget: "image", required: false}
-      - {label: "Description/Résumé", name: "excerpt", widget: "text"}
-      - {label: "Tags", name: "tags", widget: "list", default: ["News"]}
-      - {label: "CTAs", name: "ctas", widget: "list", required: false, fields: [
-          {label: "Texte du bouton", name: "text", widget: "string"},
-          {label: "Lien", name: "url", widget: "string"},
-          {label: "Style", name: "style", widget: "select", options: ["primary", "secondary"], default: "primary"}
-        ]}
-      - {label: "Publié", name: "published", widget: "boolean", default: false}
-      - {label: "Mis en avant", name: "featured", widget: "boolean", default: false}
+      - {label: "Date", name: "date", widget: "datetime"}
+      - {label: "Image", name: "image", widget: "image", required: false}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Tags", name: "tags", widget: "list", default: []}
       - {label: "Contenu", name: "body", widget: "markdown"}
+      - {label: "Statut", name: "status", widget: "select", options: ["publié", "brouillon"], default: "brouillon"}
+      - {label: "CTAs", name: "ctas", widget: "list", required: false, fields: [
+          {label: "Texte", name: "text", widget: "string"},
+          {label: "URL", name: "url", widget: "string"},
+          {label: "Type", name: "type", widget: "select", options: ["primary", "secondary"], default: "primary"}
+        ]}
 
   # Collection pour les pages principales (optionnel)
-  - name: "pages"
-    label: "Pages"
+  - name: "parametres"
+    label: "Paramètres"
     files:
-      - name: "homepage"
-        label: "Page d'accueil"
-        file: "data/homepage.json"
-        fields:
-          - {label: "Titre principal", name: "hero_title", widget: "string"}
-          - {label: "Sous-titre", name: "hero_subtitle", widget: "text"}
-          - {label: "Image hero", name: "hero_image", widget: "image"}
-          - {label: "Section À propos", name: "about_section", widget: "markdown"}
-      - name: "settings"
+      - file: "data/site-settings.json"
         label: "Paramètres du site"
-        file: "data/settings.json"
+        name: "site-settings"
         fields:
           - {label: "Nom du site", name: "site_name", widget: "string"}
-          - {label: "Description", name: "site_description", widget: "text"}
-          - {label: "Email de contact", name: "contact_email", widget: "string"}
-          - {label: "Réseaux sociaux", name: "social_links", widget: "object", fields: [
-              {label: "Twitter", name: "twitter", widget: "string", required: false},
-              {label: "LinkedIn", name: "linkedin", widget: "string", required: false},
-              {label: "GitHub", name: "github", widget: "string", required: false}
-            ]} 
+          - {label: "Description", name: "description", widget: "text"} 
