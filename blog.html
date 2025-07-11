@@ -151,7 +151,6 @@
     .blog-card-image-container {
       position: relative;
       width: 100%;
-      height: 280px;
       border-radius: 12px;
       overflow: hidden;
       background: #f5f5f5;
@@ -159,10 +158,10 @@
     
     .blog-card-image {
       width: 100%;
-      height: 100%;
-      background-size: cover;
-      background-position: center;
+      height: auto;
+      object-fit: contain;
       border-radius: 12px;
+      display: block;
     }
     
     .blog-card-image-container::before {
@@ -327,7 +326,7 @@
       }
       
       .blog-card-image-container {
-        height: 280px;
+        /* Hauteur automatique pour mobile aussi */
       }
     }
 
@@ -611,7 +610,11 @@
                   </div>
                 ` : ''}
                 <div class="blog-card-image-container">
-                  <div class="blog-card-image" style="${post.image || post.cover_image ? `background-image: url('${post.image || post.cover_image}');` : ''}"></div>
+                  ${post.image || post.cover_image ? `
+                    <img src="${post.image || post.cover_image}" alt="${post.title}" class="blog-card-image">
+                  ` : `
+                    <div class="blog-card-image" style="background: #f5f5f5; min-height: 200px;"></div>
+                  `}
                 </div>
               </div>
             </article>
