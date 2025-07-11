@@ -9,9 +9,9 @@ site_url: https://projectnumina-website.netlify.app
 display_url: https://projectnumina-website.netlify.app
 
 collections:
-  # Collection pour les membres de l'équipe
+  # Collection pour les membres de la communauté
   - name: "team"
-    label: "Équipe"
+    label: "Communauté"
     folder: "data/team"
     create: true
     slug: "{{slug}}"
@@ -19,12 +19,9 @@ collections:
     format: "json"
     fields:
       - {label: "Nom", name: "name", widget: "string"}
-      - {label: "Rôle", name: "role", widget: "string"}
-      - {label: "Photo", name: "image", widget: "image", required: false}
-      - {label: "Tags", name: "tags", widget: "list", default: ["Team Member"]}
+      - {label: "Avatar", name: "image", widget: "image", required: false}
+      - {label: "Tags", name: "tags", widget: "select", multiple: true, options: ["Active Contributor", "Alumni", "Founding Members", "Scientific Advisors"], default: ["Active Contributor"]}
       - {label: "URL", name: "url", widget: "string", required: false}
-      - {label: "Bio", name: "bio", widget: "text", required: false}
-      - {label: "Ordre d'affichage", name: "order", widget: "number", default: 1}
 
   # Collection pour les projets
   - name: "projects"
