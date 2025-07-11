@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: castagnedev/project-numina-website
+  repo: 1000ml/project-numina-website
   branch: main
 
 media_folder: "assets/uploads"
