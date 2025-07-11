@@ -1,0 +1,16 @@
+{
+  "title": "Axion",
+  "description": "Un framework pour l'automatisation de preuves mathématiques utilisant l'IA.",
+  "long_description": "# Axion\n\nAxion est un framework révolutionnaire qui combine l'intelligence artificielle avec la théorie des preuves pour automatiser la démonstration de théorèmes mathématiques.\n\n## Fonctionnalités\n\n- Génération automatique de preuves\n- Vérification formelle\n- Interface intuitive\n- Support pour Lean et Coq",
+  "image": "projects_images/projectnumina_axion.jpg",
+  "gallery": [
+    "projects_images/projectnumina_axion.jpg",
+    "projects_images/projectnumina_axion-1.jpg"
+  ],
+  "tags": ["Preuves automatiques", "Lean", "Recherche"],
+  "url": "https://axion.numina.ai",
+  "github_url": "https://github.com/project-numina/axion",
+  "status": "En cours",
+  "order": 2,
+  "featured": true
+} 

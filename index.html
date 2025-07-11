@@ -1,0 +1,1830 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Numina</title>
+  
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
+  <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="favicon/favicon.ico">
+  <link rel="manifest" href="favicon/site.webmanifest">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gradient: linear-gradient(90deg, #ffb199 0%, #ff0844 100%);
+      --bg: #FFFEF9;
+      --card-bg: #fff;
+      --shadow: 0 4px 24px rgba(0,0,0,0.07);
+      --radius: 20px;
+      --primary: #ff5e62;
+      --secondary: #ff9966;
+      --text: #222;
+      --muted: #888;
+      --tag-bg: #f3f3f3;
+      --tag-text: #ff5e62;
+      --header-height: 72px;
+      --header-bg: #fff;
+      --nav-link: #222;
+      --nav-link-active: #ff5e62;
+      --nav-link-hover: #ff5e62;
+      --hero-orange: linear-gradient(120deg, #ffb199 0%, #ff0844 100%);
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      margin: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    /* HEADER */
+    header.main-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: transparent;
+      height: var(--header-height);
+      width: 100%;
+      display: flex;
+      align-items: center;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    body.scrolled header.main-header {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+      top: 20px;
+      max-width: 1168px;
+      margin: 0 auto;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      width: calc(100% - 32px);
+    }
+    .header-center {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: var(--header-height);
+      padding: 0 16px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1.7rem;
+      color: var(--primary);
+      text-decoration: none;
+      position: relative;
+    }
+    .logo-icon {
+      height: 36px;
+      width: auto;
+      display: block;
+      transition: opacity 0.3s ease;
+    }
+    .logo-full {
+      height: 36px;
+      width: auto;
+      display: block;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    body.scrolled .logo-icon {
+      opacity: 0;
+    }
+    body.scrolled .logo-full {
+      opacity: 1;
+    }
+    .main-nav {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      font-family: 'Roboto', sans-serif;
+    }
+    .main-nav-link {
+      color: var(--nav-link);
+      text-decoration: none;
+      font-size: 1.08rem;
+      font-weight: 700;
+      padding: 2px 0;
+      background: none;
+      border: none;
+      transition: color 0.2s;
+      font-family: 'Roboto', sans-serif;
+    }
+    .main-nav-link:hover {
+      color: #A85923;
+    }
+    .main-nav-link.active {
+      color: #A85923;
+      font-weight: 700;
+    }
+    .main-nav-cta {
+      color: #21706A;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: none;
+      padding: 2px 0;
+      border: none;
+      position: relative;
+      font-family: 'Roboto', sans-serif;
+    }
+    .main-nav-cta .cta-arrow {
+      width: 1.25em;
+      height: 1.25em;
+      margin-left: 6px;
+      vertical-align: middle;
+      display: inline-block;
+      stroke-width: 2.2;
+      stroke: #21706A;
+    }
+    .main-nav-cta::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -4px;
+      height: 2px;
+      background: #21706A;
+      width: 100%;
+      border-radius: 1px;
+    }
+    .main-nav-cta:hover {
+      color: #21706A;
+    }
+    /* HERO */
+    .hero-sponsors-block {
+      margin: 0 auto;
+      max-width: 1200px;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px #ff5e6212;
+      overflow: hidden;
+      background: linear-gradient(120deg, #ffb199 0%, #ff0844 100%);
+      position: relative;
+      z-index: 10;
+    }
+    .hero-sponsors-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: url('Assets/hero.jpg') center center/cover no-repeat;
+      opacity: 0.85;
+      pointer-events: none;
+      border-radius: 20px;
+    }
+    .hero-flex {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding: 48px 56px 40px 56px;
+      gap: 32px;
+      min-height: 520px;
+    }
+    .hero-col-left {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      flex: 1;
+      min-width: 0;
+    }
+    .hero-logo-typo {
+      max-width: 100%;
+      height: auto;
+      max-height: 120px;
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.2));
+    }
+    .hero-col-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      flex: 1;
+      min-width: 0;
+      color: #fff;
+    }
+    .hero-description {
+      font-size: 1.26rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+      line-height: 1.5;
+      color: #fff;
+      text-shadow: 0 2px 8px #ff5e6233;
+    }
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: inherit;
+      font-weight: inherit;
+      color: #fff;
+      text-decoration: underline;
+      transition: opacity 0.2s;
+      text-underline-offset: 4px;
+      text-decoration-thickness: 1px;
+    }
+    .hero-cta:hover {
+      opacity: 0.8;
+      text-decoration: underline;
+    }
+    .hero-cta::after {
+      content: '↓';
+      font-size: 0.9em;
+      margin-left: 2px;
+      opacity: 0.8;
+    }
+    .sponsors-block {
+      background: #FDFAF6;
+      border-radius: 0 0 20px 20px;
+      padding: 20px 32px 16px 32px;
+      position: relative;
+      z-index: 5;
+      margin-top: -4px;
+      box-shadow: 0 2px 16px #0001;
+      overflow: hidden;
+    }
+    .sponsors-label {
+      color: #6B5B4A;
+      font-size: 1.08rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+    .partner-logos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 32px;
+      flex-wrap: nowrap;
+      margin-bottom: 20px;
+      overflow-x: hidden;
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+    .partner-logos a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 48px;
+      transition: opacity 0.2s ease;
+      position: relative;
+      padding: 0 12px;
+    }
+    .partner-logos a:hover {
+      opacity: 0.8;
+    }
+    
+    /* Tooltips pour les logos sponsors */
+    .partner-logos a::after {
+      content: attr(title);
+      position: absolute;
+      top: -35px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(34, 34, 34, 0.9);
+      color: white;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.2s ease;
+      pointer-events: none;
+      z-index: 10;
+    }
+    
+    .partner-logos a::before {
+      content: '';
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-top: 4px solid rgba(34, 34, 34, 0.9);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.2s ease;
+      pointer-events: none;
+      z-index: 10;
+    }
+    
+    .partner-logos a:hover::after,
+    .partner-logos a:hover::before {
+      opacity: 1;
+      visibility: visible;
+    }
+    .partner-logos img {
+      max-height: 22px;
+      max-width: 90px;
+      object-fit: contain;
+      background: none;
+      filter: none;
+      opacity: 1;
+    }
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 16px 0 16px;
+    }
+    section {
+      margin-bottom: 64px;
+    }
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .section-sub {
+      color: var(--muted);
+      font-size: 1.1rem;
+      margin-bottom: 32px;
+    }
+    .filters {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      border: none;
+      border-radius: 999px;
+      padding: 8px 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.2s, color 0.2s;
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 32px;
+    }
+    .project-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px 24px 20px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      min-height: 340px;
+      position: relative;
+    }
+    .project-card img {
+      width: 100%;
+      max-height: 120px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 16px;
+      background: #f3f3f3;
+    }
+    .project-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .project-desc {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 16px;
+    }
+    .project-tags {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .tag {
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      border-radius: 8px;
+      padding: 2px 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .project-actions {
+      margin-top: auto;
+      display: flex;
+      gap: 12px;
+    }
+    .btn {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      padding: 8px 20px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 2px 8px #ff5e6233;
+      transition: background 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn.secondary {
+      background: var(--tag-bg);
+      color: var(--primary);
+      box-shadow: none;
+    }
+
+    .cta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+      margin-top: 32px;
+    }
+    .cta-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px 24px 20px 24px;
+      text-align: center;
+      min-height: 180px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .cta-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .cta-desc {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 16px;
+    }
+    /* Footer - New Design */
+    .footer-new {
+      background: #1a1a1a;
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      padding: 100px 0 60px 0;
+      margin-top: 0;
+    }
+    
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      margin-bottom: 0;
+    }
+    
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .footer-logo-new {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    
+    .footer-logo-new img {
+      height: 32px;
+      width: 32px;
+    }
+    
+    .footer-logo-text {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: white;
+    }
+    
+    .footer-mission-new {
+      color: #a0a0a0;
+      font-size: 1rem;
+      line-height: 1.6;
+      width: 100%;
+      margin-bottom: 24px;
+    }
+    
+    .footer-brand-bottom {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    
+    .footer-links {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+    }
+    
+    .footer-col-new {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .footer-col-title-new {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+    }
+    
+    .footer-link-new {
+      color: #a0a0a0;
+      text-decoration: none;
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+      transition: color 0.2s ease;
+      display: block;
+    }
+    
+    .footer-link-new:hover {
+      color: white;
+    }
+    
+    .footer-link-external {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .external-icon {
+      width: 14px;
+      height: 14px;
+      opacity: 0.7;
+    }
+    
+    .footer-copyright {
+      color: #a0a0a0;
+      font-size: 0.9rem;
+    }
+    
+    .footer-legal-link {
+      color: #a0a0a0;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s ease;
+    }
+    
+    .footer-legal-link:hover {
+      color: white;
+    }
+    
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+      
+      .footer-links {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .footer-container {
+        padding: 0 20px;
+      }
+      
+      .footer-new {
+        padding: 80px 0 48px 0;
+      }
+      
+      .footer-links {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+    }
+    
+    @media (max-width: 600px) {
+      .footer-container {
+        padding: 0 16px;
+      }
+      
+      .footer-new {
+        padding: 64px 0 40px 0;
+      }
+      
+      .footer-content {
+        gap: 40px;
+      }
+      
+      .footer-brand-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+    }
+    @media (max-width: 900px) {
+      body.scrolled header.main-header {
+        max-width: calc(100vw - 32px);
+        top: 20px;
+        margin: 0 16px;
+        width: calc(100vw - 32px);
+      }
+      .header-center {
+        padding: 0 12px;
+      }
+      .hero-flex {
+        flex-direction: column;
+        padding: 32px 16px 24px 16px;
+        gap: 24px;
+        min-height: 320px;
+        align-items: center;
+      }
+      .hero-col-left {
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+      }
+      .hero-col-right {
+        align-items: center;
+        justify-content: flex-start;
+        text-align: center;
+        width: 100%;
+      }
+      .hero-logo-typo {
+        max-height: 80px;
+      }
+      .hero-sponsors-block {
+        max-width: 98vw;
+        border-radius: 16px;
+      }
+      .hero-sponsors-bg {
+        border-radius: 16px;
+      }
+      .sponsors-block {
+        border-radius: 0 0 16px 16px;
+      }
+      .partner-logos {
+        flex-wrap: wrap;
+        gap: 20px;
+        padding-left: 0;
+        padding-right: 0;
+        overflow-x: hidden;
+      }
+      .partner-logos img {
+        max-height: 18px;
+        max-width: 70px;
+      }
+    }
+    @media (max-width: 600px) {
+      body.scrolled header.main-header {
+        max-width: calc(100vw - 16px);
+        top: 20px;
+        margin: 0 8px;
+        width: calc(100vw - 16px);
+      }
+      .header-center {
+        padding: 0 8px;
+      }
+      .hero-sponsors-block {
+        max-width: 100vw;
+        border-radius: 10px;
+        margin: 0 auto;
+      }
+      .hero-sponsors-bg {
+        border-radius: 10px;
+      }
+      .sponsors-block {
+        border-radius: 0 0 10px 10px;
+      }
+      .hero-flex {
+        padding: 18px 6px 12px 6px;
+        min-height: 200px;
+        align-items: center;
+        gap: 16px;
+      }
+      .hero-logo-typo {
+        max-height: 60px;
+      }
+      .partner-logos {
+        gap: 12px;
+        flex-wrap: wrap;
+        padding-left: 0;
+        padding-right: 0;
+        overflow-x: hidden;
+      }
+      .partner-logos img {
+        max-height: 14px;
+        max-width: 48px;
+      }
+    }
+    /* Ongoing Projects Section */
+    .ongoing-section {
+      background: #FFFEF9;
+      border-radius: 0;
+      padding: 38px 0 32px 0;
+      margin-bottom: 48px;
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+    }
+    .ongoing-section::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      background: radial-gradient(ellipse 800px 400px at center center, #CD794C 0%, rgba(205, 121, 76, 0.5) 30%, rgba(255, 254, 249, 0) 70%);
+      opacity: 0.3;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .ongoing-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 26px;
+      position: relative;
+      z-index: 1;
+    }
+    .ongoing-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+      gap: 12px;
+      position: relative;
+      z-index: 1;
+    }
+    .ongoing-title {
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: #18181b;
+      letter-spacing: -0.025em;
+    }
+    .ongoing-sub {
+      color: #18181b;
+      font-size: 0.9rem;
+      margin-bottom: 28px;
+      max-width: 600px;
+      position: relative;
+      z-index: 1;
+    }
+    .ongoing-filters {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+        /* Couleurs des filtres selon les couleurs des tags */
+    .ongoing-filter-btn {
+      background: #f3f3f3;
+      color: #18181b;
+      border: none;
+      border-radius: 999px;
+      padding: 8px 19px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+    .ongoing-filter-btn.active {
+      background: #18181b;
+      color: #fff !important;
+      box-shadow: 0 3px 10px #18181b22;
+    }
+    .ongoing-filter-btn[data-filter="models"]:not(.active) {
+      color: #7c3aed;
+    }
+    .ongoing-filter-btn[data-filter="datasets"]:not(.active) {
+      color: #ea580c;
+    }
+    .ongoing-filter-btn[data-filter="tools"]:not(.active) {
+      color: #2563eb;
+    }
+    /* Grille responsive avec 2-3 colonnes */
+    .ongoing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 26px;
+      position: relative;
+      z-index: 1;
+    }
+    /* Carte large pour Math Viewer */
+    .ongoing-card.highlight {
+      grid-column: span 2;
+    }
+    .ongoing-card {
+      background: #FEFBF6;
+      border: 1px solid #D6CFC0;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease, opacity 0.3s ease;
+      overflow: hidden;
+      height: 450px;
+      position: relative;
+      opacity: 1;
+    }
+    /* Animation hover plus subtile avec contour */
+    .ongoing-card:hover {
+      border: 2px solid #CD794C;
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: 0 8px 24px rgba(205, 121, 76, 0.15);
+    }
+    .ongoing-card-content {
+      padding: 22px 19px 19px 19px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      transition: none;
+      overflow: hidden;
+    }
+    .ongoing-card-tags {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    /* Tags sans background selon Figma */
+    .ongoing-tag {
+      border-radius: 0;
+      padding: 0;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: capitalize;
+      background: none;
+    }
+    .ongoing-tag.model {
+      color: #7c3aed;
+    }
+    .ongoing-tag.dataset {
+      color: #ea580c;
+    }
+    .ongoing-tag.research {
+      color: #16a34a;
+    }
+    .ongoing-tag.tool {
+      color: #2563eb;
+    }
+    .ongoing-card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #18181b;
+    }
+    .ongoing-card.highlight .ongoing-card-title {
+      font-size: 1.4rem;
+    }
+    /* Statut sans background selon Figma */
+    .ongoing-card-status {
+      display: inline-block;
+      background: none;
+      color: #6B5B4A;
+      border-radius: 0;
+      padding: 0;
+      font-size: 0.68rem;
+      font-weight: 400;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      width: fit-content;
+    }
+    .ongoing-card-desc {
+      color: #18181b;
+      font-size: 0.8rem;
+      line-height: 1.5;
+      margin-bottom: 16px;
+      flex: 1;
+    }
+    .ongoing-card-actions {
+      margin-bottom: 16px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    /* Bouton selon design Figma */
+    .ongoing-btn {
+      background: #18181b;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 9px 16px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      box-shadow: none;
+    }
+    .ongoing-btn:hover {
+      background: #A85923;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px #A8592333;
+    }
+    .ongoing-btn::after {
+      content: '→';
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .ongoing-btn.secondary {
+      background: transparent;
+      color: #6B5B4A;
+      box-shadow: none;
+      padding: 9px 0;
+    }
+    .ongoing-btn.secondary:hover {
+      color: #A85923;
+      background: transparent;
+    }
+    .ongoing-btn.secondary::after {
+      content: '';
+    }
+    /* Images avec ratios respectés, pleine largeur - pas de zoom sur l'image */
+    .ongoing-card-img {
+      width: 100%;
+      height: auto;
+      min-height: 144px;
+      object-fit: cover;
+      object-position: center;
+      transition: none;
+      background: #f8f8f8;
+      border-radius: 0;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1200px) {
+      .ongoing-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 28px;
+      }
+      .ongoing-card.highlight {
+        grid-column: span 2;
+      }
+    }
+    @media (max-width: 900px) {
+      .ongoing-section {
+        padding: 32px 20px;
+      }
+      .ongoing-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+      .ongoing-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+      }
+      .ongoing-card.highlight {
+        grid-column: span 2;
+      }
+      .ongoing-card {
+        min-height: 420px;
+      }
+    }
+    @media (max-width: 600px) {
+      .ongoing-section {
+        padding: 24px 16px;
+      }
+      .ongoing-title {
+        font-size: 2rem;
+      }
+      .ongoing-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .ongoing-card.highlight {
+        grid-column: span 1;
+      }
+      .ongoing-card {
+        min-height: 380px;
+      }
+      .ongoing-card.highlight .ongoing-card-title {
+        font-size: 1.5rem;
+      }
+    }
+    
+    /* Open Source AI Section */
+    .open-source-section-new {
+      background: #fef8f5;
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      padding: 40px 0;
+      margin-bottom: 48px;
+    }
+    
+    .open-source-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+    
+    .open-source-header {
+      text-align: left;
+      margin-bottom: 32px;
+    }
+    
+    .open-source-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #18181b;
+      margin-bottom: 8px;
+    }
+    
+    .open-source-subtitle {
+      color: #6b7280;
+      font-size: 1.1rem;
+    }
+    
+    .tables-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-bottom: 40px;
+    }
+    
+    .table-container {
+      background: white;
+      border-radius: 16px;
+      border: 1px solid #D6CFC0;
+      overflow: hidden;
+    }
+    
+    .table-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #18181b;
+      padding: 20px 20px 16px 20px;
+      margin: 0;
+    }
+    
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    .data-table thead th {
+      background: #faf8f3;
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: #8b7355;
+      border-bottom: 1px solid #D6CFC0;
+    }
+    
+    .data-table tbody td {
+      padding: 12px 16px;
+      border-top: 1px solid #e5e7eb;
+      font-size: 0.9rem;
+    }
+    
+    .license-badge {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    
+    .license-badge.open-source {
+      background: #dcfce7;
+      color: #166534;
+    }
+    
+    .license-badge.apache {
+      background: #dbeafe;
+      color: #1d4ed8;
+    }
+    
+    .action-buttons {
+      display: flex;
+      flex-direction: row;
+      gap: 16px;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    
+    .btn-github {
+      background: #f8f9fa;
+      color: #18181b;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      padding: 12px 24px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    
+    .btn-github:hover {
+      background: #e9ecef;
+      border-color: #6c757d;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 900px) {
+      .tables-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      
+      .open-source-container {
+        padding: 0 20px;
+      }
+      
+      .open-source-section-new {
+        padding: 32px 0;
+      }
+    }
+    
+    @media (max-width: 600px) {
+      .open-source-container {
+        padding: 0 16px;
+      }
+      
+      .open-source-section-new {
+        padding: 24px 0;
+      }
+      
+      .action-buttons {
+        flex-direction: column;
+        gap: 12px;
+      }
+      
+      .open-source-title {
+        font-size: 1.7rem;
+      }
+      
+      .data-table thead th,
+      .data-table tbody td {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+      }
+      
+      .table-title {
+        font-size: 1.1rem;
+        padding: 16px 16px 12px 16px;
+      }
+          }
+    
+    /* Get Involved Section - New Design */
+    .get-involved-section {
+      background: #2a5f5f;
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      padding: 60px 0;
+      margin-bottom: 0;
+    }
+    
+    .get-involved-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+    
+    .get-involved-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    
+    .get-involved-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 16px;
+    }
+    
+    .get-involved-subtitle {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.85);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .get-involved-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    
+    .get-involved-card {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      padding: 32px 24px;
+      transition: all 0.3s ease;
+    }
+    
+    .get-involved-card:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(-4px);
+    }
+    
+    .get-involved-card-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 12px;
+    }
+    
+    .get-involved-card-desc {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+    
+    .cta-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    
+    .cta-link:hover {
+      transform: translateX(4px);
+    }
+    
+    .cta-link::after {
+      content: '→';
+      font-size: 1.1rem;
+      transition: transform 0.2s ease;
+    }
+    
+    .cta-link:hover::after {
+      transform: translateX(2px);
+    }
+    
+    .cta-follow {
+      color: #ff6b9d;
+    }
+    
+    .cta-tools {
+      color: #4ecdc4;
+    }
+    
+    .cta-join {
+      color: #667eea;
+    }
+    
+    .cta-support {
+      color: #ffa726;
+    }
+    
+    /* Responsive */
+    @media (max-width: 900px) {
+      .get-involved-container {
+        padding: 0 20px;
+      }
+      
+      .get-involved-section {
+        padding: 48px 0;
+      }
+      
+      .get-involved-title {
+        font-size: 1.8rem;
+      }
+    }
+    
+    @media (max-width: 600px) {
+      .get-involved-container {
+        padding: 0 16px;
+      }
+      
+      .get-involved-section {
+        padding: 40px 0;
+      }
+      
+      .get-involved-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      .get-involved-card {
+        padding: 24px 20px;
+      }
+    }
+    </style>
+  </head>
+<body>
+  <header class="main-header">
+    <div class="header-center">
+      <a href="#" class="logo">
+        <img src="Assets/icon_projectNumina.svg" alt="Project Numina" class="logo-icon">
+        <img src="Assets/logo_projectNumina.svg" alt="Project Numina" class="logo-full">
+      </a>
+      <nav class="main-nav">
+        <a href="#get-involved" class="main-nav-link main-nav-cta">
+          Get Involved
+          <svg class="cta-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </a>
+        <span style="margin: 0 18px; border-right: 1.5px solid #e0e0e0; height: 24px; display: inline-block;"></span>
+        <a href="index.html" class="main-nav-link active">Projects</a>
+        <a href="about-us.html" class="main-nav-link">About Us</a>
+        <a href="community.html" class="main-nav-link">Community</a>
+        <a href="https://projectnumina.ai/publications/" target="_blank" rel="noopener noreferrer" class="main-nav-link">Blog</a>
+      </nav>
+    </div>
+  </header>
+  <section class="hero-sponsors-block">
+    <div class="hero-sponsors-bg"></div>
+    <div class="hero-flex">
+      <div class="hero-col-left">
+        <img src="Assets/typo_projectNumina.svg" alt="Project Numina" class="hero-logo-typo">
+      </div>
+      <div class="hero-col-right">
+        <div class="hero-description">Numina advances open-source AI to deepen how humans and machines engage with mathematics, a mission shaped by open tools, data, and shared exploration in <a class="hero-cta" href="#projects">our ongoing projects</a></div>
+      </div>
+    </div>
+  </section>
+  <div class="sponsors-block">
+    <div class="sponsors-label">THEY SUPPORT US</div>
+    <div class="partner-logos">
+      <a href="https://mistral.ai/" target="_blank" rel="noopener noreferrer"><img src="partner_logos/mistralai_logo.png" alt="Mistral AI" title="Mistral AI"></a>
+      <a href="https://huggingface.co/" target="_blank" rel="noopener noreferrer"><img src="partner_logos/huggingface_logo.png" alt="Hugging Face" title="Hugging Face"></a>
+      <a href="https://meta.com/" target="_blank" rel="noopener noreferrer"><img src="partner_logos/meta_logo.png" alt="Meta" title="Meta"></a>
+      <a href="https://www.generalcatalyst.com/stories/our-partnership-with-project-numina" target="_blank" rel="noopener noreferrer"><img src="partner_logos/generalcatalyst_logo.png" alt="General Catalyst" title="General Catalyst"></a>
+      <a href="https://www.anthropic.com/" target="_blank" rel="noopener noreferrer"><img src="partner_logos/a_logo.png" alt="Anthropic" title="Anthropic"></a>
+      <a href="https://answerai.pro/" target="_blank" rel="noopener noreferrer"><img src="partner_logos/answerai_logo.png" alt="Answer AI" title="Answer AI"></a>
+      <a href="https://bicmr.pku.edu.cn/" target="_blank" rel="noopener noreferrer"><img src="partner_logos/beijingmathematicalresearch_logo.png" alt="Beijing Mathematical Research" title="Beijing Mathematical Research"></a>
+      <a href="https://www.kimi.com/" target="_blank" rel="noopener noreferrer"><img src="partner_logos/moonshot_logo.png" alt="Moonshot" title="Moonshot"></a>
+      <a href="https://www.businesswire.com/news/home/20241217062574/en/Project-Numina-Receives-%E2%82%AC3m-Research-Grant-From-XTX-Markets" target="_blank" rel="noopener noreferrer"><img src="partner_logos/xtx_logo.png" alt="XTX" title="XTX"></a>
+    </div>
+  </div>
+  <main>
+    <section class="ongoing-section" id="projects">
+      <div class="ongoing-container">
+        <div class="ongoing-header">
+          <div class="ongoing-title">Ongoing Projects</div>
+          <div class="ongoing-filters">
+            <button class="ongoing-filter-btn active" data-filter="all">All</button>
+            <button class="ongoing-filter-btn" data-filter="models">Models</button>
+            <button class="ongoing-filter-btn" data-filter="datasets">Datasets</button>
+            <button class="ongoing-filter-btn" data-filter="tools">Tools</button>
+          </div>
+        </div>
+        <div class="ongoing-sub">Discover our flagship projects and current research directions.</div>
+        <div class="ongoing-grid" id="ongoing-grid">
+          <!-- Axion - carte large mise en avant -->
+          <div class="ongoing-card highlight" data-tags="tools">
+            <div class="ongoing-card-content">
+              <div class="ongoing-card-tags">
+                <span class="ongoing-tag tool">Tool</span>
+              </div>
+              <div class="ongoing-card-title">Axion</div>
+              <div class="ongoing-card-status">COMING SOON | JULY 2025</div>
+              <div class="ongoing-card-desc">AI-powered platform to explore, write, and validate mathematical proofs. It helps learners progress from intuition to formal reasoning with guided feedback, adaptive learning paths, and trustworthy verification.</div>
+              <div class="ongoing-card-actions">
+                <a href="http://axion.projectnumina.ai/" target="_blank" rel="noopener noreferrer" class="ongoing-btn">Get started</a>
+              </div>
+            </div>
+            <img src="projects_images/projectnumina_axion.jpg" alt="Axion" class="ongoing-card-img">
+          </div>
+
+          <!-- kimina-prover-72b -->
+          <div class="ongoing-card" data-tags="models">
+            <div class="ongoing-card-content">
+              <div class="ongoing-card-tags">
+                <span class="ongoing-tag model">Model</span>
+              </div>
+              <div class="ongoing-card-title">kimina-prover-72b</div>
+              <div class="ongoing-card-status">UPDATED | JULY 2025</div>
+              <div class="ongoing-card-desc">Automated proof assistant for advanced mathematical research.</div>
+              <div class="ongoing-card-actions">
+                <a href="https://demo.projectnumina.ai/" target="_blank" rel="noopener noreferrer" class="ongoing-btn">Get started</a>
+                <a href="https://huggingface.co/blog/AI-MO/kimina-prover" target="_blank" rel="noopener noreferrer" class="ongoing-btn secondary">⚡ See Blog Post</a>
+              </div>
+            </div>
+            <img src="projects_images/projectnumina_kimina-prover.jpg" alt="kimina-prover-72b" class="ongoing-card-img">
+          </div>
+
+          <!-- Math Viewer -->
+          <div class="ongoing-card" data-tags="tools">
+            <div class="ongoing-card-content">
+              <div class="ongoing-card-tags">
+                <span class="ongoing-tag tool">Tool</span>
+              </div>
+              <div class="ongoing-card-title">Math Viewer</div>
+              <div class="ongoing-card-status">COMING SOON | JULY 2025</div>
+              <div class="ongoing-card-desc">Platform to annotate informal and formal proofs with structured workflows, task distribution and AI-assisted quality control. Includes Lean 4-powered autoformalization to generate datasets for model training.</div>
+              <div class="ongoing-card-actions">
+                <a href="https://supercut.ai/share/castagne/AnGQXhrTAtN1xDCX9CRhfk" target="_blank" rel="noopener noreferrer" class="ongoing-btn">Watch demo</a>
+              </div>
+            </div>
+            <img src="projects_images/projectnumina_mathviewer.jpg" alt="Math Viewer" class="ongoing-card-img">
+          </div>
+
+          <!-- NuminaMath -->
+          <div class="ongoing-card" data-tags="datasets">
+            <div class="ongoing-card-content">
+              <div class="ongoing-card-tags">
+                <span class="ongoing-tag dataset">Dataset</span>
+              </div>
+              <div class="ongoing-card-title">NuminaMath</div>
+              <div class="ongoing-card-status">COMING SOON | JULY 2025</div>
+              <div class="ongoing-card-desc">Datasets being the winning solution of the 1st AIMO Progress Prize.
+                <ul style="margin-top:8px; margin-left:16px; line-height:1.5;">
+                  <li>• NuminaMath-7B-TIR</li>
+                  <li>• NuminaMath-CoT</li>
+                </ul>
+              </div>
+              <div class="ongoing-card-actions">
+                <a href="https://projectnumina.ai/publications/" target="_blank" rel="noopener noreferrer" class="ongoing-btn">Read our publication</a>
+                <a href="https://huggingface.co/datasets/AI-MO/NuminaMath-CoT" target="_blank" rel="noopener noreferrer" class="ongoing-btn secondary">Dataset</a>
+              </div>
+            </div>
+            <img src="projects_images/projectnumina_numinamath.png" alt="NuminaMath" class="ongoing-card-img">
+          </div>
+
+          <!-- NuminaMath-Lean 100K -->
+          <div class="ongoing-card" data-tags="datasets">
+            <div class="ongoing-card-content">
+              <div class="ongoing-card-tags">
+                <span class="ongoing-tag dataset">Dataset</span>
+              </div>
+              <div class="ongoing-card-title">NuminaMath-Lean 100K</div>
+              <div class="ongoing-card-status">COMING SOON | JULY 2025</div>
+              <div class="ongoing-card-desc">A massive dataset of 100,000 formalized math problems in Lean, including 50,000 formalized solutions, which will also serve as a powerful reinforcement learning (RL) training set.</div>
+              <div class="ongoing-card-actions">
+                <a href="https://huggingface.co/datasets/AI-MO" target="_blank" rel="noopener noreferrer" class="ongoing-btn">Dataset</a>
+              </div>
+            </div>
+            <img src="projects_images/projectnumina_numinamath.png" alt="NuminaMath-Lean 100K" class="ongoing-card-img">
+          </div>
+
+          <!-- Numina-IMO-Bench 880 -->
+          <div class="ongoing-card" data-tags="datasets">
+            <div class="ongoing-card-content">
+              <div class="ongoing-card-tags">
+                <span class="ongoing-tag dataset">Dataset</span>
+              </div>
+              <div class="ongoing-card-title">Numina-IMO-Bench 880</div>
+              <div class="ongoing-card-status">COMING SOON | JULY 2025</div>
+              <div class="ongoing-card-desc">A challenging benchmark of 880 IMO-level and IMO-shortlist-level formal problems.</div>
+              <div class="ongoing-card-actions">
+                <a href="https://huggingface.co/datasets/AI-MO" target="_blank" rel="noopener noreferrer" class="ongoing-btn">Dataset</a>
+              </div>
+            </div>
+            <img src="projects_images/projectnumina_numinamath.png" alt="Numina-IMO-Bench 880" class="ongoing-card-img">
+          </div>
+
+          <!-- CombiBench -->
+          <div class="ongoing-card" data-tags="datasets">
+            <div class="ongoing-card-content">
+              <div class="ongoing-card-tags">
+                <span class="ongoing-tag dataset">Dataset</span>
+              </div>
+              <div class="ongoing-card-title">CombiBench</div>
+              <div class="ongoing-card-status">UPDATED | MAY 2025</div>
+              <div class="ongoing-card-desc">The first benchmark focused on combinatorial problems in Lean 4, featuring 100 manually curated problems of varying difficulty levels from IMO, competitions, and textbooks to evaluate automated theorem proving capabilities.</div>
+              <div class="ongoing-card-actions">
+                <a href="https://huggingface.co/datasets/AI-MO/CombiBench" target="_blank" rel="noopener noreferrer" class="ongoing-btn">Dataset</a>
+              </div>
+            </div>
+            <img src="projects_images/projectnumina_numinamath.png" alt="CombiBench" class="ongoing-card-img">
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="open-source-ai" class="open-source-section-new">
+      <div class="open-source-container">
+        <div class="open-source-header">
+          <h2 class="open-source-title">Open Source AI</h2>
+          <p class="open-source-subtitle">All our models and datasets are open and available to the community.</p>
+        </div>
+
+        <div class="tables-grid">
+        <!-- Tableau des modèles -->
+        <div class="table-container">
+          <h3 class="table-title">Featured Models</h3>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Size</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>NuminaMath-7B-CoT</td>
+                <td>Math reasoning with chain-of-thought prompts</td>
+                <td>7B</td>
+              </tr>
+              <tr>
+                <td>Kimina-Prover-Distill-1.5B</td>
+                <td>Lightweight formal proof assistant</td>
+                <td>1.5B</td>
+              </tr>
+              <tr>
+                <td>Coming Soon Model</td>
+                <td>Advanced mathematical reasoning model</td>
+                <td>TBA</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Tableau des datasets -->
+        <div class="table-container">
+          <h3 class="table-title">Featured Datasets</h3>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Size</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Numina Math</td>
+                <td>Math reasoning dataset with chain-of-thought solutions</td>
+                <td>860K</td>
+              </tr>
+              <tr>
+                <td>Combibench</td>
+                <td>Combinatorics problems and solutions benchmark</td>
+                <td>50K</td>
+              </tr>
+              <tr>
+                <td>Informal Math Dataset</td>
+                <td>Large-scale informal mathematical proofs collection</td>
+                <td>Coming Soon</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+              </div>
+
+        <div class="action-buttons">
+          <a href="https://huggingface.co/AI-MO" target="_blank" rel="noopener noreferrer" class="btn-github">
+            <span style="font-size: 16px;">🤗</span>
+            View all on Hugging Face
+          </a>
+          <a href="https://github.com/project-numina" target="_blank" rel="noopener noreferrer" class="btn-github">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+            </svg>
+            View all on GitHub
+          </a>
+        </div>
+      </div>
+    </section>
+    <section id="get-involved" class="get-involved-section">
+      <div class="get-involved-container">
+        <div class="get-involved-header">
+          <h2 class="get-involved-title">Get Involved with Project Numina</h2>
+          <p class="get-involved-subtitle">Engage with the community, explore our resources, or contribute à la mission.</p>
+        </div>
+        
+        <div class="get-involved-grid">
+          <div class="get-involved-card">
+            <div class="get-involved-card-title">Join the effort</div>
+            <div class="get-involved-card-desc">Contribute code, review tasks or help shape the future of math.</div>
+            <a href="https://docs.google.com/forms/d/1FREvq2lCc9URnu5iGXAxBZRcx6OpEnQWlYSryM5s42g/edit" target="_blank" rel="noopener noreferrer" class="cta-link cta-join">Contact Us</a>
+          </div>
+          
+          <div class="get-involved-card">
+            <div class="get-involved-card-title">Support the mission</div>
+            <div class="get-involved-card-desc">Make a donation and help advance open, collaborative mathematics.</div>
+            <a href="mailto:contact@projectnumina.com" class="cta-link cta-support">Donate to Numina</a>
+          </div>
+          
+          <div class="get-involved-card">
+            <div class="get-involved-card-title">Follow us</div>
+            <div class="get-involved-card-desc">Stay updated with the latest research and community news.</div>
+            <a href="https://x.com/ProjectNumina" target="_blank" rel="noopener noreferrer" class="cta-link cta-follow">Follow us on X</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer-new">
+    <div class="footer-container">
+      <div class="footer-content">
+        <!-- Section Brand -->
+        <div class="footer-brand">
+          <div class="footer-logo-new">
+            <img src="Assets/projectnumina_logo.svg" alt="Project Numina Logo">
+            <span class="footer-logo-text">Project Numina</span>
+          </div>
+          <div class="footer-mission-new">
+            Project Numina is a non-profit initiative advancing mathematics through open collaboration between humans and AI.
+          </div>
+          <div class="footer-brand-bottom">
+            <div class="footer-copyright">
+              © 2024 Project Numina. All rights reserved.
+            </div>
+            <a href="https://projectnumina.ai/" target="_blank" rel="noopener noreferrer" class="footer-legal-link">Privacy policies</a>
+          </div>
+        </div>
+
+        <!-- Section Links -->
+        <div class="footer-links">
+          <div class="footer-col-new">
+            <div class="footer-col-title-new">Quick Links</div>
+            <a href="https://projectnumina.ai/" target="_blank" rel="noopener noreferrer" class="footer-link-new">Projects</a>
+            <a href="https://projectnumina.ai/" target="_blank" rel="noopener noreferrer" class="footer-link-new">About us</a>
+            <a href="#get-involved" class="footer-link-new">Get Involved</a>
+            <a href="https://projectnumina.ai/" target="_blank" rel="noopener noreferrer" class="footer-link-new">Community</a>
+          </div>
+          
+          <div class="footer-col-new">
+            <div class="footer-col-title-new">Resources</div>
+            <a href="https://projectnumina.ai/" target="_blank" rel="noopener noreferrer" class="footer-link-new">Blog</a>
+            <a href="https://projectnumina.ai/" target="_blank" rel="noopener noreferrer" class="footer-link-new">Publications</a>
+            <a href="https://huggingface.co/AI-MO" target="_blank" rel="noopener noreferrer" class="footer-link-new footer-link-external">
+              HuggingFace
+              <svg class="external-icon" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/>
+                <path d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/>
+              </svg>
+            </a>
+            <a href="https://github.com/project-numina" target="_blank" rel="noopener noreferrer" class="footer-link-new footer-link-external">
+              GitHub
+              <svg class="external-icon" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/>
+                <path d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/>
+              </svg>
+            </a>
+          </div>
+          
+          <div class="footer-col-new">
+            <div class="footer-col-title-new">Connect</div>
+            <a href="https://x.com/ProjectNumina" target="_blank" rel="noopener noreferrer" class="footer-link-new footer-link-external">
+              Twitter
+              <svg class="external-icon" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/>
+                <path d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/>
+              </svg>
+            </a>
+            <a href="https://www.linkedin.com/company/projectnumina" target="_blank" rel="noopener noreferrer" class="footer-link-new footer-link-external">
+              LinkedIn
+              <svg class="external-icon" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/>
+                <path d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/>
+              </svg>
+            </a>
+            <a href="https://projectnumina.ai/" target="_blank" rel="noopener noreferrer" class="footer-link-new footer-link-external">
+              Youtube
+              <svg class="external-icon" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/>
+                <path d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </footer>
+  <script>
+    window.addEventListener('scroll', function() {
+      if(window.scrollY > 10) {
+        document.body.classList.add('scrolled');
+      } else {
+        document.body.classList.remove('scrolled');
+      }
+    });
+
+    // Smooth scroll pour les liens d'ancrage
+    document.addEventListener('DOMContentLoaded', function() {
+      const navLinks = document.querySelectorAll('a[href^="#"]');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          const targetId = this.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+          
+          if (targetElement) {
+            e.preventDefault();
+            const offsetTop = targetElement.offsetTop - 90; // Compensation pour la nav sticky
+            window.scrollTo({
+              top: offsetTop,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+    });
+    // Filtres Ongoing Projects
+    document.addEventListener('DOMContentLoaded', function() {
+      const filterBtns = document.querySelectorAll('.ongoing-filter-btn');
+      const cards = document.querySelectorAll('.ongoing-card');
+      
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          const filter = this.getAttribute('data-filter');
+          
+          // Mise à jour des boutons actifs
+          filterBtns.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          
+          // Fade out
+          cards.forEach(card => {
+            card.style.opacity = '0';
+          });
+          
+          // Filtrage et fade in
+          setTimeout(() => {
+            if (filter === 'all') {
+              cards.forEach(card => {
+                card.style.display = '';
+                // Remettre la classe highlight pour Axion seulement quand "all"
+                if (card.querySelector('.ongoing-card-title').textContent === 'Axion') {
+                  card.classList.add('highlight');
+                } else {
+                  card.classList.remove('highlight');
+                }
+                card.style.opacity = '1';
+              });
+            } else {
+              cards.forEach(card => {
+                const tags = card.getAttribute('data-tags');
+                if (tags && tags.includes(filter)) {
+                  card.style.display = '';
+                  // Garder la classe highlight pour Axion dans le filtre "tools"
+                  if (filter === 'tools' && card.querySelector('.ongoing-card-title').textContent === 'Axion') {
+                    card.classList.add('highlight');
+                  } else {
+                    card.classList.remove('highlight');
+                  }
+                  card.style.opacity = '1';
+                } else {
+                  card.style.display = 'none';
+                  card.classList.remove('highlight');
+                }
+              });
+            }
+          }, 150);
+        });
+      });
+    });
+  </script>
+  
+  <!-- Netlify Identity Widget -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+  </script>
+</body>
+</html> 

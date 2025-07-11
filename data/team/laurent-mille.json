@@ -1,0 +1,9 @@
+{
+  "name": "Laurent Mille",
+  "role": "Développeur Frontend",
+  "image": "profile_photos/Laurent_Mille.jpeg",
+  "tags": ["Team Member", "Frontend"],
+  "url": "https://www.linkedin.com/in/laurent-mille/",
+  "bio": "Développeur frontend spécialisé dans les interfaces modernes et l'expérience utilisateur.",
+  "order": 2
+} 

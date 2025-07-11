@@ -1,0 +1,90 @@
+backend:
+  name: github
+  repo: project-numina/project-numina-website
+  branch: main
+
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+site_url: https://project-numina.netlify.app
+display_url: https://project-numina.netlify.app
+
+collections:
+  # Collection pour les membres de l'équipe
+  - name: "team"
+    label: "Équipe"
+    folder: "data/team"
+    create: true
+    slug: "{{slug}}"
+    extension: "json"
+    format: "json"
+    fields:
+      - {label: "Nom", name: "name", widget: "string"}
+      - {label: "Rôle", name: "role", widget: "string"}
+      - {label: "Photo", name: "image", widget: "image", required: false}
+      - {label: "Tags", name: "tags", widget: "list", default: ["Team Member"]}
+      - {label: "URL", name: "url", widget: "string", required: false}
+      - {label: "Bio", name: "bio", widget: "text", required: false}
+      - {label: "Ordre d'affichage", name: "order", widget: "number", default: 1}
+
+  # Collection pour les projets
+  - name: "projects"
+    label: "Projets"
+    folder: "data/projects"
+    create: true
+    slug: "{{slug}}"
+    extension: "json"
+    format: "json"
+    fields:
+      - {label: "Titre", name: "title", widget: "string"}
+      - {label: "Description courte", name: "description", widget: "text"}
+      - {label: "Description longue", name: "long_description", widget: "markdown", required: false}
+      - {label: "Image principale", name: "image", widget: "image"}
+      - {label: "Galerie d'images", name: "gallery", widget: "list", field: {label: "Image", name: "image", widget: "image"}, required: false}
+      - {label: "Tags", name: "tags", widget: "list", default: ["Recherche"]}
+      - {label: "Lien du projet", name: "url", widget: "string", required: false}
+      - {label: "Lien GitHub", name: "github_url", widget: "string", required: false}
+      - {label: "Statut", name: "status", widget: "select", options: ["En cours", "Terminé", "En pause"], default: "En cours"}
+      - {label: "Ordre d'affichage", name: "order", widget: "number", default: 1}
+      - {label: "Mis en avant", name: "featured", widget: "boolean", default: false}
+
+  # Collection pour les articles de blog
+  - name: "blog"
+    label: "Blog"
+    folder: "posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Titre", name: "title", widget: "string"}
+      - {label: "Date de publication", name: "date", widget: "datetime"}
+      - {label: "Auteur", name: "author", widget: "string"}
+      - {label: "Image de couverture", name: "cover_image", widget: "image", required: false}
+      - {label: "Résumé", name: "excerpt", widget: "text"}
+      - {label: "Tags", name: "tags", widget: "list", default: ["News"]}
+      - {label: "Publié", name: "published", widget: "boolean", default: false}
+      - {label: "Contenu", name: "body", widget: "markdown"}
+
+  # Collection pour les pages principales (optionnel)
+  - name: "pages"
+    label: "Pages"
+    files:
+      - name: "homepage"
+        label: "Page d'accueil"
+        file: "data/homepage.json"
+        fields:
+          - {label: "Titre principal", name: "hero_title", widget: "string"}
+          - {label: "Sous-titre", name: "hero_subtitle", widget: "text"}
+          - {label: "Image hero", name: "hero_image", widget: "image"}
+          - {label: "Section À propos", name: "about_section", widget: "markdown"}
+      - name: "settings"
+        label: "Paramètres du site"
+        file: "data/settings.json"
+        fields:
+          - {label: "Nom du site", name: "site_name", widget: "string"}
+          - {label: "Description", name: "site_description", widget: "text"}
+          - {label: "Email de contact", name: "contact_email", widget: "string"}
+          - {label: "Réseaux sociaux", name: "social_links", widget: "object", fields: [
+              {label: "Twitter", name: "twitter", widget: "string", required: false},
+              {label: "LinkedIn", name: "linkedin", widget: "string", required: false},
+              {label: "GitHub", name: "github", widget: "string", required: false}
+            ]} 
