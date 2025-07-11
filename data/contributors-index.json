@@ -1,0 +1,417 @@
+{
+  "generated": "2025-07-11T17:23:30.563Z",
+  "count": 50,
+  "contributors": [
+    {
+      "filename": "alain-durmus",
+      "name": "Alain Durmus",
+      "tags": [
+        "Scientific Advisors"
+      ],
+      "lastModified": "2025-07-11T16:54:54.953Z"
+    },
+    {
+      "filename": "albert-jiang",
+      "name": "Albert Jiang",
+      "tags": [
+        "Alumni"
+      ],
+      "lastModified": "2025-07-11T16:54:54.953Z"
+    },
+    {
+      "filename": "ben-lipkin",
+      "name": "Ben Lipkin",
+      "tags": [
+        "Alumni"
+      ],
+      "lastModified": "2025-07-11T16:54:54.954Z"
+    },
+    {
+      "filename": "bolton-bailey",
+      "name": "Bolton Bailey",
+      "tags": [
+        "Active Contributor"
+      ],
+      "lastModified": "2025-07-11T16:54:54.954Z"
+    },
+    {
+      "filename": "ebony-zhang",
+      "name": "Ebony Zhang",
+      "tags": [
+        "Active Contributor"
+      ],
+      "lastModified": "2025-07-11T16:54:54.954Z"
+    },
+    {
+      "filename": "ed-beeching",
+      "name": "Ed Beeching",
+      "tags": [
+        "Alumni"
+      ],
+      "lastModified": "2025-07-11T16:54:54.954Z"
+    },
+    {
+      "filename": "francisco-moreira-machado",
+      "name": "Francisco Moreira Machado",
+      "tags": [
+        "Alumni"
+      ],
+      "lastModified": "2025-07-11T16:54:54.954Z"
+    },
+    {
+      "filename": "frederick-pu",
+      "name": "Frederick Pu",
+      "tags": [
+        "Active Contributor"
+      ],
+      "lastModified": "2025-07-11T16:54:54.954Z"
+    },
+    {
+      "filename": "gergely-berczi",
+      "name": "Gergely Berczi",
+      "tags": [
+        "Active Contributor"
+      ],
+      "lastModified": "2025-07-11T16:54:54.954Z"
+    },
+    {
+      "filename": "guillaume-lample",
+      "name": "Guillaume Lample",
+      "tags": [
+        "Founding Members",
+        "Scientific Advisors",
+        "Active Contributor"
+      ],
+      "lastModified": "2025-07-11T16:54:54.954Z"
+    },
+    {
+      "filename": "helene-evain",
+      "name": "Helene Evain",
+      "tags": [
+        "Founding Members",
+        "Active Contributor"
+      ],
+      "lastModified": "2025-07-11T17:11:39.752Z"
+    },
+    {
+      "filename": "hugues-de-saxce",
+      "name": "Hugues de Saxce",
+      "tags": [
+        "Active Contributor"
+      ],
+      "lastModified": "2025-07-11T17:11:45.616Z"
+    },
+    {
+      "filename": "jia-li",
+      "name": "Jia Li",
+      "tags": [
+        "Founding Members",
+        "Scientific Advisors"
+      ],
+      "lastModified": "2025-07-11T16:54:54.955Z"
+    },
+    {
+      "filename": "jianqiao-lu",
+      "name": "Jianqiao Lu",
+      "tags": [
+        "Active Contributor"
+      ],
+      "lastModified": "2025-07-11T16:54:54.955Z"
+    },
+    {
+      "filename": "jiawei-liu",
+      "name": "Jiawei Liu",
+      "tags": [
+        "Alumni"
+      ],
+      "lastModified": "2025-07-11T16:54:54.955Z"
+    },
+    {
+      "filename": "julien-michel",
+      "name": "Julien Michel",
+      "tags": [
+        "Active Contributor"
+      ],
+      "lastModified": "2025-07-11T16:54:54.955Z"
+    },
+    {
+      "filename": "kashif-rasul",
+      "name": "Kashif Rasul",
+      "tags": [
+        "Alumni"
+      ],
+      "lastModified": "2025-07-11T16:54:54.955Z"
+    },
+    {
+      "filename": "leo-dreyfus-schmidt",
+      "name": "Leo Dreyfus-Schmidt",
+      "tags": [
+        "Active Contributor"
+      ],
+      "lastModified": "2025-07-11T17:11:33.891Z"
+    },
+    {
+      "filename": "lewis-tunstall",
+      "name": "Lewis Tunstall",
+      "tags": [
+        "Active Contributor"
+      ],
+      "lastModified": "2025-07-11T16:54:54.956Z"
+    },
+    {
+      "filename": "liangjun-zhong",
+      "name": "Liangjun Zhong",
+      "tags": [
+        "Alumni"
+      ],
+      "lastModified": "2025-07-11T16:54:54.956Z"
+    },
+    {
+      "filename": "longhui-yu",
+      "name": "Longhui Yu",
+      "tags": [
+        "Alumni"
+      ],
+      "lastModified": "2025-07-11T16:54:54.956Z"
+    },
+    {
+      "filename": "luigi-pagani",
+      "name": "Luigi Pagani",
+      "tags": [
+        "Active Contributor"
+      ],
+      "lastModified": "2025-07-11T16:54:54.956Z"
+    },
+    {
+      "filename": "mantas-baksys",
+      "name": "Mantas Bakšys",
+      "tags": [
+        "Active Contributor"
+      ],
+      "lastModified": "2025-07-11T16:54:54.956Z"
+    },
+    {
+      "filename": "marco-dos-santos",
+      "name": "Marco Dos Santos",
+      "tags": [
+        "Active Contributor"
+      ],
+      "lastModified": "2025-07-11T16:54:54.956Z"
+    },
+    {
+      "filename": "marina-vinyes",
+      "name": "Marina Vinyes",
+      "tags": [
+        "Active Contributor"
+      ],
+      "lastModified": "2025-07-11T16:54:54.956Z"
+    },
+    {
+      "filename": "mert-unsal",
+      "name": "Mert Unsal",
+      "tags": [
+        "Active Contributor"
+      ],
+      "lastModified": "2025-07-11T17:11:19.560Z"
+    },
+    {
+      "filename": "pauline-bourigault",
+      "name": "Pauline Bourigault",
+      "tags": [
+        "Active Contributor"
+      ],
+      "lastModified": "2025-07-11T16:54:54.957Z"
+    },
+    {
+      "filename": "map-tags-list-active-contributor-founding-members-scientific-advisors-name-personnage-de-test-image-assets-uploads-images-jpeg-url-https-www-linkedin-com-feed",
+      "name": "Personnage de Test",
+      "tags": [
+        "Active Contributor",
+        "Founding Members",
+        "Scientific Advisors"
+      ],
+      "lastModified": "2025-07-11T17:18:20.960Z"
+    },
+    {
+      "filename": "philip-vonderlind",
+      "name": "Philip Vonderlind",
+      "tags": [
+        "Active Contributor"
+      ],
+      "lastModified": "2025-07-11T16:54:54.957Z"
+    },
+    {
+      "filename": "professor-bin-dong",
+      "name": "Professor Bin Dong",
+      "tags": [
+        "Alumni"
+      ],
+      "lastModified": "2025-07-11T16:54:54.957Z"
+    },
+    {
+      "filename": "ran-wang",
+      "name": "Ran Wang",
+      "tags": [
+        "Active Contributor"
+      ],
+      "lastModified": "2025-07-11T16:54:54.957Z"
+    },
+    {
+      "filename": "roman-soletskyi",
+      "name": "Roman Soletskyi",
+      "tags": [
+        "Alumni"
+      ],
+      "lastModified": "2025-07-11T16:54:54.957Z"
+    },
+    {
+      "filename": "map-tags-list-active-contributor-name-test-image-assets-uploads-images-jpeg-url-test",
+      "name": "Ronaldo",
+      "tags": [
+        "Active Contributor"
+      ],
+      "lastModified": "2025-07-11T17:18:20.961Z"
+    },
+    {
+      "filename": "map-tags-list-active-contributor-founding-members-name-ronaldo-image-assets-uploads-images-jpeg-url-https-www-linkedin-com-feed",
+      "name": "Ronaldo ",
+      "tags": [
+        "Active Contributor",
+        "Founding Members"
+      ],
+      "lastModified": "2025-07-11T17:18:20.960Z"
+    },
+    {
+      "filename": "s-looi",
+      "name": "S. Looi",
+      "tags": [
+        "Alumni"
+      ],
+      "lastModified": "2025-07-11T16:54:54.957Z"
+    },
+    {
+      "filename": "shengyi-costa-huang",
+      "name": "Shengyi Costa Huang",
+      "tags": [
+        "Alumni"
+      ],
+      "lastModified": "2025-07-11T16:54:54.957Z"
+    },
+    {
+      "filename": "simon-frieder",
+      "name": "Simon Frieder",
+      "tags": [
+        "Active Contributor"
+      ],
+      "lastModified": "2025-07-11T16:54:54.957Z"
+    },
+    {
+      "filename": "stanislas-polu",
+      "name": "Stanislas Polu",
+      "tags": [
+        "Founding Members",
+        "Scientific Advisors"
+      ],
+      "lastModified": "2025-07-11T16:54:54.957Z"
+    },
+    {
+      "filename": "map-tags-list-active-contributor-founding-members-scientific-advisors-name-test-test-image-assets-uploads-images-jpeg-url-https-www-linkedin-com-feed",
+      "name": "Test TEst",
+      "tags": [
+        "Active Contributor",
+        "Founding Members",
+        "Scientific Advisors"
+      ],
+      "lastModified": "2025-07-11T17:18:20.961Z"
+    },
+    {
+      "filename": "thibaut-barroyer",
+      "name": "Thibaut Barroyer",
+      "tags": [
+        "Active Contributor"
+      ],
+      "lastModified": "2025-07-11T16:54:54.958Z"
+    },
+    {
+      "filename": "wen-ding-li",
+      "name": "Wen-Ding Li",
+      "tags": [
+        "Active Contributor"
+      ],
+      "lastModified": "2025-07-11T16:54:54.958Z"
+    },
+    {
+      "filename": "yann-fleureau",
+      "name": "Yann Fleureau",
+      "tags": [
+        "Founding Members",
+        "Active Contributor"
+      ],
+      "lastModified": "2025-07-11T16:54:54.958Z"
+    },
+    {
+      "filename": "yazhe-niu",
+      "name": "Yazhe Niu",
+      "tags": [
+        "Alumni"
+      ],
+      "lastModified": "2025-07-11T16:54:54.958Z"
+    },
+    {
+      "filename": "yufan-zhao",
+      "name": "Yufan Zhao",
+      "tags": [
+        "Alumni"
+      ],
+      "lastModified": "2025-07-11T16:54:54.958Z"
+    },
+    {
+      "filename": "zekai-zhu",
+      "name": "Zekai Zhu",
+      "tags": [
+        "Active Contributor"
+      ],
+      "lastModified": "2025-07-11T16:54:54.958Z"
+    },
+    {
+      "filename": "zhenzhe-ying",
+      "name": "Zhenzhe Ying",
+      "tags": [
+        "Active Contributor"
+      ],
+      "lastModified": "2025-07-11T16:54:54.958Z"
+    },
+    {
+      "filename": "zhou-li",
+      "name": "Zhou Li",
+      "tags": [
+        "Alumni"
+      ],
+      "lastModified": "2025-07-11T16:54:54.958Z"
+    },
+    {
+      "filename": "zhouliang",
+      "name": "Zhouliang",
+      "tags": [
+        "Alumni"
+      ],
+      "lastModified": "2025-07-11T16:54:54.958Z"
+    },
+    {
+      "filename": "zihan-qin",
+      "name": "Zihan Qin",
+      "tags": [
+        "Alumni"
+      ],
+      "lastModified": "2025-07-11T16:54:54.958Z"
+    },
+    {
+      "filename": "ziju-shen",
+      "name": "Ziju Shen",
+      "tags": [
+        "Alumni"
+      ],
+      "lastModified": "2025-07-11T16:54:54.959Z"
+    }
+  ]
+}

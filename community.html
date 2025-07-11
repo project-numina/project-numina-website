@@ -478,38 +478,34 @@
         'numina_photos/team-6.jpg'
       ];
 
-      // Fonction pour charger tous les contributeurs depuis le CMS
+      // Fonction pour charger tous les contributeurs depuis le CMS (VRAIMENT DYNAMIQUE)
       async function loadContributors() {
         try {
-          // Liste réelle des fichiers créés lors de la migration
-          const contributorFiles = [
-            'alain-durmus', 'albert-jiang', 'ben-lipkin', 'bolton-bailey', 'ebony-zhang',
-            'ed-beeching', 'francisco-moreira-machado', 'frederick-pu', 'gergely-berczi',
-            'guillaume-lample', 'helene-evain', 'hugues-de-saxce', 'jia-li', 'jianqiao-lu',
-            'jiawei-liu', 'julien-michel', 'kashif-rasul', 'laurent-mille', 'leo-dreyfus-schmidt',
-            'lewis-tunstall', 'liangjun-zhong', 'longhui-yu', 'luigi-pagani', 'mantas-baksys',
-            'marco-dos-santos', 'marina-vinyes', 'mert-unsal', 'pauline-bourigault',
-            'philip-vonderlind', 'professor-bin-dong', 'ran-wang', 'roman-soletskyi',
-            's-looi', 'shengyi-costa-huang', 'simon-frieder', 'stanislas-polu',
-            'thibaut-barroyer', 'wen-ding-li', 'yann-fleureau', 'yazhe-niu', 'yufan-zhao',
-            'zekai-zhu', 'zhenzhe-ying', 'zhou-li', 'zhouliang', 'zihan-qin', 'ziju-shen'
-          ];
-
-          console.log('Début du chargement des contributeurs...');
+          console.log('🔄 Chargement dynamique des contributeurs...');
           
-          const loadPromises = contributorFiles.map(async (filename) => {
+          // Charger l'index des contributeurs
+          const indexResponse = await fetch('data/contributors-index.json');
+          if (!indexResponse.ok) {
+            throw new Error(`Erreur lors du chargement de l'index: ${indexResponse.status}`);
+          }
+          
+          const index = await indexResponse.json();
+          console.log(`📋 Index trouvé: ${index.count} contributeurs (généré: ${index.generated})`);
+          
+          // Charger tous les contributeurs listés dans l'index
+          const loadPromises = index.contributors.map(async (contrib) => {
             try {
-              const response = await fetch(`data/team/${filename}.json`);
+              const response = await fetch(`data/team/${contrib.filename}.json`);
               if (response.ok) {
                 const data = await response.json();
-                console.log(`✓ Chargé: ${filename}`, data);
+                console.log(`✓ Chargé: ${contrib.filename} (${data.name})`);
                 return data;
               } else {
-                console.warn(`✗ Erreur HTTP ${response.status} pour ${filename}`);
+                console.warn(`✗ Erreur HTTP ${response.status} pour ${contrib.filename}`);
                 return null;
               }
             } catch (error) {
-              console.warn(`✗ Erreur lors du chargement de ${filename}:`, error);
+              console.warn(`✗ Erreur lors du chargement de ${contrib.filename}:`, error);
               return null;
             }
           });
@@ -517,7 +513,7 @@
           const results = await Promise.all(loadPromises);
           contributors = results.filter(contributor => contributor !== null);
           
-          console.log(`${contributors.length} contributeurs chargés depuis le CMS`);
+          console.log(`🎉 ${contributors.length} contributeurs chargés dynamiquement!`);
           console.log('Contributeurs:', contributors);
           
           if (contributors.length === 0) {
@@ -526,12 +522,13 @@
           
           renderGrid('All');
         } catch (error) {
-          console.error('Erreur lors du chargement des contributeurs:', error);
+          console.error('❌ Erreur lors du chargement des contributeurs:', error);
           grid.innerHTML = `
             <div style='color:#b00;font-size:1.2rem;padding:32px;text-align:center;grid-column:1/-1;'>
               Erreur de chargement des contributeurs depuis le CMS.<br>
               Lancez un serveur local pour voir la page (ex: <code>python3 -m http.server</code>).<br>
-              Vérifiez la console pour plus de détails.
+              Vérifiez la console pour plus de détails.<br>
+              <small>L'index doit être régénéré avec: <code>node generate-contributors-index.js</code></small>
             </div>
           `;
         }

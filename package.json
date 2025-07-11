@@ -1,0 +1,17 @@
+{
+  "name": "project-numina-website",
+  "version": "1.0.0",
+  "description": "Site web statique pour Project Numina avec CMS intégré",
+  "main": "generate-contributors-index.js",
+  "scripts": {
+    "build": "node generate-contributors-index.js",
+    "dev": "python3 -m http.server 8000",
+    "generate-index": "node generate-contributors-index.js"
+  },
+  "keywords": ["numina", "mathematics", "cms", "netlify"],
+  "author": "Project Numina Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=16.0.0"
+  }
+} 
