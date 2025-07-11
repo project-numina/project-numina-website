@@ -21,6 +21,9 @@
         }
       });
     }
+    
+    // Force la détection de l'utilisateur connecté
+    window.netlifyIdentity && window.netlifyIdentity.init();
   </script>
 </body>
 </html> 
