@@ -1,6 +1,5 @@
 backend:
-  name: github
-  repo: 1000ml/project-numina-website
+  name: git-gateway
   branch: main
 
 media_folder: "assets/uploads"
