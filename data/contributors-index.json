@@ -1,6 +1,6 @@
 {
-  "generated": "2025-07-11T17:31:00.062Z",
-  "count": 52,
+  "generated": "2025-07-11T17:51:35.560Z",
+  "count": 47,
   "contributors": [
     {
       "filename": "alain-durmus",
@@ -127,14 +127,6 @@
       "lastModified": "2025-07-11T16:54:54.955Z"
     },
     {
-      "filename": "map-tags-list-active-contributor-name-john-doe",
-      "name": "John Doe",
-      "tags": [
-        "Active Contributor"
-      ],
-      "lastModified": "2025-07-11T17:24:57.399Z"
-    },
-    {
       "filename": "julien-michel",
       "name": "Julien Michel",
       "tags": [
@@ -149,6 +141,14 @@
         "Alumni"
       ],
       "lastModified": "2025-07-11T16:54:54.955Z"
+    },
+    {
+      "filename": "map-tags-list-active-contributor-name-laurent-mille-image-assets-uploads-capture-d’écran-2024-11-25-à-10-02-44-png-url-https-www-linkedin-com-in-laurentmille",
+      "name": "Laurent Mille",
+      "tags": [
+        "Active Contributor"
+      ],
+      "lastModified": "2025-07-11T17:48:02.218Z"
     },
     {
       "filename": "leo-dreyfus-schmidt",
@@ -231,16 +231,6 @@
       "lastModified": "2025-07-11T16:54:54.957Z"
     },
     {
-      "filename": "map-tags-list-active-contributor-founding-members-scientific-advisors-name-personnage-de-test-image-assets-uploads-images-jpeg-url-https-www-linkedin-com-feed",
-      "name": "Personnage de Test",
-      "tags": [
-        "Active Contributor",
-        "Founding Members",
-        "Scientific Advisors"
-      ],
-      "lastModified": "2025-07-11T17:18:20.960Z"
-    },
-    {
       "filename": "philip-vonderlind",
       "name": "Philip Vonderlind",
       "tags": [
@@ -271,31 +261,6 @@
         "Alumni"
       ],
       "lastModified": "2025-07-11T16:54:54.957Z"
-    },
-    {
-      "filename": "map-tags-list-active-contributor-name-ronaldo-image-assets-uploads-images-jpeg-url-https-www-linkedin-com-feed",
-      "name": "Ronaldo",
-      "tags": [
-        "Active Contributor"
-      ],
-      "lastModified": "2025-07-11T17:24:57.399Z"
-    },
-    {
-      "filename": "map-tags-list-active-contributor-name-test-image-assets-uploads-images-jpeg-url-test",
-      "name": "Ronaldo",
-      "tags": [
-        "Active Contributor"
-      ],
-      "lastModified": "2025-07-11T17:18:20.961Z"
-    },
-    {
-      "filename": "map-tags-list-active-contributor-founding-members-name-ronaldo-image-assets-uploads-images-jpeg-url-https-www-linkedin-com-feed",
-      "name": "Ronaldo ",
-      "tags": [
-        "Active Contributor",
-        "Founding Members"
-      ],
-      "lastModified": "2025-07-11T17:18:20.960Z"
     },
     {
       "filename": "s-looi",
@@ -329,16 +294,6 @@
         "Scientific Advisors"
       ],
       "lastModified": "2025-07-11T16:54:54.957Z"
-    },
-    {
-      "filename": "map-tags-list-active-contributor-founding-members-scientific-advisors-name-test-test-image-assets-uploads-images-jpeg-url-https-www-linkedin-com-feed",
-      "name": "Test TEst",
-      "tags": [
-        "Active Contributor",
-        "Founding Members",
-        "Scientific Advisors"
-      ],
-      "lastModified": "2025-07-11T17:18:20.961Z"
     },
     {
       "filename": "thibaut-barroyer",
