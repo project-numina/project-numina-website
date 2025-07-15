@@ -7,7 +7,7 @@
   "description": "A challenging benchmark of 880 IMO-level and IMO-shortlist-level formal problems.",
   "image": "/Assets/uploads/numina-datasets-generic.jpg",
   "highlight": false,
-  "published": "published",
+  "published": "draft",
   "ctas": [
     {
       "text": "Dataset",
