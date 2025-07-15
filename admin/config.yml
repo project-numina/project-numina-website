@@ -2,8 +2,11 @@ backend:
   name: git-gateway
   branch: main
 
-media_folder: "assets/uploads"
-public_folder: "/assets/uploads"
+# Configuration pour développement local (optionnel)
+# local_backend: true
+
+media_folder: "Assets/uploads"
+public_folder: "/Assets/uploads"
 
 site_url: https://projectnumina-website.netlify.app
 display_url: https://projectnumina-website.netlify.app
