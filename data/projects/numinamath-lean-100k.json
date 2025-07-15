@@ -1,9 +1,11 @@
 {
   "title": "NuminaMath-Lean 100K",
-  "tags": ["datasets"],
+  "tags": [
+    "datasets"
+  ],
   "status": "COMING SOON | JULY 2025",
   "description": "A massive dataset of 100,000 formalized math problems in Lean, including 50,000 formalized solutions, which will also serve as a powerful reinforcement learning (RL) training set.",
-  "image": "projects_images/projectnumina_numinamath.png",
+  "image": "/Assets/uploads/numina-datasets-generic.jpg",
   "highlight": false,
   "published": "published",
   "ctas": [
@@ -13,4 +15,4 @@
       "type": "primary"
     }
   ]
-} 
+}

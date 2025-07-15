@@ -1,15 +1,17 @@
 {
   "title": "NuminaMath",
-  "tags": ["datasets"],
-  "status": "COMING SOON | JULY 2025",
+  "tags": [
+    "datasets"
+  ],
+  "status": "UPDATED | JULY 2025",
   "description": "Datasets being the winning solution of the 1st AIMO Progress Prize.\n• NuminaMath-7B-TIR\n• NuminaMath-CoT",
-  "image": "projects_images/projectnumina_numinamath.png",
+  "image": "/Assets/uploads/numina-datasets-generic.jpg",
   "highlight": false,
   "published": "published",
   "ctas": [
     {
       "text": "Read our publication",
-      "url": "https://projectnumina.ai/publications/",
+      "url": "https://github.com/project-numina/aimo-progress-prize/blob/main/report/numina_dataset.pdf",
       "type": "primary"
     },
     {
@@ -18,4 +20,4 @@
       "type": "secondary"
     }
   ]
-} 
+}

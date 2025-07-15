@@ -1,6 +1,9 @@
 {
   "title": "kimina-prover-72b",
-  "tags": ["models"],
+  "tags": [
+    "models",
+    "tools"
+  ],
   "status": "UPDATED | JULY 2025",
   "description": "Automated proof assistant for advanced mathematical research.",
   "image": "projects_images/projectnumina_kimina-prover.jpg",
@@ -13,9 +16,9 @@
       "type": "primary"
     },
     {
-      "text": "⚡ See Blog Post",
+      "text": "See Blog Post",
       "url": "https://huggingface.co/blog/AI-MO/kimina-prover",
       "type": "secondary"
     }
   ]
-} 
+}
