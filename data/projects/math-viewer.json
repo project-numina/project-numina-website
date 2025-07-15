@@ -1,7 +1,9 @@
 {
   "title": "Math Viewer",
-  "tags": ["tools"],
-  "status": "COMING SOON | JULY 2025",
+  "tags": [
+    "tools"
+  ],
+  "status": "INTERNAL PROJECT | OCT. 2024",
   "description": "Platform to annotate informal and formal proofs with structured workflows, task distribution and AI-assisted quality control. Includes Lean 4-powered autoformalization to generate datasets for model training.",
   "image": "projects_images/projectnumina_mathviewer.jpg",
   "highlight": false,
@@ -13,4 +15,4 @@
       "type": "primary"
     }
   ]
-} 
+}
