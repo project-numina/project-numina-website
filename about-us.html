@@ -149,6 +149,106 @@
     .main-nav-cta:hover {
       color: #21706A;
     }
+    
+    /* Mobile Menu Styles */
+    .mobile-menu-btn {
+      display: none;
+      flex-direction: column;
+      width: 30px;
+      height: 24px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      justify-content: space-between;
+    }
+    
+    .mobile-menu-btn span {
+      width: 100%;
+      height: 3px;
+      background: var(--nav-link);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-menu-btn.active span:nth-child(1) {
+      transform: rotate(45deg) translate(6px, 6px);
+    }
+    
+    .mobile-menu-btn.active span:nth-child(2) {
+      opacity: 0;
+    }
+    
+    .mobile-menu-btn.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+    
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: var(--header-height);
+      left: 0;
+      right: 0;
+      background: white;
+      border-top: 1px solid #e0e0e0;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      z-index: 99;
+      max-height: calc(100vh - var(--header-height));
+      overflow-y: auto;
+    }
+    
+    .mobile-menu.active {
+      display: block;
+    }
+    
+    .mobile-menu-content {
+      padding: 20px;
+    }
+    
+    .mobile-menu-link {
+      display: block;
+      color: var(--nav-link);
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 600;
+      padding: 12px 0;
+      border-bottom: 1px solid #f0f0f0;
+      transition: color 0.2s;
+    }
+    
+    .mobile-menu-link:hover {
+      color: #A85923;
+    }
+    
+    .mobile-menu-link.active {
+      color: #A85923;
+      font-weight: 700;
+    }
+    
+    .mobile-menu-separator {
+      height: 1px;
+      background: #e0e0e0;
+      margin: 16px 0;
+    }
+    
+    .mobile-menu-section {
+      margin: 20px 0;
+    }
+    
+    .mobile-menu-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+    }
+    
+    .mobile-menu-section .mobile-menu-link {
+      font-size: 1rem;
+      padding: 8px 0 8px 16px;
+      border-bottom: none;
+    }
     .header-hero {
       max-width: 1200px;
       margin: 48px auto 32px auto;
@@ -634,6 +734,25 @@
       .header-center {
         padding: 0 12px;
       }
+      
+      /* Mobile Navigation */
+      .main-nav {
+        display: none;
+      }
+      
+      .mobile-menu-btn {
+        display: flex;
+      }
+      
+      /* Footer Mobile - Hide all links, keep only brand */
+      .footer-links {
+        display: none;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
       .about-desc-row { flex-direction: column; gap: 18px; }
       .mission-bg {
         max-width: 98vw;
@@ -1029,16 +1148,47 @@
         <img src="Assets/logo_projectNumina.svg" alt="Project Numina" class="logo-full-only">
       </a>
       <nav class="main-nav">
-        <a href="#get-involved" class="main-nav-link main-nav-cta">
-          Get Involved
-          <svg class="cta-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
-        </a>
-        <span style="margin: 0 18px; border-right: 1.5px solid #e0e0e0; height: 24px; display: inline-block;"></span>
         <a href="index.html" class="main-nav-link">Projects</a>
         <a href="about-us.html" class="main-nav-link active">About Us</a>
         <a href="community.html" class="main-nav-link">Community</a>
         <a href="blog.html" class="main-nav-link">Blog</a>
       </nav>
+      
+      <!-- Mobile Menu Button -->
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      
+      <!-- Mobile Menu -->
+      <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-content">
+          <a href="index.html" class="mobile-menu-link">Projects</a>
+          <a href="about-us.html" class="mobile-menu-link active">About Us</a>
+          <a href="community.html" class="mobile-menu-link">Community</a>
+          <a href="blog.html" class="mobile-menu-link">Blog</a>
+          
+          <div class="mobile-menu-separator"></div>
+          
+          <div class="mobile-menu-section">
+            <div class="mobile-menu-title">Resources</div>
+            <a href="https://huggingface.co/AI-MO" target="_blank" rel="noopener noreferrer" class="mobile-menu-link">HuggingFace</a>
+            <a href="https://github.com/project-numina" target="_blank" rel="noopener noreferrer" class="mobile-menu-link">GitHub</a>
+          </div>
+          
+          <div class="mobile-menu-section">
+            <div class="mobile-menu-title">Connect</div>
+            <a href="https://x.com/ProjectNumina" target="_blank" rel="noopener noreferrer" class="mobile-menu-link">Twitter</a>
+            <a href="https://www.linkedin.com/company/projectnumina" target="_blank" rel="noopener noreferrer" class="mobile-menu-link">LinkedIn</a>
+            <a href="https://projectnumina.ai/" target="_blank" rel="noopener noreferrer" class="mobile-menu-link">YouTube</a>
+          </div>
+          
+          <div class="mobile-menu-separator"></div>
+          
+          <a href="#" onclick="window.open('legal-notice.html', 'legal', 'width=800,height=600,scrollbars=yes,resizable=yes'); return false;" class="mobile-menu-link">Legal Notice</a>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -1272,6 +1422,35 @@
          
          teamGrid.innerHTML = cards.join('');
        });
+
+    // Mobile Menu Toggle
+    function toggleMobileMenu() {
+      const mobileMenu = document.getElementById('mobileMenu');
+      const menuBtn = document.querySelector('.mobile-menu-btn');
+      
+      mobileMenu.classList.toggle('active');
+      menuBtn.classList.toggle('active');
+    }
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(e) {
+      const mobileMenu = document.getElementById('mobileMenu');
+      const menuBtn = document.querySelector('.mobile-menu-btn');
+      
+      if (!mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+        mobileMenu.classList.remove('active');
+        menuBtn.classList.remove('active');
+      }
+    });
+
+    // Écoute du scroll pour changer l'apparence du header
+    window.addEventListener('scroll', function() {
+      if(window.scrollY > 10) {
+        document.body.classList.add('scrolled');
+      } else {
+        document.body.classList.remove('scrolled');
+      }
+    });
   </script>
 </body>
 </html> 
