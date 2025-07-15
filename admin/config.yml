@@ -26,21 +26,27 @@ collections:
       - {label: "URL", name: "url", widget: "string", required: false}
       - {label: "Tags", name: "tags", widget: "select", multiple: true, options: ["Active Contributor", "Alumni", "Founding Members", "Scientific Advisors"]}
 
-  # Collection pour les projets
+  # Collection pour les cartes projets
   - name: "projets"
-    label: "Projets"
+    label: "Cartes Projets"
     folder: "data/projects"
     create: true
     slug: "{{slug}}"
     extension: "json"
     format: "json"
     fields:
-      - {label: "Nom", name: "name", widget: "string"}
-      - {label: "Description", name: "description", widget: "text"}
-      - {label: "Image", name: "image", widget: "image", required: false}
-      - {label: "Tags", name: "tags", widget: "list", default: []}
-      - {label: "URL", name: "url", widget: "string", required: false}
-      - {label: "GitHub", name: "github", widget: "string", required: false}
+      - {label: "Titre", name: "title", widget: "string", hint: "50 caractères maximum", pattern: [".{1,50}", "Le titre doit faire entre 1 et 50 caractères"]}
+      - {label: "Tags", name: "tags", widget: "select", multiple: true, options: ["models", "datasets", "tools", "research"], hint: "Sélectionnez un ou plusieurs tags"}
+      - {label: "Status + Date", name: "status", widget: "string", hint: "Ex: COMING SOON | JULY 2025 ou UPDATED | MAY 2025"}
+      - {label: "Description", name: "description", widget: "text", hint: "Description détaillée du projet"}
+      - {label: "Visuel", name: "image", widget: "image", required: false, hint: "Image de présentation du projet"}
+      - {label: "Mise en avant", name: "highlight", widget: "boolean", default: false, hint: "Cochez pour afficher en carte large"}
+      - {label: "Status de publication", name: "published", widget: "select", options: ["published", "draft"], default: "draft", hint: "Déployé = visible sur le site, Brouillon = masqué"}
+      - {label: "CTAs", name: "ctas", widget: "list", required: false, max: 2, hint: "Maximum 2 boutons d'action", fields: [
+          {label: "Texte", name: "text", widget: "string"},
+          {label: "URL", name: "url", widget: "string"},
+          {label: "Type", name: "type", widget: "select", options: ["primary", "secondary"], default: "primary", hint: "Primary = bouton principal, Secondary = bouton secondaire"}
+        ]}
 
   # Collection pour les articles de blog
   - name: "blog"

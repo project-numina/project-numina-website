@@ -1,5 +1,5 @@
 [build]
-  command = "node generate-contributors-index.js && node generate-blog-index.js"
+  command = "node generate-contributors-index.js && node generate-blog-index.js && node generate-projects-index.js"
   publish = "."
 
 [build.environment]

@@ -4,11 +4,12 @@
   "description": "Site web statique pour Project Numina avec CMS intégré",
   "main": "generate-contributors-index.js",
   "scripts": {
-    "build": "node generate-contributors-index.js && node generate-blog-index.js",
+    "build": "node generate-contributors-index.js && node generate-blog-index.js && node generate-projects-index.js",
     "dev": "python3 -m http.server 8000",
     "generate-contributors": "node generate-contributors-index.js",
-    "generate-blog": "node generate-blog-index.js",
-    "generate-all": "npm run generate-contributors && npm run generate-blog"
+    "generate-blog": "node generate-blog-index.js", 
+    "generate-projects": "node generate-projects-index.js",
+    "generate-all": "npm run generate-contributors && npm run generate-blog && npm run generate-projects"
   },
   "keywords": ["numina", "mathematics", "cms", "netlify"],
   "author": "Project Numina Team",

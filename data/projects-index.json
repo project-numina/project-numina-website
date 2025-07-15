@@ -1,0 +1,84 @@
+{
+  "generated": "2025-07-15T08:47:45.076Z",
+  "count": 7,
+  "published": 7,
+  "projects": [
+    {
+      "filename": "axion",
+      "title": "Axion",
+      "tags": [
+        "tools"
+      ],
+      "status": "COMING SOON | JULY 2025",
+      "highlight": true,
+      "published": "published",
+      "lastModified": "2025-07-15T08:45:27.478Z"
+    },
+    {
+      "filename": "combibench",
+      "title": "CombiBench",
+      "tags": [
+        "datasets"
+      ],
+      "status": "UPDATED | MAY 2025",
+      "highlight": false,
+      "published": "published",
+      "lastModified": "2025-07-15T08:46:47.181Z"
+    },
+    {
+      "filename": "kimina-prover-72b",
+      "title": "kimina-prover-72b",
+      "tags": [
+        "models"
+      ],
+      "status": "UPDATED | JULY 2025",
+      "highlight": false,
+      "published": "published",
+      "lastModified": "2025-07-15T08:45:38.274Z"
+    },
+    {
+      "filename": "math-viewer",
+      "title": "Math Viewer",
+      "tags": [
+        "tools"
+      ],
+      "status": "COMING SOON | JULY 2025",
+      "highlight": false,
+      "published": "published",
+      "lastModified": "2025-07-15T08:45:59.358Z"
+    },
+    {
+      "filename": "numina-imo-bench-880",
+      "title": "Numina-IMO-Bench 880",
+      "tags": [
+        "datasets"
+      ],
+      "status": "COMING SOON | JULY 2025",
+      "highlight": false,
+      "published": "published",
+      "lastModified": "2025-07-15T08:46:38.257Z"
+    },
+    {
+      "filename": "numinamath",
+      "title": "NuminaMath",
+      "tags": [
+        "datasets"
+      ],
+      "status": "COMING SOON | JULY 2025",
+      "highlight": false,
+      "published": "published",
+      "lastModified": "2025-07-15T08:46:12.043Z"
+    },
+    {
+      "filename": "numinamath-lean-100k",
+      "title": "NuminaMath-Lean 100K",
+      "tags": [
+        "datasets"
+      ],
+      "status": "COMING SOON | JULY 2025",
+      "highlight": false,
+      "published": "published",
+      "lastModified": "2025-07-15T08:46:31.581Z"
+    }
+  ]
+}

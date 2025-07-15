@@ -1,16 +1,16 @@
 {
   "title": "Math Viewer",
-  "description": "Un outil de visualisation interactive pour explorer et comprendre les concepts mathématiques complexes.",
-  "long_description": "# Math Viewer\n\nMath Viewer est un outil de visualisation révolutionnaire qui permet aux étudiants, chercheurs et enseignants d'explorer les mathématiques de manière interactive.\n\n## Caractéristiques\n\n- **Visualisations 3D** pour les fonctions complexes\n- **Animations interactives** pour les transformations\n- **Support LaTeX** intégré\n- **Export haute qualité** pour les publications\n\n## Applications\n\n- Enseignement universitaire\n- Recherche mathématique\n- Présentations académiques\n- Apprentissage autodidacte",
+  "tags": ["tools"],
+  "status": "COMING SOON | JULY 2025",
+  "description": "Platform to annotate informal and formal proofs with structured workflows, task distribution and AI-assisted quality control. Includes Lean 4-powered autoformalization to generate datasets for model training.",
   "image": "projects_images/projectnumina_mathviewer.jpg",
-  "gallery": [
-    "projects_images/projectnumina_mathviewer.jpg",
-    "projects_images/projectnumina_mathviewer-1.jpg"
-  ],
-  "tags": ["Visualisation", "Éducation", "Outils"],
-  "url": "https://mathviewer.numina.ai",
-  "github_url": "https://github.com/project-numina/math-viewer",
-  "status": "En cours",
-  "order": 3,
-  "featured": false
+  "highlight": false,
+  "published": "published",
+  "ctas": [
+    {
+      "text": "Watch demo",
+      "url": "https://supercut.ai/share/castagne/AnGQXhrTAtN1xDCX9CRhfk",
+      "type": "primary"
+    }
+  ]
 } 

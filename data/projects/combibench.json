@@ -1,0 +1,16 @@
+{
+  "title": "CombiBench",
+  "tags": ["datasets"],
+  "status": "UPDATED | MAY 2025",
+  "description": "The first benchmark focused on combinatorial problems in Lean 4, featuring 100 manually curated problems of varying difficulty levels from IMO, competitions, and textbooks to evaluate automated theorem proving capabilities.",
+  "image": "projects_images/projectnumina_numinamath.png",
+  "highlight": false,
+  "published": "published",
+  "ctas": [
+    {
+      "text": "Dataset",
+      "url": "https://huggingface.co/datasets/AI-MO/CombiBench",
+      "type": "primary"
+    }
+  ]
+} 
