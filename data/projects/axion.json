@@ -1,6 +1,8 @@
 {
-  "title": "Axion",
-  "tags": ["tools"],
+  "title": "Axion V1",
+  "tags": [
+    "tools"
+  ],
   "status": "COMING SOON | JULY 2025",
   "description": "AI-powered platform to explore, write, and validate mathematical proofs. It helps learners progress from intuition to formal reasoning with guided feedback, adaptive learning paths, and trustworthy verification.",
   "image": "projects_images/projectnumina_axion.jpg",
@@ -13,4 +15,4 @@
       "type": "primary"
     }
   ]
-} 
+}
