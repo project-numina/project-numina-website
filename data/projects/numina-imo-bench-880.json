@@ -1,9 +1,11 @@
 {
   "title": "Numina-IMO-Bench 880",
-  "tags": ["datasets"],
+  "tags": [
+    "datasets"
+  ],
   "status": "COMING SOON | JULY 2025",
   "description": "A challenging benchmark of 880 IMO-level and IMO-shortlist-level formal problems.",
-  "image": "projects_images/projectnumina_numinamath.png",
+  "image": "/Assets/uploads/numina-datasets-generic.jpg",
   "highlight": false,
   "published": "published",
   "ctas": [
@@ -13,4 +15,4 @@
       "type": "primary"
     }
   ]
-} 
+}
