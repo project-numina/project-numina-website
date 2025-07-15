@@ -1,9 +1,11 @@
 {
   "title": "CombiBench",
-  "tags": ["datasets"],
+  "tags": [
+    "datasets"
+  ],
   "status": "UPDATED | MAY 2025",
   "description": "The first benchmark focused on combinatorial problems in Lean 4, featuring 100 manually curated problems of varying difficulty levels from IMO, competitions, and textbooks to evaluate automated theorem proving capabilities.",
-  "image": "projects_images/projectnumina_numinamath.png",
+  "image": "/Assets/uploads/numina-datasets-generic.jpg",
   "highlight": false,
   "published": "published",
   "ctas": [
@@ -13,4 +15,4 @@
       "type": "primary"
     }
   ]
-} 
+}
