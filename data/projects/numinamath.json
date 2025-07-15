@@ -3,7 +3,7 @@
   "tags": [
     "datasets"
   ],
-  "status": "COMING SOON | JULY 2025",
+  "status": "UPDATED | JULY 2025",
   "description": "Datasets being the winning solution of the 1st AIMO Progress Prize.\n• NuminaMath-7B-TIR\n• NuminaMath-CoT",
   "image": "/Assets/uploads/numina-datasets-generic.jpg",
   "highlight": false,
@@ -11,7 +11,7 @@
   "ctas": [
     {
       "text": "Read our publication",
-      "url": "https://projectnumina.ai/publications/",
+      "url": "https://github.com/project-numina/aimo-progress-prize/blob/main/report/numina_dataset.pdf",
       "type": "primary"
     },
     {
