@@ -34,6 +34,9 @@ collections:
     slug: "{{slug}}"
     extension: "json"
     format: "json"
+    # Configuration spécifique pour les images de projets
+    media_folder: "projects_images"
+    public_folder: "/projects_images"
     fields:
       - {label: "Titre", name: "title", widget: "string", hint: "50 caractères maximum", pattern: [".{1,50}", "Le titre doit faire entre 1 et 50 caractères"]}
       - {label: "Tags", name: "tags", widget: "select", multiple: true, options: ["models", "datasets", "tools", "research"], hint: "Sélectionnez un ou plusieurs tags"}
