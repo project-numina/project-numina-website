@@ -1,25 +1,8 @@
 {
-  "generated": "2025-07-15T08:27:28.750Z",
-  "count": 5,
-  "published": 5,
+  "generated": "2025-07-16T08:01:28.769Z",
+  "count": 4,
+  "published": 4,
   "posts": [
-    {
-      "filename": "2025-07-15-test.md",
-      "title": "test",
-      "date": "2025-07-15T10:20:00.000+02:00",
-      "image": "/assets/uploads/images.jpeg",
-      "status": "publié",
-      "ctas": [
-        {
-          "type": "primary",
-          "text": "test",
-          "url": "https://projectnumina-website.netlify.app/blog"
-        }
-      ],
-      "lastModified": "2025-07-15T08:24:41.057Z",
-      "wordCount": 1,
-      "excerpt": "test..."
-    },
     {
       "filename": "2025-07-10-releasing-kiminaprover-72b.md",
       "title": "Releasing KiminaProver-72B",
@@ -38,7 +21,7 @@
           "type": "secondary"
         }
       ],
-      "lastModified": "2025-07-11T19:09:30.260Z",
+      "lastModified": "2025-07-16T07:51:12.523Z",
       "wordCount": 28,
       "excerpt": "New milestone for Project Numina and Kimi Moonshot! 🚀 We are open sourcing our KiminaProver-72B. This SotA theorem-proving model comes with Test-Time Reinforcement Learning Search and Error-Fixing Ca..."
     },
@@ -55,9 +38,9 @@
           "type": "primary"
         }
       ],
-      "lastModified": "2025-07-11T19:09:30.259Z",
+      "lastModified": "2025-07-16T07:51:12.523Z",
       "wordCount": 27,
-      "excerpt": "🔥 We believe formal math is the future. Introducing Kimina-Prover Preview, a Numina and [Kimi-Moonshot](https://x.com/Kimi_Moonshot) collaboration, the first large formal reasoning model for Lean4, a..."
+      "excerpt": "🔥 We believe formal math is the future. Introducing Kimina-Prover Preview, a Numina and <a href=\"https://x.com/Kimi_Moonshot\" target=\"_blank\" rel=\"noopener noreferrer\">Kimi-Moonshot</a> collaboration, the first large formal reasoning model for Lean4, a..."
     },
     {
       "filename": "2024-12-17-numina-receives-3m-research-grant.md",
@@ -72,9 +55,9 @@
           "type": "primary"
         }
       ],
-      "lastModified": "2025-07-11T19:09:30.259Z",
+      "lastModified": "2025-07-16T07:51:12.522Z",
       "wordCount": 30,
-      "excerpt": "🤩 Project Numina is thrilled to announce a €3m research grant from [XTX Markets](https://www.xtxmarkets.com/) to support the development of open-source AI tools for mathematicians and general progres..."
+      "excerpt": "🤩 Project Numina is thrilled to announce a €3m research grant from <a href=\"https://www.xtxmarkets.com/\" target=\"_blank\" rel=\"noopener noreferrer\">XTX Markets</a> to support the development of open-source AI tools for mathematicians and general progres..."
     },
     {
       "filename": "2024-07-11-how-numinamath-won-aimo-progress-prize.md",
@@ -89,9 +72,9 @@
           "type": "primary"
         }
       ],
-      "lastModified": "2025-07-11T19:09:30.259Z",
+      "lastModified": "2025-07-16T07:51:12.522Z",
       "wordCount": 104,
-      "excerpt": "This year, Numina and Hugging Face collaborated to compete in the 1st Progress Prize of the [AI Math Olympiad (AIMO)](https://aimoprize.com/).\nThis competition involved fine-tuning open LLMs to solve ..."
+      "excerpt": "This year, Numina and Hugging Face collaborated to compete in the 1st Progress Prize of the <a href=\"https://aimoprize.com/\" target=\"_blank\" rel=\"noopener noreferrer\">AI Math Olympiad (AIMO)</a>.\nThis competition involved fine-tuning open LLMs to solve ..."
     }
   ]
 }

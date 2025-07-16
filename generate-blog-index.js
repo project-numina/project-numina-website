@@ -3,6 +3,12 @@
 const fs = require('fs');
 const path = require('path');
 
+// Fonction pour convertir les liens Markdown en HTML
+function convertMarkdownLinks(text) {
+  // Convertir les liens Markdown [texte](url) en <a href="url">texte</a>
+  return text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+}
+
 // Fonction pour parser le front matter YAML simple
 function parseFrontMatter(content) {
   if (!content.startsWith('---')) return null;
@@ -140,7 +146,7 @@ function generateBlogIndex() {
             ...parsed.data,
             lastModified: fs.statSync(filePath).mtime.toISOString(),
             wordCount: parsed.body.split(/\s+/).length,
-            excerpt: parsed.body.substring(0, 200) + '...'
+            excerpt: convertMarkdownLinks(parsed.body.substring(0, 200)) + '...'
           };
           
           // Ne garder que les posts publiés (ancien format: published, nouveau format: status)
