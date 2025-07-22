@@ -668,14 +668,7 @@
       const filterBtns = document.querySelectorAll('.community-filter-btn');
       const grid = document.getElementById('community-grid');
       let contributors = [];
-      let teamPhotos = [
-        'Assets/uploads/team-1.jpg',
-        'Assets/uploads/team-2.jpg',
-        'Assets/uploads/team-3.jpg',
-        'Assets/uploads/team-4.jpg',
-        'Assets/uploads/team-5.jpg',
-        'Assets/uploads/team-6.jpg'
-      ];
+      let teamPhotos = [];
 
       // Fonction pour charger tous les contributeurs depuis le CMS (VRAIMENT DYNAMIQUE)
       async function loadContributors() {
@@ -730,6 +723,27 @@
               <small>L'index doit être régénéré avec: <code>node generate-contributors-index.js</code></small>
             </div>
           `;
+        }
+      }
+
+      async function loadTeamPhotos() {
+        try {
+          const files = [
+            'team-1.json', 'team-2.json', 'team-3.json', 'team-4.json', 'team-5.json', 'team-6.json'
+          ];
+          const loadPromises = files.map(async (file) => {
+            const response = await fetch(`data/photos_community/${file}`);
+            if (response.ok) {
+              const data = await response.json();
+              return data.image;
+            } else {
+              return null;
+            }
+          });
+          const results = await Promise.all(loadPromises);
+          teamPhotos = results.filter(img => !!img);
+        } catch (e) {
+          teamPhotos = [];
         }
       }
 
@@ -823,7 +837,10 @@
       });
 
       // Charger les contributeurs au démarrage
-      loadContributors();
+      (async function() {
+        await loadTeamPhotos();
+        loadContributors();
+      })();
     });
 
     // Mobile Menu Toggle
