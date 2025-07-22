@@ -37,13 +37,13 @@
   },
   {
     "name": "Ran Wang",
-    "image": "profile_photos/default.png",
+    "image": "Assets/uploads/default.png",
     "tags": ["Active Contributor"],
     "url": "https://huggingface.co/ranWang"
   },
   {
     "name": "Zhenzhe Ying",
-    "image": "profile_photos/default.png",
+    "image": "Assets/uploads/default.png",
     "tags": ["Active Contributor"],
     "url": "https://huggingface.co/zhenzhe"
   },
@@ -181,7 +181,7 @@
   },
   {
     "name": "S. Looi",
-    "image": "profile_photos/default.png",
+    "image": "Assets/uploads/default.png",
     "tags": ["Alumni"],
     "url": "https://huggingface.co/SLooi"
   },
@@ -223,7 +223,7 @@
   },
   {
     "name": "Yufan Zhao",
-    "image": "profile_photos/default.png",
+    "image": "Assets/uploads/default.png",
     "tags": ["Alumni"],
     "url": "https://huggingface.co/yz1997"
   },

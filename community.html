@@ -806,7 +806,7 @@
             </div>`;
           } else {
             return `<a class='contributor-card no-underline' href='${item.url||'#'}' target='_blank' tabindex='0'>
-              <img src='${item.image || 'profile_photos/default.png'}' alt='${item.name}' class='contributor-photo'>
+              <img src='${item.image || 'Assets/uploads/default.png'}' alt='${item.name}' class='contributor-photo'>
               <div class='contributor-name no-underline'>${item.name}</div>
               <div class='contributor-tags'>
                 ${(item.tags||[]).map(t=>`<span class='contributor-tag no-underline'>${t}</span>`).join('')}
