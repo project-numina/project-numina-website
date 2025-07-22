@@ -1,7 +1,7 @@
 {
-  "generated": "2025-07-15T09:02:03.963Z",
-  "count": 7,
-  "published": 7,
+  "generated": "2025-07-22T09:31:33.220Z",
+  "count": 6,
+  "published": 6,
   "projects": [
     {
       "filename": "axion",
@@ -9,10 +9,10 @@
       "tags": [
         "tools"
       ],
-      "status": "COMING SOON | JULY 2025",
+      "status": "AVAILABLE | JULY 2025",
       "highlight": true,
       "published": "published",
-      "lastModified": "2025-07-15T08:50:18.801Z"
+      "lastModified": "2025-07-22T09:13:07.272Z"
     },
     {
       "filename": "combibench",
@@ -23,40 +23,30 @@
       "status": "UPDATED | MAY 2025",
       "highlight": false,
       "published": "published",
-      "lastModified": "2025-07-15T08:50:18.801Z"
+      "lastModified": "2025-07-22T09:13:07.272Z"
     },
     {
       "filename": "kimina-prover-72b",
       "title": "kimina-prover-72b",
       "tags": [
-        "models"
+        "models",
+        "tools"
       ],
       "status": "UPDATED | JULY 2025",
       "highlight": false,
       "published": "published",
-      "lastModified": "2025-07-15T08:50:18.801Z"
+      "lastModified": "2025-07-22T09:13:07.273Z"
     },
     {
       "filename": "math-viewer",
-      "title": "Math Viewer",
+      "title": "MathViewer",
       "tags": [
         "tools"
       ],
-      "status": "COMING SOON | JULY 2025",
+      "status": "INTERNAL PROJECT | OCT. 2024",
       "highlight": false,
       "published": "published",
-      "lastModified": "2025-07-15T08:50:18.802Z"
-    },
-    {
-      "filename": "numina-imo-bench-880",
-      "title": "Numina-IMO-Bench 880",
-      "tags": [
-        "datasets"
-      ],
-      "status": "COMING SOON | JULY 2025",
-      "highlight": false,
-      "published": "published",
-      "lastModified": "2025-07-15T08:50:18.802Z"
+      "lastModified": "2025-07-22T09:13:07.273Z"
     },
     {
       "filename": "numinamath",
@@ -64,10 +54,10 @@
       "tags": [
         "datasets"
       ],
-      "status": "COMING SOON | JULY 2025",
+      "status": "UPDATED | JULY 2025",
       "highlight": false,
       "published": "published",
-      "lastModified": "2025-07-15T08:50:18.802Z"
+      "lastModified": "2025-07-22T09:13:07.273Z"
     },
     {
       "filename": "numinamath-lean-100k",
@@ -78,7 +68,7 @@
       "status": "COMING SOON | JULY 2025",
       "highlight": false,
       "published": "published",
-      "lastModified": "2025-07-15T08:50:18.802Z"
+      "lastModified": "2025-07-22T09:13:07.273Z"
     }
   ]
 }

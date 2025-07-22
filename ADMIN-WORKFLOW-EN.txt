@@ -1,0 +1,31 @@
+---
+# Memo: Project Numina Editorial Workflow (Decap/Netlify CMS)
+
+## Admin Access
+- All editors with a GitHub account and repo access can log in to the admin at /admin/.
+- Each editor can add, edit, or update content according to their GitHub permissions.
+
+## Available Collections
+- **Community**: manage team members, avatars, tags, etc.
+- **Project Cards**: manage projects, statuses, images, descriptions, etc.
+- **Blog**: manage news articles, announcements, etc.
+
+## Editorial Workflow
+
+### Community & Project Cards
+- Any change (add, edit, delete) is saved and published directly to the GitHub repo.
+- Changes are visible on the site after the next deployment.
+- Use these sections to keep the team and project info up to date.
+
+### Blog
+- A "Draft" mode is available for each article.
+- Create or edit an article, save it as a "Draft" for review or validation.
+- When the article is ready, set it to "Published" to make it live on the site.
+- This workflow allows you to prepare content in advance and publish at the right time.
+
+## Best Practices
+- Prefer using "Draft" mode for sensitive or to-be-reviewed content.
+- All changes via the admin are versioned in GitHub (history, rollback possible).
+- For questions or validation, use the status fields or communicate with the team.
+
+--- 

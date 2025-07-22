@@ -46,3 +46,4 @@ build/
 
 # Netlify
 .netlify/ 
+Sources_locales/ 
