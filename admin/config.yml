@@ -69,3 +69,14 @@ collections:
           {label: "URL", name: "url", widget: "string"},
           {label: "Type", name: "type", widget: "select", options: ["primary", "secondary"], default: "primary"}
         ]} 
+  - name: "photos_community"
+    label: "Photos Community"
+    folder: "data/photos_community"
+    create: true
+    slug: "{{slug}}"
+    extension: "json"
+    format: "json"
+    fields:
+      - {label: "Titre", name: "title", widget: "string"}
+      - {label: "Image", name: "image", widget: "image"}
+      - {label: "Description", name: "description", widget: "text", required: false} 
