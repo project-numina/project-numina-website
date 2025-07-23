@@ -1,17 +1,17 @@
 {
-  "title": "MathViewer",
+  "title": "NuminaForge",
   "tags": [
     "tools"
   ],
-  "status": "INTERNAL PROJECT | OCT. 2024",
-  "description": "Platform to annotate informal and formal proofs with structured workflows, task distribution and AI-assisted quality control. Includes Lean 4-powered autoformalization to generate datasets for model training.",
+  "status": "INTERNAL TOOL | OCT 2024",
+  "description": "NuminaForge is our internal platform to orchestrate collaborative mathematical annotation at scale.\nIt enables multi-user workflows, autoformalization in Lean4, task tracking, and quality control — all in one place.",
   "image": "Assets/uploads/projectnumina_mathviewer.jpg",
   "highlight": false,
   "published": "published",
   "ctas": [
     {
-      "text": "Watch demo",
-      "url": "https://supercut.ai/share/castagne/AnGQXhrTAtN1xDCX9CRhfk",
+      "text": "Explore our workflow",
+      "url": "",
       "type": "primary"
     }
   ]

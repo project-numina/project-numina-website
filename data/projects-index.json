@@ -1,5 +1,5 @@
 {
-  "generated": "2025-07-22T12:55:17.729Z",
+  "generated": "2025-07-23T09:44:26.453Z",
   "count": 6,
   "published": 6,
   "projects": [
@@ -12,7 +12,7 @@
       "status": "AVAILABLE | JULY 2025",
       "highlight": true,
       "published": "published",
-      "lastModified": "2025-07-22T09:13:07.272Z"
+      "lastModified": "2025-07-22T12:55:45.280Z"
     },
     {
       "filename": "combibench",
@@ -35,18 +35,18 @@
       "status": "UPDATED | JULY 2025",
       "highlight": false,
       "published": "published",
-      "lastModified": "2025-07-22T09:13:07.273Z"
+      "lastModified": "2025-07-22T12:55:55.275Z"
     },
     {
       "filename": "math-viewer",
-      "title": "MathViewer",
+      "title": "NuminaForge",
       "tags": [
         "tools"
       ],
-      "status": "INTERNAL PROJECT | OCT. 2024",
+      "status": "INTERNAL TOOL | OCT 2024",
       "highlight": false,
       "published": "published",
-      "lastModified": "2025-07-22T09:13:07.273Z"
+      "lastModified": "2025-07-23T09:44:23.241Z"
     },
     {
       "filename": "numinamath",
