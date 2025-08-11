@@ -1478,22 +1478,42 @@
       });
     });
     
-         // Génération dynamique de la founding team depuis contributors.json
-     fetch('contributors.json')
-       .then(r => r.json())
-       .then(data => {
-         const core = data.filter(c => c.tags && c.tags.includes('Founding Members'));
-         
-         // Founding team grid avec toutes les personnes + CTA
+     // Génération dynamique de la founding team depuis contributors-index + team files
+     (async () => {
+       try {
+         const indexResponse = await fetch('data/contributors-index.json');
+         const indexJson = await indexResponse.json();
+         const allContributors = Array.isArray(indexJson.contributors) ? indexJson.contributors : [];
+         const founders = allContributors.filter(c => Array.isArray(c.tags) && c.tags.includes('Founding Members'));
+
+         const details = await Promise.all(founders.map(async (c) => {
+           try {
+             const teamResp = await fetch(`data/team/${c.filename}.json`);
+             if (!teamResp.ok) throw new Error('team file not found');
+             const t = await teamResp.json();
+             return {
+               name: t.name || c.name,
+               image: t.image || 'Assets/uploads/default.png',
+               url: t.url || '#'
+             };
+           } catch (_) {
+             return {
+               name: c.name,
+               image: 'Assets/uploads/default.png',
+               url: '#'
+             };
+           }
+         }));
+
          const teamGrid = document.getElementById('core-team-grid');
-         const cards = core.map(c => `
-           <a class="timeline-team-card" href="${c.url || '#'}" target="_blank">
-             <img src="${c.image || 'Assets/uploads/default.png'}" alt="${c.name}" onerror="this.src='Assets/uploads/default.png'">
-             <div class="name">${c.name}</div>
+         const cards = details.map(p => `
+           <a class="timeline-team-card" href="${p.url}" target="_blank">
+             <img src="${p.image}" alt="${p.name}" onerror="this.src='Assets/uploads/default.png'">
+             <div class="name">${p.name}</div>
              <div class="tag">Founding Team</div>
            </a>
          `);
-         
+
          // Ajouter le CTA comme dernière carte
          cards.push(`
            <a href="community.html" class="timeline-team-cta">
@@ -1501,9 +1521,12 @@
              <div style="font-size: 1.2rem; margin-top: 8px;">&rarr;</div>
            </a>
          `);
-         
+
          teamGrid.innerHTML = cards.join('');
-       });
+       } catch (err) {
+         console.error('Failed to load founding team', err);
+       }
+     })();
   </script>
 </body>
 </html> 
