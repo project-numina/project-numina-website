@@ -1,31 +1,34 @@
 ---
-# Mémo : Workflow d'édition Project Numina (Decap/Netlify CMS)
+# Mémo : Workflow d'édition Project Numina (Strapi CMS)
 
 ## Accès à l'admin
-- Tous les éditeurs ayant un compte GitHub avec accès au repo peuvent se connecter à l'admin via /admin/.
-- Chacun peut éditer, ajouter ou corriger le contenu selon ses droits GitHub.
+- L'interface d'administration Strapi est accessible via l'URL du serveur Strapi (par défaut : http://localhost:1337/admin en développement).
+- Les éditeurs doivent se connecter avec leurs identifiants Strapi pour gérer le contenu.
+- Les modifications sont sauvegardées dans la base de données Strapi et sont immédiatement disponibles via l'API.
 
 ## Collections disponibles
-- **Communauté** : gestion des membres, avatars, tags, etc.
-- **Cartes Projets** : gestion des projets, statuts, images, descriptions, etc.
-- **Blog** : gestion des articles d'actualité, annonces, etc.
+- **Members (Membres)** : gestion des membres de la communauté, avatars, tags, etc.
+- **Projects (Projets)** : gestion des projets, statuts, images, descriptions, etc.
+- **Articles (Blog)** : gestion des articles d'actualité, annonces, etc.
+- **Community Photos** : gestion des photos de l'équipe
 
 ## Workflow d'édition
 
-### Communauté & Cartes Projets
-- Toute modification (ajout, édition, suppression) est enregistrée et publiée directement sur le repo GitHub.
-- Les changements sont visibles sur le site dès le prochain déploiement.
+### Members & Projects
+- Toute modification (ajout, édition, suppression) est enregistrée dans Strapi.
+- Les changements sont immédiatement visibles sur le site via l'API Strapi.
 - Utiliser ces sections pour tenir à jour l'équipe et les projets.
 
-### Blog
-- Un mode "Draft" (brouillon) est disponible pour chaque article.
+### Articles (Blog)
+- Un mode "Draft" (brouillon) est disponible pour chaque article via le système de draft/publish de Strapi.
 - Créez ou éditez un article, enregistrez-le en mode "Draft" pour relecture ou validation.
-- Quand l'article est prêt, passez-le en "Published" pour publication sur le site.
+- Quand l'article est prêt, publiez-le pour le rendre visible sur le site.
 - Ce workflow permet de préparer des contenus à l'avance et de les publier au bon moment.
 
 ## Bonnes pratiques
 - Privilégier le mode "Draft" pour les contenus sensibles ou à valider.
-- Toute modification via l'admin est versionnée dans GitHub (historique, rollback possible).
+- Toute modification via l'admin Strapi est accessible via l'API REST.
 - Pour toute question ou besoin de validation, utilisez les statuts ou communiquez avec l'équipe.
+- Les images sont gérées via le système de médias de Strapi.
 
---- 
+---

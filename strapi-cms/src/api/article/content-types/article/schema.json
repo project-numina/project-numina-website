@@ -1,0 +1,22 @@
+
+{
+  "kind": "collectionType",
+  "collectionName": "articles",
+  "info": {
+    "singularName": "article",
+    "pluralName": "articles",
+    "displayName": "Article"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": { "type": "string", "required": true },
+    "slug": { "type": "uid", "targetField": "title", "required": true, "unique": true },
+    "date": { "type": "datetime" },
+    "image": { "type": "media", "multiple": false },
+    "body": { "type": "text" },
+    "ctas": { "type": "component", "repeatable": true, "component": "cta.cta" }
+  }
+}
+

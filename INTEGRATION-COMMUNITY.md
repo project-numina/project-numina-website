@@ -174,30 +174,36 @@ Ajoutez ces éléments dans votre page :
 
 ## 🎯 Utilisation du CMS
 
-### Via l'interface CMS
-1. Allez sur `/admin/`
-2. Cliquez sur "Communauté" 
+### Via l'interface Strapi
+1. Accédez à l'interface d'administration Strapi (par défaut : http://localhost:1337/admin en développement)
+2. Cliquez sur "Members" dans le menu de gauche
 3. **Modifier** un contributeur existant
-4. **Ajouter** un nouveau membre avec "New Communauté"
+4. **Ajouter** un nouveau membre avec "Create new entry"
 5. **Tags disponibles** : Active Contributor, Alumni, Founding Members, Scientific Advisors
 
 ### Workflow
-1. **Modification dans le CMS** → commit automatique sur GitHub
-2. **Redéploiement Netlify** → nouveau fichier JSON disponible
-3. **Page community.html** → charge automatiquement les nouvelles données
+1. **Modification dans Strapi** → sauvegarde dans la base de données Strapi
+2. **API Strapi** → les données sont immédiatement disponibles via l'API REST
+3. **Page community.html** → charge automatiquement les nouvelles données depuis l'API Strapi
 
 ## 🔧 Personnalisation
 
 ### Modifier les tags disponibles
-Éditez `admin/config.yml` ligne 23 :
-```yaml
-options: ["Active Contributor", "Alumni", "Founding Members", "Scientific Advisors", "Nouveau Tag"]
+Éditez le schéma Strapi dans `strapi-cms/src/api/member/content-types/member/schema.json` :
+```json
+"member_tags": {
+  "type": "enumeration",
+  "enum": ["Active Contributor", "Alumni", "Founding Members", "Scientific Advisors", "Nouveau Tag"]
+}
 ```
 
 ### Ajouter des champs
-Dans `admin/config.yml`, ajoutez après le champ URL :
-```yaml
-- {label: "Bio", name: "bio", widget: "text", required: false}
+Dans le schéma Strapi `strapi-cms/src/api/member/content-types/member/schema.json`, ajoutez dans la section `attributes` :
+```json
+"bio": {
+  "type": "text",
+  "required": false
+}
 ```
 
 ## 📁 Structure finale
@@ -205,15 +211,14 @@ Dans `admin/config.yml`, ajoutez après le champ URL :
 ```
 numina-website/
 ├── community.html              # Page avec le script d'intégration
-├── data/team/                  # Données CMS (48 fichiers JSON)
-├── admin/config.yml            # Configuration CMS
+├── strapi-cms/                 # Application Strapi avec les schémas de contenu
 └── contributors.json           # Ancien fichier (peut être supprimé)
 ```
 
 ## ✅ Avantages de cette approche
 
-- **Pas de code** : votre contact peut tout gérer via `/admin/`
-- **Temps réel** : modifications visibles après redéploiement
+- **Pas de code** : votre contact peut tout gérer via l'interface d'administration Strapi
+- **Temps réel** : modifications visibles immédiatement via l'API Strapi
 - **Flexibilité** : ajout/suppression de membres facile
 - **Sécurité** : validation des données par le CMS
 - **Historique** : toutes les modifications sont trackées sur GitHub 

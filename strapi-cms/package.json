@@ -1,0 +1,52 @@
+{
+  "name": "strapi-cms",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A Strapi application",
+  "scripts": {
+    "build": "strapi build",
+    "console": "strapi console",
+    "deploy": "strapi deploy",
+    "dev": "npm run develop",
+    "develop": "strapi develop",
+    "start": "strapi start",
+    "strapi": "strapi",
+    "upgrade": "npx @strapi/upgrade latest",
+    "upgrade:dry": "npx @strapi/upgrade latest --dry",
+    "seed:tags": "node scripts/seed-tags.js",
+    "migrate:members": "node scripts/migrate-members.js",
+    "migrate:projects": "node scripts/migrate-projects.js",
+    "migrate:articles": "node scripts/migrate-articles.js",
+    "migrate:photos": "node scripts/migrate-community-photos.js",
+    "migrate:all": "npm run migrate:members && npm run migrate:projects && npm run migrate:articles && npm run migrate:photos"
+  },
+  "dependencies": {
+    "@strapi/plugin-cloud": "5.21.0",
+    "@strapi/plugin-graphql": "5.21.0",
+    "@strapi/plugin-users-permissions": "5.21.0",
+    "@strapi/strapi": "5.21.0",
+    "better-sqlite3": "11.3.0",
+    "gray-matter": "^4.0.3",
+    "mime-types": "^3.0.1",
+    "node-fetch": "^3.3.2",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-router-dom": "^6.0.0",
+    "slugify": "^1.6.6",
+    "styled-components": "^6.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=18.0.0 <=22.x.x",
+    "npm": ">=6.0.0"
+  },
+  "strapi": {
+    "uuid": "d375c678-4c09-4954-99fe-e290abde72e7",
+    "installId": "82af891910d4109bb091ac3b5cf205fe01a0633eb779d9b03444347d2b01a157"
+  }
+}

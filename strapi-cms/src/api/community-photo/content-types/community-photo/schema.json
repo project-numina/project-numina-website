@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "community_photos",
+  "info": {
+    "singularName": "community-photo",
+    "pluralName": "community-photos",
+    "displayName": "Community Photo"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": { "type": "string", "required": true },
+    "image": { "type": "media", "multiple": false, "required": true },
+    "description": { "type": "text" }
+  }
+}
+

@@ -505,7 +505,7 @@
     main {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 40px 16px 0 16px;
+      padding: 40px 0 0 0;
     }
     section {
       margin-bottom: 64px;
@@ -1097,7 +1097,7 @@
     .ongoing-card-actions {
       margin-bottom: 16px;
       display: flex;
-      gap: 10px;
+      gap: 20px;
       flex-wrap: wrap;
     }
     /* Bouton selon design Figma */
@@ -1164,7 +1164,7 @@
     }
     @media (max-width: 900px) {
       .ongoing-section {
-        padding: 32px 20px;
+        padding: 0px;
       }
       .ongoing-header {
         flex-direction: column;
@@ -1184,7 +1184,7 @@
     }
     @media (max-width: 600px) {
       .ongoing-section {
-        padding: 24px 16px;
+        padding: 0px;
       }
       .ongoing-title {
         font-size: 2rem;
@@ -1874,8 +1874,21 @@
         });
       });
     });
-    // Chargement dynamique des cartes projets
+    // Chargement des cartes projets depuis Strapi
     document.addEventListener('DOMContentLoaded', function() {
+      const resolveStrapiBase = () => {
+        const raw = (window.STRAPI_URL || '').toString().trim();
+        if (raw) {
+          try { const u = new URL(raw, window.location.origin); return u.origin + (u.pathname === '/' ? '' : u.pathname); } catch {}
+          if (raw.startsWith(':')) return `${window.location.protocol}//${window.location.hostname}${raw}`;
+          if (raw.startsWith('//')) return `${window.location.protocol}${raw}`;
+          if (raw.startsWith('/')) return `${window.location.origin}${raw}`;
+          if (raw.startsWith('http')) return raw;
+        }
+        return `${window.location.protocol}//${window.location.hostname}:1337`;
+      };
+      const STRAPI_URL = resolveStrapiBase();
+      const makeUrl = (u) => (u && u.startsWith('http') ? u : (u ? `${STRAPI_URL}${u}` : u));
       let projects = [];
       const grid = document.getElementById('ongoing-grid');
       const filterBtns = document.querySelectorAll('.ongoing-filter-btn');
@@ -1883,56 +1896,34 @@
       // Fonction pour charger les projets
       async function loadProjects() {
         try {
-          console.log('🔄 Chargement dynamique des projets...');
-          
-          // Charger l'index des projets
-          const indexResponse = await fetch('data/projects-index.json');
-          if (!indexResponse.ok) {
-            throw new Error(`Erreur lors du chargement de l'index projets: ${indexResponse.status}`);
-          }
-          
-          const index = await indexResponse.json();
-          console.log(`📋 Index projets trouvé: ${index.count} projets (généré: ${index.generated})`);
-          
-          // Charger tous les projets listés dans l'index
-          const loadPromises = index.projects.map(async (proj) => {
-            try {
-              const response = await fetch(`data/projects/${proj.filename}.json`);
-              if (response.ok) {
-                const data = await response.json();
-                console.log(`✓ Chargé: ${proj.filename} (${data.title})`);
-                return data;
-              } else {
-                console.warn(`✗ Erreur HTTP ${response.status} pour ${proj.filename}`);
-                return null;
+          const url = `${STRAPI_URL}/api/projects?populate=*&sort=highlight:desc,title:asc&pagination[pageSize]=100`;
+          const res = await fetch(url);
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          const json = await res.json();
+          console.log('Réponse Strapi:', json);
+          projects = (json.data || []).map((item) => {
+            // Gestion des tags JSON - peut être un tableau, une chaîne parsée, ou null
+            let tags = [];
+            if (item.project_tags) {
+              if (Array.isArray(item.project_tags)) {
+                tags = item.project_tags;
+              } else if (typeof item.project_tags === 'string') {
+                try {
+                  tags = JSON.parse(item.project_tags);
+                } catch (e) {
+                  console.warn('Erreur parsing tags JSON:', e);
+                }
               }
-            } catch (error) {
-              console.warn(`✗ Erreur lors du chargement de ${proj.filename}:`, error);
-              return null;
             }
+            
+            const image = item.image?.url ? makeUrl(item.image.url) : (item.image ? `/Assets/${item.image}` : null);
+            const ctas = Array.isArray(item.ctas) ? item.ctas : [];
+            return { title: item.title, status: item.status, description: item.description, highlight: !!item.highlight, image, ctas, tags };
           });
-
-          const results = await Promise.all(loadPromises);
-          projects = results.filter(project => project !== null && project.published === 'published');
-          
-          console.log(`🎉 ${projects.length} projets chargés dynamiquement!`);
-          console.log('Projets:', projects);
-          
-          if (projects.length === 0) {
-            throw new Error('Aucun projet publié chargé');
-          }
-          
           renderProjects('all');
-          
         } catch (error) {
-          console.error('❌ Erreur lors du chargement des projets:', error);
-          grid.innerHTML = `
-            <div style='color:#b00;font-size:1.2rem;padding:32px;text-align:center;grid-column:1/-1;'>
-              Erreur de chargement des projets depuis le CMS.<br>
-              Lancez un serveur local pour voir la page (ex: <code>python3 -m http.server</code>).<br>
-              <small>L'index doit être régénéré avec: <code>node generate-projects-index.js</code></small>
-            </div>
-          `;
+          console.error('❌ Erreur Strapi (projects):', error);
+          grid.innerHTML = `<div style='text-align:center;padding:64px;color:#666;grid-column:1/-1;'><h3>Erreur de chargement des projets</h3></div>`;
         }
       }
 
@@ -2025,20 +2016,6 @@
       // Charger les projets au démarrage
       loadProjects();
     });
-  </script>
-  
-  <!-- Netlify Identity Widget -->
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  <script>
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
-          });
-        }
-      });
-    }
   </script>
 </body>
 </html> 

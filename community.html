@@ -663,85 +663,59 @@
         document.body.classList.remove('scrolled');
       }
     });
-    // Système de chargement des contributeurs depuis le CMS
+    // Système de chargement des contributeurs depuis Strapi
     document.addEventListener('DOMContentLoaded', function() {
+      const resolveStrapiBase = () => {
+        const raw = (window.STRAPI_URL || '').toString().trim();
+        if (raw) {
+          try { const u = new URL(raw, window.location.origin); return u.origin + (u.pathname === '/' ? '' : u.pathname); } catch {}
+          if (raw.startsWith(':')) return `${window.location.protocol}//${window.location.hostname}${raw}`;
+          if (raw.startsWith('//')) return `${window.location.protocol}${raw}`;
+          if (raw.startsWith('/')) return `${window.location.origin}${raw}`;
+          if (raw.startsWith('http')) return raw;
+        }
+        return `${window.location.protocol}//${window.location.hostname}:1337`;
+      };
+      const STRAPI_URL = resolveStrapiBase();
+      const makeUrl = (u) => {
+        if (!u) return '';
+        return u.startsWith('http') ? u : `${STRAPI_URL}${u}`;
+      };
       const filterBtns = document.querySelectorAll('.community-filter-btn');
       const grid = document.getElementById('community-grid');
       let contributors = [];
       let teamPhotos = [];
 
-      // Fonction pour charger tous les contributeurs depuis le CMS (VRAIMENT DYNAMIQUE)
+      // Chargement depuis Strapi
       async function loadContributors() {
         try {
-          console.log('🔄 Chargement dynamique des contributeurs...');
-          
-          // Charger l'index des contributeurs
-          const indexResponse = await fetch('data/contributors-index.json');
-          if (!indexResponse.ok) {
-            throw new Error(`Erreur lors du chargement de l'index: ${indexResponse.status}`);
-          }
-          
-          const index = await indexResponse.json();
-          console.log(`📋 Index trouvé: ${index.count} contributeurs (généré: ${index.generated})`);
-          
-          // Charger tous les contributeurs listés dans l'index
-          const loadPromises = index.contributors.map(async (contrib) => {
-            try {
-              const response = await fetch(`data/team/${contrib.filename}.json`);
-              if (response.ok) {
-                const data = await response.json();
-                console.log(`✓ Chargé: ${contrib.filename} (${data.name})`);
-                return data;
-              } else {
-                console.warn(`✗ Erreur HTTP ${response.status} pour ${contrib.filename}`);
-                return null;
-              }
-            } catch (error) {
-              console.warn(`✗ Erreur lors du chargement de ${contrib.filename}:`, error);
-              return null;
-            }
+          console.log('🔄 Chargement des contributeurs depuis Strapi...');
+          const url = `${STRAPI_URL}/api/members?populate=image&pagination[pageSize]=200`;
+          const res = await fetch(url);
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          const json = await res.json();
+          contributors = (json.data || []).map((item) => {
+            const image = item.image?.url ? makeUrl(item.image.url) : (item.image ? `/Assets/${item.image}` : 'Assets/uploads/default.png');
+            const tags = Array.isArray(item.member_tags) ? item.member_tags : [];
+            return { name: item.name, url: item.url, image, tags };
           });
-
-          const results = await Promise.all(loadPromises);
-          contributors = results.filter(contributor => contributor !== null);
-          
-          console.log(`🎉 ${contributors.length} contributeurs chargés dynamiquement!`);
-          console.log('Contributeurs:', contributors);
-          
-          if (contributors.length === 0) {
-            throw new Error('Aucun contributeur chargé');
-          }
-          
+          console.log(`🎉 ${contributors.length} contributeurs chargés depuis Strapi`);
           renderGrid('All');
         } catch (error) {
-          console.error('❌ Erreur lors du chargement des contributeurs:', error);
-          grid.innerHTML = `
-            <div style='color:#b00;font-size:1.2rem;padding:32px;text-align:center;grid-column:1/-1;'>
-              Erreur de chargement des contributeurs depuis le CMS.<br>
-              Lancez un serveur local pour voir la page (ex: <code>python3 -m http.server</code>).<br>
-              Vérifiez la console pour plus de détails.<br>
-              <small>L'index doit être régénéré avec: <code>node generate-contributors-index.js</code></small>
-            </div>
-          `;
+          console.error('❌ Erreur Strapi (contributors):', error);
+          grid.innerHTML = `<div style='color:#b00;font-size:1.2rem;padding:32px;text-align:center;grid-column:1/-1;'>Erreur de chargement des contributeurs depuis Strapi.</div>`;
         }
       }
 
       async function loadTeamPhotos() {
         try {
-          const files = [
-            'team-1.json', 'team-2.json', 'team-3.json', 'team-4.json', 'team-5.json', 'team-6.json'
-          ];
-          const loadPromises = files.map(async (file) => {
-            const response = await fetch(`data/photos_community/${file}`);
-            if (response.ok) {
-              const data = await response.json();
-              return data.image;
-            } else {
-              return null;
-            }
-          });
-          const results = await Promise.all(loadPromises);
-          teamPhotos = results.filter(img => !!img);
+          const res = await fetch(`${STRAPI_URL}/api/community-photos?populate=image&pagination[pageSize]=100`);
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          const json = await res.json();
+          teamPhotos = (json.data || [])
+            .map(item => item.image?.url)
+            .filter(Boolean)
+            .map(makeUrl);
         } catch (e) {
           teamPhotos = [];
         }

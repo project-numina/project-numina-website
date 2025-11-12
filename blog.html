@@ -705,76 +705,40 @@
       }
     });
     
-    // Système de chargement des posts de blog
+    // Chargement des posts de blog depuis Strapi
     document.addEventListener('DOMContentLoaded', function() {
+      const resolveStrapiBase = () => {
+        const raw = (window.STRAPI_URL || '').toString().trim();
+        if (raw) {
+          try { const u = new URL(raw, window.location.origin); return u.origin + (u.pathname === '/' ? '' : u.pathname); } catch {}
+          if (raw.startsWith(':')) return `${window.location.protocol}//${window.location.hostname}${raw}`;
+          if (raw.startsWith('//')) return `${window.location.protocol}${raw}`;
+          if (raw.startsWith('/')) return `${window.location.origin}${raw}`;
+          if (raw.startsWith('http')) return raw;
+        }
+        return `${window.location.protocol}//${window.location.hostname}:1337`;
+      };
+      const STRAPI_URL = resolveStrapiBase();
+      const makeUrl = (u) => (u && u.startsWith('http') ? u : (u ? `${STRAPI_URL}${u}` : u));
       const grid = document.getElementById('blog-grid');
       let posts = [];
 
-      // Fonction pour parser le front matter
-      function parseFrontMatter(content) {
-        if (!content.startsWith('---')) return null;
-        
-        const endIndex = content.indexOf('---', 3);
-        if (endIndex === -1) return null;
-        
-        const frontMatter = content.slice(3, endIndex).trim();
-        const body = content.slice(endIndex + 3).trim();
-        
-        const data = {};
-        frontMatter.split('\n').forEach(line => {
-          const colonIndex = line.indexOf(':');
-          if (colonIndex !== -1) {
-            const key = line.slice(0, colonIndex).trim();
-            let value = line.slice(colonIndex + 1).trim();
-            
-            // Supprimer les guillemets
-            if ((value.startsWith('"') && value.endsWith('"')) || 
-                (value.startsWith("'") && value.endsWith("'"))) {
-              value = value.slice(1, -1);
-            }
-            
-            data[key] = value;
-          }
-        });
-        
-        return { data, body };
-      }
-
-      // Fonction pour charger les posts depuis l'index
+      // Chargement depuis Strapi
       async function loadPosts() {
         try {
-          console.log('🔄 Chargement dynamique des posts de blog...');
-          
-          // Charger l'index des posts
-          const indexResponse = await fetch('data/blog-index.json');
-          if (!indexResponse.ok) {
-            throw new Error(`Erreur lors du chargement de l'index blog: ${indexResponse.status}`);
-          }
-          
-          const index = await indexResponse.json();
-          console.log(`📋 Index blog trouvé: ${index.count} posts (généré: ${index.generated})`);
-          
-          // Utiliser directement les posts de l'index (déjà triés par date)
-          posts = index.posts.filter(post => 
-            post.published === true || 
-            post.published === 'true' || 
-            post.status === 'publié'
-          );
-          
-          console.log(`🎉 ${posts.length} posts chargés dynamiquement!`);
-          console.log('Posts:', posts);
-          
+          const url = `${STRAPI_URL}/api/articles?filters[publishedAt][$notNull]=true&sort=date:desc&populate=image&pagination[pageSize]=100`;
+          const res = await fetch(url);
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          const json = await res.json();
+          posts = (json.data || []).map((item) => {
+            const image = item.image?.url ? makeUrl(item.image.url) : (item.image ? `/Assets/${item.image}` : null);
+            const excerpt = item.body ? (item.body.length > 220 ? item.body.slice(0, 220) + '…' : item.body) : '';
+            return { title: item.title, date: item.date, image, ctas: Array.isArray(item.ctas) ? item.ctas : [], excerpt, filename: item.slug };
+          });
           renderPosts();
-          
         } catch (error) {
-          console.error('❌ Erreur lors du chargement des posts:', error);
-          grid.innerHTML = `
-            <div style='color:#b00;font-size:1.2rem;padding:32px;text-align:center;grid-column:1/-1;'>
-              Erreur de chargement des posts de blog.<br>
-              Lancez un serveur local pour voir la page (ex: <code>python3 -m http.server</code>).<br>
-              <small>L'index doit être régénéré avec: <code>node generate-blog-index.js</code></small>
-            </div>
-          `;
+          console.error('❌ Erreur Strapi (blog):', error);
+          grid.innerHTML = `<div style='color:#b00;font-size:1.2rem;padding:32px;text-align:center;grid-column:1/-1;'>Erreur de chargement des articles depuis Strapi.</div>`;
         }
       }
 

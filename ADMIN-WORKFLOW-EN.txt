@@ -1,31 +1,34 @@
 ---
-# Memo: Project Numina Editorial Workflow (Decap/Netlify CMS)
+# Memo: Project Numina Editorial Workflow (Strapi CMS)
 
 ## Admin Access
-- All editors with a GitHub account and repo access can log in to the admin at /admin/.
-- Each editor can add, edit, or update content according to their GitHub permissions.
+- The Strapi admin interface is accessible via the Strapi server URL (default: http://localhost:1337/admin in development).
+- Editors must log in with their Strapi credentials to manage content.
+- Changes are saved in the Strapi database and are immediately available via the API.
 
 ## Available Collections
-- **Community**: manage team members, avatars, tags, etc.
-- **Project Cards**: manage projects, statuses, images, descriptions, etc.
-- **Blog**: manage news articles, announcements, etc.
+- **Members**: manage team members, avatars, tags, etc.
+- **Projects**: manage projects, statuses, images, descriptions, etc.
+- **Articles (Blog)**: manage news articles, announcements, etc.
+- **Community Photos**: manage team photos
 
 ## Editorial Workflow
 
-### Community & Project Cards
-- Any change (add, edit, delete) is saved and published directly to the GitHub repo.
-- Changes are visible on the site after the next deployment.
+### Members & Projects
+- Any change (add, edit, delete) is saved in Strapi.
+- Changes are immediately visible on the site via the Strapi API.
 - Use these sections to keep the team and project info up to date.
 
-### Blog
-- A "Draft" mode is available for each article.
+### Articles (Blog)
+- A "Draft" mode is available for each article via Strapi's draft/publish system.
 - Create or edit an article, save it as a "Draft" for review or validation.
-- When the article is ready, set it to "Published" to make it live on the site.
+- When the article is ready, publish it to make it live on the site.
 - This workflow allows you to prepare content in advance and publish at the right time.
 
 ## Best Practices
 - Prefer using "Draft" mode for sensitive or to-be-reviewed content.
-- All changes via the admin are versioned in GitHub (history, rollback possible).
+- All changes via the Strapi admin are accessible via the REST API.
 - For questions or validation, use the status fields or communicate with the team.
+- Images are managed via Strapi's media library system.
 
---- 
+---
