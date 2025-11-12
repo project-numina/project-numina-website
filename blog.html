@@ -29,6 +29,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  
+  <!-- Configuration de l'URL Strapi -->
+  <script>
+    // Définir l'URL de l'API Strapi
+    // En production, remplacez par l'URL de votre instance Strapi déployée
+    // Exemple: window.STRAPI_URL = 'https://votre-strapi.railway.app';
+    window.STRAPI_URL = window.STRAPI_URL || 'http://localhost:1337';
+  </script>
+  
   <style>
     :root {
       --bg: #FFFEF9;
