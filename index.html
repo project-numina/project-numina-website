@@ -1021,6 +1021,16 @@
     .ongoing-card.highlight {
       grid-column: span 2;
     }
+    .ongoing-card.highlight .ongoing-card-content {
+        flex-shrink: 0;
+    }
+    .ongoing-card.highlight .ongoing-card-img {
+        flex: 1;
+        min-height: 0; /* Permet à l'image de rétrécir si besoin */
+        height: auto;
+        object-fit: cover;
+        object-position: top center;
+    }
     .ongoing-card {
       background: #FEFBF6;
       border: 1px solid #D6CFC0;
