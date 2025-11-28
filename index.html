@@ -1609,6 +1609,7 @@
       <a href="https://bicmr.pku.edu.cn/" target="_blank" rel="noopener noreferrer"><img src="partner_logos/beijingmathematicalresearch_logo.png" alt="Beijing Mathematical Research" title="Beijing Mathematical Research"></a>
       <a href="https://www.kimi.com/" target="_blank" rel="noopener noreferrer"><img src="partner_logos/moonshot_logo.png" alt="Moonshot" title="Moonshot"></a>
       <a href="https://www.businesswire.com/news/home/20241217062574/en/Project-Numina-Receives-%E2%82%AC3m-Research-Grant-From-XTX-Markets" target="_blank" rel="noopener noreferrer"><img src="partner_logos/xtx_logo.png" alt="XTX" title="XTX"></a>
+      <a href="https://www.logicalintelligence.com/" target="_blank" rel="noopener noreferrer"><img src="partner_logos/www.logicalintelligence_logo.png" alt="Logical Intelligence" title="Logical Intelligence" style="max-height: 32px; max-width: 130px;"></a>
     </div>
   </div>
   <main>
@@ -1648,22 +1649,8 @@
                 <th>Size</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>NuminaMath-7B-CoT</td>
-                <td>Math reasoning with chain-of-thought prompts</td>
-                <td>7B</td>
-              </tr>
-              <tr>
-                <td>Kimina-Prover-Distill-1.5B</td>
-                <td>Lightweight formal proof assistant</td>
-                <td>1.5B</td>
-              </tr>
-              <tr>
-                <td>Coming Soon Model</td>
-                <td>Advanced mathematical reasoning model</td>
-                <td>TBA</td>
-              </tr>
+            <tbody id="models-table-body">
+              <!-- Models loaded via JS -->
             </tbody>
           </table>
         </div>
@@ -1679,22 +1666,8 @@
                 <th>Size</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>Numina Math</td>
-                <td>Math reasoning dataset with chain-of-thought solutions</td>
-                <td>860K</td>
-              </tr>
-              <tr>
-                <td>Combibench</td>
-                <td>Combinatorics problems and solutions benchmark</td>
-                <td>50K</td>
-              </tr>
-              <tr>
-                <td>Informal Math Dataset</td>
-                <td>Large-scale informal mathematical proofs collection</td>
-                <td>Coming Soon</td>
-              </tr>
+            <tbody id="datasets-table-body">
+              <!-- Datasets loaded via JS -->
             </tbody>
           </table>
         </div>
@@ -1722,7 +1695,7 @@
         </div>
         
         <div class="get-involved-grid">
-          <div class="get-involved-card">
+          <div class="get-involved-card" id="join-effort-card" style="display: none;">
             <div class="get-involved-card-title">Join the effort</div>
             <div class="get-involved-card-desc">Contribute code, review tasks or help shape the future of math.</div>
             <a href="https://forms.gle/D5HfTAFRPyk69L4J6" target="_blank" rel="noopener noreferrer" class="cta-link cta-join">Contact Us</a>
@@ -1912,23 +1885,39 @@
           const json = await res.json();
           console.log('Réponse Strapi:', json);
           projects = (json.data || []).map((item) => {
-            // Gestion des tags JSON - peut être un tableau, une chaîne parsée, ou null
+            // Support flattened or nested (Strapi v4) structure
+            const attrs = item.attributes || item;
+            
+            // Gestion des tags JSON
             let tags = [];
-            if (item.project_tags) {
-              if (Array.isArray(item.project_tags)) {
-                tags = item.project_tags;
-              } else if (typeof item.project_tags === 'string') {
+            if (attrs.project_tags) {
+              if (Array.isArray(attrs.project_tags)) {
+                tags = attrs.project_tags;
+              } else if (typeof attrs.project_tags === 'string') {
                 try {
-                  tags = JSON.parse(item.project_tags);
+                  tags = JSON.parse(attrs.project_tags);
                 } catch (e) {
                   console.warn('Erreur parsing tags JSON:', e);
                 }
               }
             }
             
-            const image = item.image?.url ? makeUrl(item.image.url) : (item.image ? `/Assets/${item.image}` : null);
-            const ctas = Array.isArray(item.ctas) ? item.ctas : [];
-            return { title: item.title, status: item.status, description: item.description, highlight: !!item.highlight, image, ctas, tags };
+            // Image handling
+            const imgData = attrs.image?.data?.attributes || attrs.image || {};
+            const imageUrl = imgData.url || (typeof attrs.image === 'string' ? attrs.image : null);
+            const image = imageUrl ? makeUrl(imageUrl) : (attrs.image && typeof attrs.image === 'string' ? `/Assets/${attrs.image}` : null);
+
+            const ctas = Array.isArray(attrs.ctas) ? attrs.ctas : [];
+            
+            return { 
+              title: attrs.title, 
+              status: attrs.label || attrs.status, 
+              description: attrs.description, 
+              highlight: !!attrs.highlight, 
+              image, 
+              ctas, 
+              tags 
+            };
           });
           renderProjects('all');
         } catch (error) {
@@ -2025,6 +2014,49 @@
 
       // Charger les projets au démarrage
       loadProjects();
+      loadFeaturedItems();
+
+      // Charger les Featured Items (Models & Datasets)
+      async function loadFeaturedItems() {
+        try {
+          const url = `${STRAPI_URL}/api/featured-items?pagination[pageSize]=100&sort=name:asc`;
+          const res = await fetch(url);
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          const json = await res.json();
+          const items = (json.data || []).map(item => ({
+            type: item.type || (item.attributes && item.attributes.type), // Handle flattened or non-flattened structure depending on Strapi version/config
+            name: item.name || (item.attributes && item.attributes.name),
+            description: item.description || (item.attributes && item.attributes.description),
+            size: item.size || (item.attributes && item.attributes.size)
+          }));
+
+          const models = items.filter(item => item.type === 'Model');
+          const datasets = items.filter(item => item.type === 'Dataset');
+
+          renderTable('models-table-body', models);
+          renderTable('datasets-table-body', datasets);
+        } catch (error) {
+          console.error('❌ Erreur Strapi (featured items):', error);
+        }
+      }
+
+      function renderTable(tbodyId, items) {
+        const tbody = document.getElementById(tbodyId);
+        if (!tbody) return;
+        
+        if (items.length === 0) {
+           tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:#888;">Coming soon...</td></tr>`;
+           return;
+        }
+
+        tbody.innerHTML = items.map(item => `
+          <tr>
+            <td>${item.name}</td>
+            <td>${item.description || ''}</td>
+            <td>${item.size || ''}</td>
+          </tr>
+        `).join('');
+      }
     });
   </script>
 </body>

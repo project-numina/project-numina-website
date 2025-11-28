@@ -22,6 +22,9 @@
       "targetField": "title",
       "required": true
     },
+    "label": {
+      "type": "string"
+    },
     "description": {
       "type": "text"
     },

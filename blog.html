@@ -645,7 +645,7 @@
           <p class="get-involved-subtitle">Engage with the community, explore our resources, or contribute à la mission.</p>
         </div>
         <div class="get-involved-grid">
-          <div class="get-involved-card">
+          <div class="get-involved-card" id="join-effort-card" style="display: none;">
             <div class="get-involved-card-title">Join the effort</div>
             <div class="get-involved-card-desc">Contribute code, review tasks or help shape the future of math.</div>
             <a href="https://forms.gle/D5HfTAFRPyk69L4J6" target="_blank" rel="noopener noreferrer" class="cta-link cta-join">Contact Us</a>
@@ -732,17 +732,52 @@
       const grid = document.getElementById('blog-grid');
       let posts = [];
 
+      // Helper pour transformer les liens Markdown en HTML cliquable
+      const parseMarkdownLinks = (text) => {
+        if (!text) return '';
+        // Remplace [text](url) par <a href="url">text</a>
+        return text.replace(
+          /\[([^\]]+)\]\(([^)]+)\)/g, 
+          '<a href="$2" target="_blank" rel="noopener noreferrer" style="color: #ff5e62; text-decoration: underline;">$1</a>'
+        );
+      };
+
       // Chargement depuis Strapi
       async function loadPosts() {
         try {
-          const url = `${STRAPI_URL}/api/articles?filters[publishedAt][$notNull]=true&sort=date:desc&populate=image&pagination[pageSize]=100`;
+          // MODIFICATION ICI : populate=* pour récupérer les CTAs
+          const url = `${STRAPI_URL}/api/articles?filters[publishedAt][$notNull]=true&sort=date:desc&populate=*&pagination[pageSize]=100`;
           const res = await fetch(url);
           if (!res.ok) throw new Error(`HTTP ${res.status}`);
           const json = await res.json();
+          
           posts = (json.data || []).map((item) => {
-            const image = item.image?.url ? makeUrl(item.image.url) : (item.image ? `/Assets/${item.image}` : null);
-            const excerpt = item.body ? (item.body.length > 220 ? item.body.slice(0, 220) + '…' : item.body) : '';
-            return { title: item.title, date: item.date, image, ctas: Array.isArray(item.ctas) ? item.ctas : [], excerpt, filename: item.slug };
+            // Support pour structure Strapi imbriquée (attributes) ou plate
+            const attrs = item.attributes || item;
+
+            // Gestion image
+            const imgData = attrs.image?.data?.attributes || attrs.image || {};
+            const imageUrl = imgData.url || (typeof attrs.image === 'string' ? attrs.image : null);
+            const image = imageUrl ? makeUrl(imageUrl) : (attrs.image && typeof attrs.image === 'string' ? `/Assets/${attrs.image}` : null);
+            
+            // Gestion de l'extrait (Body)
+            const rawBody = attrs.body || '';
+            let excerptText = rawBody.length > 250 ? rawBody.slice(0, 250) + '…' : rawBody;
+            
+            // Application du parsing Markdown sur l'extrait
+            const excerpt = parseMarkdownLinks(excerptText);
+
+            // Gestion des CTAs
+            const ctas = Array.isArray(attrs.ctas) ? attrs.ctas : [];
+
+            return { 
+              title: attrs.title, 
+              date: attrs.date, 
+              image, 
+              ctas, 
+              excerpt, 
+              filename: attrs.slug || attrs.filename 
+            };
           });
           renderPosts();
         } catch (error) {

@@ -439,6 +439,40 @@ export interface ApiCommunityPhotoCommunityPhoto
   };
 }
 
+export interface ApiFeaturedItemFeaturedItem
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'featured_items';
+  info: {
+    description: 'Items for the Open Source AI tables (Models and Datasets)';
+    displayName: 'Featured Item';
+    pluralName: 'featured-items';
+    singularName: 'featured-item';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::featured-item.featured-item'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    size: Schema.Attribute.String;
+    type: Schema.Attribute.Enumeration<['Model', 'Dataset']> &
+      Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiMemberMember extends Struct.CollectionTypeSchema {
   collectionName: 'members';
   info: {
@@ -497,6 +531,7 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
     description: Schema.Attribute.Text;
     highlight: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     image: Schema.Attribute.Media;
+    label: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -1029,6 +1064,7 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::article.article': ApiArticleArticle;
       'api::community-photo.community-photo': ApiCommunityPhotoCommunityPhoto;
+      'api::featured-item.featured-item': ApiFeaturedItemFeaturedItem;
       'api::member.member': ApiMemberMember;
       'api::project.project': ApiProjectProject;
       'plugin::content-releases.release': PluginContentReleasesRelease;
