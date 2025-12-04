@@ -8,27 +8,82 @@ La base de données `data.db` contient déjà les données suivantes :
 - **8 articles** (table `articles`)
 - **12 photos de communauté** (table `community_photos`)
 
-## 🔧 Installation et démarrage
+## 🔧 Installation depuis zéro (Clone du repo)
 
-1. **Installer les dépendances** :
+### Étape 1 : Cloner le repository
+```bash
+git clone <url-du-repo>
+cd project-numina-website
+```
+
+### Étape 2 : Installer les dépendances
 ```bash
 cd strapi-cms
 npm install
 ```
 
-2. **Créer le fichier .env** (copier depuis .env.example) :
+### Étape 3 : Configurer l'environnement ⚠️ CRITIQUE
+
+**🔴 PROBLÈME COMMUN** : Si vous clonez le repo de zéro, le fichier `.env` n'existe pas (il est dans `.gitignore` pour des raisons de sécurité). **Sans ce fichier, Strapi ne peut pas démarrer** car les secrets JWT et autres sont obligatoires.
+
+**✅ SOLUTION : Génération automatique (Recommandé)**
 ```bash
-cp .env.example .env
+npm run setup
+```
+ou
+```bash
+node scripts/setup-env.js
 ```
 
-3. **Démarrer Strapi** :
+Ce script génère automatiquement un fichier `.env` avec tous les secrets nécessaires (aléatoires et sécurisés).
+
+**Option B : Création manuelle**
+Si le script ne fonctionne pas, créez manuellement un fichier `.env` dans `strapi-cms/` avec le contenu suivant :
+
+```env
+# Secrets (générez des valeurs aléatoires pour chaque)
+APP_KEYS=key1,key2,key3,key4
+ADMIN_JWT_SECRET=votre-secret-jwt-admin
+JWT_SECRET=votre-secret-jwt
+API_TOKEN_SALT=votre-salt-api
+TRANSFER_TOKEN_SALT=votre-salt-transfer
+ENCRYPTION_KEY=votre-cle-chiffrement
+
+# Base de données
+DATABASE_CLIENT=sqlite
+DATABASE_FILENAME=./data.db
+
+# Serveur
+HOST=0.0.0.0
+PORT=1337
+NODE_ENV=development
+```
+
+**⚠️ IMPORTANT** : Les secrets doivent être des chaînes aléatoires uniques. Vous pouvez les générer avec :
+```bash
+# Générer un secret aléatoire (64 caractères)
+node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"
+```
+
+**📝 Note** : Chaque développeur doit avoir son propre fichier `.env` avec des secrets différents. C'est normal et sécurisé.
+
+### Étape 4 : Démarrer Strapi
 ```bash
 npm run develop
 ```
 
-4. **Accéder à l'interface d'administration** :
-- URL : http://localhost:1337/admin
-- Créer un compte admin au premier démarrage (si nécessaire)
+### Étape 5 : Se connecter à l'interface d'administration
+
+**URL** : http://localhost:1337/admin
+
+⚠️ **IMPORTANT** : Si Strapi vous demande de créer un compte admin au démarrage, c'est normal ! La base de données contient déjà des utilisateurs, mais vous pouvez :
+
+- **Option 1** : Créer un nouveau compte admin (recommandé pour le développement local)
+- **Option 2** : Réinitialiser le mot de passe d'un compte existant avec le script :
+  ```bash
+  node scripts/reset-admin-password.js laurent@castagne.co votre_mot_de_passe
+  ```
+  Le mot de passe par défaut si vous n'en spécifiez pas est `admin123`.
 
 ## 📊 Vérifier les données
 
