@@ -62,14 +62,9 @@ $RECYCLE.BIN/
 
 
 ############################
-# Logs and databases
-############################
+# Strapi database
+# data.db
 
-.tmp
-*.log
-*.sql
-*.sqlite
-*.sqlite3
 
 
 ############################
