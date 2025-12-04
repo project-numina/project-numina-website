@@ -1,0 +1,45 @@
+Salut !
+
+Le site Project Numina est prêt à être déployé. Voici le récapitulatif :
+
+✅ ÉTAT ACTUEL
+- Strapi CMS : Déjà déployé sur Google Cloud → https://cms.projectnumina.ai
+- Configuration URL : Déjà faite dans le code (détection auto production/dev)
+- Site statique : Prêt à être déployé
+
+🚀 DÉPLOIEMENT (Netlify recommandé)
+1. Créer un compte sur netlify.com
+2. "Add new site" → "Import from GitHub" → sélectionner le repo
+3. Configuration :
+   - Base directory : /
+   - Build command : npm run build
+   - Publish directory : /
+4. Déployer → C'est tout !
+
+📋 CHECKLIST
+- [ ] Site déployé et accessible
+- [ ] Tester que les données s'affichent (membres, projets, articles)
+- [ ] Vérifier la console navigateur (F12) pour erreurs
+- [ ] Console : console.log(window.STRAPI_URL) doit afficher https://cms.projectnumina.ai
+
+🔧 TECHNIQUE
+- URL Strapi : https://cms.projectnumina.ai (déjà configurée dans index.html, blog.html, community.html)
+- Le site détecte automatiquement s'il est en prod ou dev local
+- Scripts : npm run build (génère les index JSON)
+
+🧪 TESTS
+- Page d'accueil : projets et featured items
+- Blog : articles
+- Communauté : membres et photos
+
+❓ DÉPANNAGE
+- Données ne s'affichent pas ? Tester https://cms.projectnumina.ai/api/members
+- Erreurs CORS ? Configurer dans Strapi admin
+- Build échoue ? Vérifier logs Netlify
+
+📚 DOCS
+- Guide complet : DEPLOYMENT.md
+- Message détaillé : MESSAGE-DEPLOIEMENT.md
+
+Merci ! 🚀
+

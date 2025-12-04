@@ -33,9 +33,9 @@
   <!-- Configuration de l'URL Strapi -->
   <script>
     // Définir l'URL de l'API Strapi
-    // En production, remplacez par l'URL de votre instance Strapi déployée
-    // Exemple: window.STRAPI_URL = 'https://votre-strapi.railway.app';
-    window.STRAPI_URL = window.STRAPI_URL || 'http://localhost:1337';
+    // En production: https://cms.projectnumina.ai
+    // En développement local: http://localhost:1337
+    window.STRAPI_URL = window.STRAPI_URL || (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' ? 'http://localhost:1337' : 'https://cms.projectnumina.ai');
   </script>
   
   <style>

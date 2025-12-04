@@ -2,23 +2,21 @@
 
 ## 📍 Comment ça fonctionne
 
-Le site statique (sur Netlify) doit savoir où se trouve votre instance Strapi déployée pour charger les données.
+Le site statique doit savoir où se trouve votre instance Strapi déployée pour charger les données.
 
-## 🎯 Méthode 1 : Configuration directe dans les fichiers HTML
+## ✅ Configuration actuelle
 
-Dans chaque fichier HTML (`index.html`, `blog.html`, `community.html`), il y a maintenant un script au début qui définit l'URL :
+L'URL Strapi est configurée automatiquement :
+- **En production** : `https://cms.projectnumina.ai` (Google Cloud)
+- **En développement local** : `http://localhost:1337`
 
-```javascript
-window.STRAPI_URL = 'https://votre-strapi.railway.app';
-```
+La détection se fait automatiquement selon le hostname. Aucune modification nécessaire !
 
-**Pour configurer :**
-1. Déployez Strapi sur Railway, Render, ou un autre service
-2. Notez l'URL de votre instance (ex: `https://project-numina-strapi.railway.app`)
-3. Remplacez la ligne dans les 3 fichiers HTML :
-   ```javascript
-   window.STRAPI_URL = 'https://project-numina-strapi.railway.app';
-   ```
+## 🎯 URL de production
+
+**URL Strapi CMS** : `https://cms.projectnumina.ai`
+
+Cette URL est déjà configurée dans les fichiers HTML (`index.html`, `blog.html`, `community.html`).
 
 ## 🎯 Méthode 2 : Utiliser une variable d'environnement Netlify (recommandé)
 
